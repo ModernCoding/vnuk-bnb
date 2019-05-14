@@ -1,31 +1,36 @@
 package vn.edu.vnuk.bnb.model;
 
-import java.sql.Date;
+import java.util.Calendar;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Bookings {
-	private int id;
-	private Date checkIn;
-	private Date checkOut;
+	private Long id;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Calendar checkIn;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Calendar checkOut;
 	private int quanlity;
 	private Users user;
 	private Rooms room;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getCheckIn() {
+	
+	public Calendar getCheckIn() {
 		return checkIn;
 	}
-	public void setCheckIn(Date checkIn) {
+	public void setCheckIn(Calendar checkIn) {
 		this.checkIn = checkIn;
 	}
-	public Date getCheckOut() {
+	public Calendar getCheckOut() {
 		return checkOut;
 	}
-	public void setCheckOut(Date checkOut) {
+	public void setCheckOut(Calendar checkOut) {
 		this.checkOut = checkOut;
 	}
 	public int getQuanlity() {

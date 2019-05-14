@@ -1,13 +1,13 @@
 package vn.edu.vnuk.bnb.model;
 
 public class RoomsEquipments {
-	private int id;
+	private Long id;
 	private Rooms room;
 	private Equipment equipment;
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Rooms getRoom() {

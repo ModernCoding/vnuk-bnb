@@ -1,19 +1,23 @@
 package vn.edu.vnuk.bnb.model;
 
-import java.util.Date;
+import java.util.Calendar;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Bills {
-	private int id;
+	private Long id;
 	private double totalPrice;
-	private Date created;
-	private Date updated;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Calendar created;
+	private Calendar updated;
 	private Bookings booking;
 	private Users user;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public double getTotalPrice() {
@@ -22,16 +26,17 @@ public class Bills {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	public Date getCreated() {
+	
+	public Calendar getCreated() {
 		return created;
 	}
-	public void setCreated(Date created) {
+	public void setCreated(Calendar created) {
 		this.created = created;
 	}
-	public Date getUpdated() {
+	public Calendar getUpdated() {
 		return updated;
 	}
-	public void setUpdated(Date updated) {
+	public void setUpdated(Calendar updated) {
 		this.updated = updated;
 	}
 	public Bookings getBooking() {

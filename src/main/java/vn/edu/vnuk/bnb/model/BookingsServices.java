@@ -1,15 +1,15 @@
 package vn.edu.vnuk.bnb.model;
 
 public class BookingsServices {
-	private int id;
+	private Long id;
 	private double price;
 	private Bookings bookings;
 	private Services services;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public double getPrice() {

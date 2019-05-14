@@ -1,17 +1,17 @@
 package vn.edu.vnuk.bnb.model;
 
 public class Rooms {
-	private int id;
+	private Long id;
 	private int beds;
 	private int roomNumber;
 	private double price;
 	private boolean isSmoking;
 	private RoomTypes roomTypes;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public int getBeds() {

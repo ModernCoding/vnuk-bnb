@@ -1,16 +1,16 @@
 package vn.edu.vnuk.bnb.model;
 
 public class Dishes {
-	private int id;
+	private Long id;
 	private String label;
-	private boolean price;
+	private double price;
 	private String description;
 	private DishTypes dishType;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getLabel() {
@@ -19,10 +19,10 @@ public class Dishes {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	public boolean isPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(boolean price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public String getDescription() {

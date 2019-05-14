@@ -1,24 +1,32 @@
 package vn.edu.vnuk.bnb.model;
 
-import java.util.Date;
+import java.util.Calendar;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Users {
-	private int id;
+	private Long id;
 	private String firstName;
 	private String middleName;
 	private String lastName;
 	private String address;
 	private String email;
 	private String phone;
-	private Date createAt;
-	private Date updateAt;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Calendar createAt;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Calendar updateAt;
 	private int identificationNumber;
 	private UserTypes userTypes;
 	private IdentificationTypes identificationTypes;
-	public int getId() {
+	private Countries country;
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFirstName() {
@@ -57,16 +65,17 @@ public class Users {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Date getCreateAt() {
+	
+	public Calendar getCreateAt() {
 		return createAt;
 	}
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(Calendar createAt) {
 		this.createAt = createAt;
 	}
-	public Date getUpdateAt() {
+	public Calendar getUpdateAt() {
 		return updateAt;
 	}
-	public void setUpdateAt(Date updateAt) {
+	public void setUpdateAt(Calendar updateAt) {
 		this.updateAt = updateAt;
 	}
 	public int getIdentificationNumber() {
@@ -87,5 +96,10 @@ public class Users {
 	public void setIdentificationTypes(IdentificationTypes identificationTypes) {
 		this.identificationTypes = identificationTypes;
 	}
-	
+	public Countries getCountry() {
+		return country;
+	}
+	public void setCountry(Countries country) {
+		this.country = country;
+	}
 }
