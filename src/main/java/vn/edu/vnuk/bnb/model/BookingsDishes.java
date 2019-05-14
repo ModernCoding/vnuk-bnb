@@ -1,7 +1,15 @@
 package vn.edu.vnuk.bnb.model;
 
+import javax.validation.constraints.NotNull;
+
 public class BookingsDishes {
 	private Long id;
+	
+	@NotNull
+	private Long bookingId;
+	@NotNull
+	private Long dishId;
+	
 	private Bookings bookings;
 	private Dishes dishes;
 	
@@ -22,6 +30,18 @@ public class BookingsDishes {
 	}
 	public void setDishes(Dishes dishes) {
 		this.dishes = dishes;
+	}
+	public Long getBookingId() {
+		return bookingId;
+	}
+	public void setBookingId(Long bookingId) {
+		this.bookingId = bookingId;
+	}
+	public Long getDishId() {
+		return dishId;
+	}
+	public void setDishId(Long dishId) {
+		this.dishId = dishId;
 	}
 	
 }

@@ -2,22 +2,47 @@ package vn.edu.vnuk.bnb.model;
 
 import java.util.Calendar;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Users {
 	private Long id;
+	@NotNull
+	@Size(min = 1, message="FirstName is mandatory")
 	private String firstName;
+	@NotNull
+	@Size(min = 1, message="MiddleName is mandatory")
 	private String middleName;
+	@NotNull
+	@Size(min = 1, message="LastName is mandatory")
 	private String lastName;
+	@NotNull
+	@Size(min = 1, message="Address is mandatory")
 	private String address;
+	@NotNull
+	@Size(min = 1, message="Email is mandatory")
 	private String email;
+	@NotNull
+	@Size(min = 1, message="Phone is mandatory")
 	private String phone;
+	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar createAt;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar updateAt;
+	
+	@NotNull
+	private Long userTypesId;
+	@NotNull
+	private Long countryId;
+	@NotNull
+	private Long identificationTypesId;
+	@NotNull
 	private int identificationNumber;
+	
+	
 	private UserTypes userTypes;
 	private IdentificationTypes identificationTypes;
 	private Countries country;
@@ -102,4 +127,23 @@ public class Users {
 	public void setCountry(Countries country) {
 		this.country = country;
 	}
+	public Long getUserTypesId() {
+		return userTypesId;
+	}
+	public void setUserTypesId(Long userTypesId) {
+		this.userTypesId = userTypesId;
+	}
+	public Long getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+	public Long getIdentificationTypesId() {
+		return identificationTypesId;
+	}
+	public void setIdentificationTypesId(Long identificationTypesId) {
+		this.identificationTypesId = identificationTypesId;
+	}
+	
 }

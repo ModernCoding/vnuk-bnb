@@ -13,7 +13,7 @@ public class Sql2140CreateBookingsDishes {
 		this.sqlQuery = "CREATE TABLE bookings_dishes ("
 				+ 	"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ 	"booking_id INT NOT NULL,"  
-				+	"dishe_id INT,"
+				+	"dishe_id INT NOT NULL,"
 				+ 	"CONSTRAINT fk_bookings_dishes_booking_id FOREIGN KEY (booking_id) REFERENCES bookings(id),"
 				+ 	"CONSTRAINT fk_bookings_dishes_dishe_id FOREIGN KEY (dishe_id) REFERENCES dishes(id)"
 				+ ") CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"

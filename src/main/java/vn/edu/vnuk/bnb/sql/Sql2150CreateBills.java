@@ -13,7 +13,7 @@ public class Sql2150CreateBills {
 		this.sqlQuery = "CREATE TABLE bills ("
 				+ 	"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ 	"booking_id INT NOT NULL,"  
-				+	"user_id INT,"
+				+	"user_id INT NOT NULL,"
 				+ 	"total_price DOUBLE NOT NULL,"
 				+	"created DATE ,"
 				+	"updated DATE ,"

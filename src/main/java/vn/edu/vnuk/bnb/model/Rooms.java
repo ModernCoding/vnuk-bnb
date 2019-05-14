@@ -1,11 +1,21 @@
 package vn.edu.vnuk.bnb.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Rooms {
 	private Long id;
+	
+	@NotNull
 	private int beds;
+	@NotNull
 	private int roomNumber;
+	@NotNull
 	private double price;
+	@NotNull
 	private boolean isSmoking;
+	@NotNull
+	private Long roomTypesId;
+	
 	private RoomTypes roomTypes;
 	
 	public Long getId() {
@@ -43,6 +53,12 @@ public class Rooms {
 	}
 	public void setRoomTypes(RoomTypes roomTypes) {
 		this.roomTypes = roomTypes;
+	}
+	public Long getRoomTypesId() {
+		return roomTypesId;
+	}
+	public void setRoomTypesId(Long roomTypesId) {
+		this.roomTypesId = roomTypesId;
 	}
 	
 }

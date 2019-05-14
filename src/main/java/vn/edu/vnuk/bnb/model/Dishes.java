@@ -1,10 +1,23 @@
 package vn.edu.vnuk.bnb.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Dishes {
 	private Long id;
+	
+	@NotNull
+	@Size(min = 1, message="Label is mandatory")
 	private String label;
+	@NotNull
 	private double price;
+	@NotNull
+	@Size(min = 1, message="Description is mandatory")
 	private String description;
+	@NotNull
+	private Long dishTypesId;
+	
+	
 	private DishTypes dishType;
 	
 	public Long getId() {
@@ -36,6 +49,12 @@ public class Dishes {
 	}
 	public void setDishType(DishTypes dishType) {
 		this.dishType = dishType;
+	}
+	public Long getDishTypesId() {
+		return dishTypesId;
+	}
+	public void setDishTypesId(Long dishTypesId) {
+		this.dishTypesId = dishTypesId;
 	}
 	
 }

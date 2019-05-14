@@ -13,7 +13,7 @@ public class Sql2090CreateRoomsEquipments {
 		this.sqlQuery = "CREATE TABLE rooms_equipments ("
 				+ 	"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ 	"room_id INT NOT NULL,"  
-				+	"equipment_id INT,"
+				+	"equipment_id INT NOT NULL,"
 				+ 	"CONSTRAINT fk_rooms_equipments_room_id FOREIGN KEY (room_id) REFERENCES rooms(id),"
 				+ 	"CONSTRAINT fk_rooms_equipments_equipment_id FOREIGN KEY (equipment_id) REFERENCES equipments(id)"
 				+ ") CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
