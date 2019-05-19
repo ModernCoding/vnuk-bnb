@@ -5,6 +5,7 @@
   margin-top : 30px;
   background-color: rgb(255,255,255);
 }
+
  img{
   float: left;
   margin-left: 10px;
@@ -13,11 +14,10 @@
 }
 .content{
   margin-left: 500px;
-
 }
 
 .room-type{
-  height: 350px;
+  height: 43  0px;
   background-color: rgb(209, 224, 224);
 }
 
