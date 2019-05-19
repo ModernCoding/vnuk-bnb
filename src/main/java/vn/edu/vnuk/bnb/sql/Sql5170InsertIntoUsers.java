@@ -35,8 +35,8 @@ public class Sql5170InsertIntoUsers {
             statement.setString(6, "quang");
             statement.setString(7, "quang");
             statement.setInt(8, 200);
-//            statement.setD
-//            statement.setLong(10, 1);
+//            statement.setsetDate(9, 9/1/1999);
+//            statement.setsetDate(9, 9/1/1999);
             statement.setInt(11, 1);
             statement.setInt(12, 1);
             
