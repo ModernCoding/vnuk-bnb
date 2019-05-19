@@ -11,9 +11,8 @@ public class Sql2010CreateRoomTypes {
 		this.connection = connection;
 		
 		this.sqlQuery = "CREATE TABLE room_types ("
-				+ "id INT NOT NULL AUTO_INCREMENT, "
-				+ "label VARCHAR(255) NOT NULL, "
-				+ "PRIMARY KEY (id)"
+				+ "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, "
+				+ "label VARCHAR(255) NOT NULL "
 				+ ") CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 			;
 	}

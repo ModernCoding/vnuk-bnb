@@ -45,7 +45,15 @@ public class Sql0000RunAllQueries {
 		
 		
 		//	Insert data into tables
+		new Sql5110InsertIntoRoomTypes(connectionTable).run();
+		new Sql5100InsertIntoRooms(connectionTable).run();
 		
+		new Sql5120InsertIntoEquipment(connectionTable).run();
+		new Sql5130InsertIntoRoomsEquipments(connectionTable).run();
+		new Sql5140InsertIntoUserTypes(connectionTable).run();
+		new Sql5160InsertIntoIdentificationTypes(connectionTable).run();
+		new Sql5150InsertIntoCountries(connectionTable).run();
+		new Sql5170InsertIntoUsers(connectionTable).run();
 		//new Sql5010InsertIntoTasks(connectionTable).run();
 		
 		

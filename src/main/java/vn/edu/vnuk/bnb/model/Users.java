@@ -1,6 +1,7 @@
 package vn.edu.vnuk.bnb.model;
 
-import java.util.Calendar;
+import java.sql.Date;
+
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,9 +30,9 @@ public class Users {
 	private String phone;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar createAt;
+	private Date createAt;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar updateAt;
+	private Date updateAt;
 	
 	@NotNull
 	private Long userTypesId;
@@ -91,16 +92,17 @@ public class Users {
 		this.phone = phone;
 	}
 	
-	public Calendar getCreateAt() {
+	
+	public Date getCreateAt() {
 		return createAt;
 	}
-	public void setCreateAt(Calendar createAt) {
+	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	public Calendar getUpdateAt() {
+	public Date getUpdateAt() {
 		return updateAt;
 	}
-	public void setUpdateAt(Calendar updateAt) {
+	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
 	public int getIdentificationNumber() {

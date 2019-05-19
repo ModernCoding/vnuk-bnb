@@ -1,95 +1,72 @@
 package vn.edu.vnuk.bnb.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import java.util.List;
 
-import vn.edu.vnuk.bnb.jdbc.ConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
 import vn.edu.vnuk.bnb.model.IdentificationTypes;
 
+@Repository
 public class IdentificationTypesDao {
 	
-    private Connection connection;
-
-    public IdentificationTypesDao(){
-        this.connection = new ConnectionFactory().getConnection();
-    }
-
-    public IdentificationTypesDao(Connection connection){
-        this.connection = connection;
+    private final JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    public IdentificationTypesDao(JdbcTemplate jdbcTemplate) {
+	  this.jdbcTemplate = jdbcTemplate;
     }
 
 
     //  CREATE
     public void create(IdentificationTypes task) throws SQLException{
 
-        String sqlQuery = "insert into identification_types (label) "
-                        +	"values (?)";
-
-        PreparedStatement statement;
+        String sqlQuery = "INSERT INTO identification_types (label) VALUES (?)";
 
         try {
-                statement = connection.prepareStatement(sqlQuery);
+            System.out.println(
+            		String.format(
+            				"%s new record in DB!",
+            				
+            				this.jdbcTemplate.update(
+            						sqlQuery,
+            						new Object[] {task.getLabel()}
+        						)
+        				)
+        		);
 
-                //	Replacing "?" through values
-                statement.setString(1, task.getLabel());
-
-                // 	Executing statement
-                statement.execute();
-
-                System.out.println("New record in DB !");
-
+            
         } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-                System.out.println("Done !");
-                connection.close();
+        	
+            e.printStackTrace();
+        
         }
 
     }
     
     
     //  READ (List of Tasks)
-    @SuppressWarnings("finally")
     public List<IdentificationTypes> read() throws SQLException {
 
-        String sqlQuery = "select * from identification_types";
-        PreparedStatement statement;
-        List<IdentificationTypes> tasks = new ArrayList<IdentificationTypes>();
-
         try {
+        
+        	return this.jdbcTemplate.query(
+        			"SELECT * FROM identification_types",
+        			new BeanPropertyRowMapper<IdentificationTypes>(IdentificationTypes.class)
+    			);
 
-            statement = connection.prepareStatement(sqlQuery);
-
-            // 	Executing statement
-            ResultSet results = statement.executeQuery();
-            
-            while(results.next()){
-
-            	IdentificationTypes task = new IdentificationTypes();
-                task.setId(results.getLong("id"));
-                task.setLabel(results.getString("label"));
-
-                tasks.add(task);
-
-            }
-
-            results.close();
-            statement.close();
-
-
+        	
         } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-                connection.close();
-                return tasks;
+        	
+            e.printStackTrace();
+        
         }
+        
+        
+		return null;
 
 
     }
@@ -97,7 +74,14 @@ public class IdentificationTypesDao {
 
     //  READ (Single Task)
     public IdentificationTypes read(Long id) throws SQLException{
-        return this.read(id, true);
+        
+    	return this.jdbcTemplate.queryForObject(
+    			"SELECT * FROM identification_types where id = ?",
+        		new Object[] {id},
+        		new BeanPropertyRowMapper<IdentificationTypes>(IdentificationTypes.class)
+        	);
+    	
+    
     }  
 
     
@@ -106,12 +90,15 @@ public class IdentificationTypesDao {
         String sqlQuery = "update identification_types set label=? where id=?";
         
         try {
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            statement.setString(1, task.getLabel());
+        	this.jdbcTemplate.update(
+					sqlQuery,
+					
+					new Object[] {
+						task.getLabel(),
+						task.getId()
+					}
+				);
             
-            statement.setLong(2, task.getId());
-            statement.execute();
-            statement.close();
             
             System.out.println("IdentificationTypes successfully modified.");
         } 
@@ -119,10 +106,6 @@ public class IdentificationTypesDao {
         catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-        finally {
-            connection.close();
         }
         
     }
@@ -133,22 +116,23 @@ public class IdentificationTypesDao {
         String sqlQuery = "delete from identification_types where id=?";
 
         try {
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            statement.setLong(1, id);
-            statement.execute();
-            statement.close();
-            
-            System.out.println("IdentificationTypes successfully deleted.");
+
+            System.out.println(
+            		String.format(
+            				"%s record successfully removed from DB!",
+            				
+            				this.jdbcTemplate.update(
+            						sqlQuery,
+            						new Object[] {id}
+        						)
+        				)
+        		);
 
         } 
 
         catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-        finally {
-            connection.close();
         }
 
     }
@@ -158,56 +142,12 @@ public class IdentificationTypesDao {
     
     public void complete(Long id) throws SQLException{
         
-    	IdentificationTypes task = this.read(id, false);
+    	IdentificationTypes task = this.read(id);
 //        task.setIsComplete(true);
-//        task.setDateOfCompletion(Calendar.getInstance());
+//        task.setDateOfCompletion(new Date(System.currentTimeMillis()));
         
         this.update(task);
         
     }
-  
     
-    //  PRIVATE
-    
-    @SuppressWarnings("finally")
-    private IdentificationTypes read(Long id, boolean closeAfterUse) throws SQLException{
-
-        String sqlQuery = "select * from identification_types where id=?";
-
-        PreparedStatement statement;
-        IdentificationTypes task = new IdentificationTypes();
-
-        try {
-            statement = connection.prepareStatement(sqlQuery);
-
-            //	Replacing "?" through values
-            statement.setLong(1, id);
-
-            // 	Executing statement
-            ResultSet results = statement.executeQuery();
-
-            if(results.next()){
-
-                task.setId(results.getLong("id"));
-                task.setLabel(results.getString("label"));
-
-            }
-
-            statement.close();
-
-        } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-            
-            if (closeAfterUse) {
-                connection.close();
-    
-            }
-            
-            return task;
-        }
-
-    }
-
 }

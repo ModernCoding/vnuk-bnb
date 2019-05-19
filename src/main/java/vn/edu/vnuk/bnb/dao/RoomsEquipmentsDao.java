@@ -1,110 +1,94 @@
 package vn.edu.vnuk.bnb.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import java.util.List;
 
-import vn.edu.vnuk.bnb.jdbc.ConnectionFactory;
-import vn.edu.vnuk.bnb.model.Rooms;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
 import vn.edu.vnuk.bnb.model.RoomsEquipments;
-import vn.edu.vnuk.bnb.model.Equipment;
+import vn.edu.vnuk.bnb.rowmapper.RoomsEquipmentsRowMapper;
+
+@Repository
 public class RoomsEquipmentsDao {
 	
-    private Connection connection;
-
-    public RoomsEquipmentsDao(){
-        this.connection = new ConnectionFactory().getConnection();
-    }
-
-    public RoomsEquipmentsDao(Connection connection){
-        this.connection = connection;
+    private final JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    public RoomsEquipmentsDao(JdbcTemplate jdbcTemplate) {
+	  this.jdbcTemplate = jdbcTemplate;
     }
 
 
     //  CREATE
     public void create(RoomsEquipments task) throws SQLException{
 
-        String sqlQuery = "insert into rooms_equipments (room_id, equipment_id) "
-                        +	"values (?, ?)";
-
-        PreparedStatement statement;
+        String sqlQuery = "INSERT INTO rooms_equipments (room_id, equipment_id) VALUES (?, ?)";
 
         try {
-                statement = connection.prepareStatement(sqlQuery);
+            System.out.println(
+            		String.format(
+            				"%s new record in DB!",
+            				
+            				this.jdbcTemplate.update(
+            						sqlQuery,
+            						new Object[] {
+            								task.getRoomId(),
+            								task.getEquipmentId()
+            									}
+        						)
+        				)
+        		);
 
-                //	Replacing "?" through values
-                statement.setLong(1, task.getRoom().getId());
-                statement.setLong(2, task.getEquipment().getId());
-
-
-                // 	Executing statement
-                statement.execute();
-
-                System.out.println("New record in DB !");
-
+            
         } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-                System.out.println("Done !");
-                connection.close();
+        	
+            e.printStackTrace();
+        
         }
 
     }
     
     
     //  READ (List of Tasks)
-    @SuppressWarnings("finally")
-    public List<RoomsEquipments> read() throws SQLException {
+    public List<RoomsEquipments> read(String roomId,String equipmentId) throws SQLException {
 
-        String sqlQuery = "select * from rooms_equipments";
-        PreparedStatement statement;
-        List<RoomsEquipments> tasks = new ArrayList<RoomsEquipments>();
+    	String sqlQuery = "select t01.id"
+    			+ "     , t02.id as room_id"
+    			+ "     , t02.price "
+    			+ "     , t02.beds "
+    			+ "     , t02.room_number "
+    			+ "     , t02.is_smoking "
+    			+ "     , t03.id as equipment_id"
+				+ "     , t03.label "
+				+ "  from rooms_equipments t01, rooms t02, equipments t03"
+				//+ "join rooms_equipments t01 on t02.id = t01.room_id"
+				+ " where t02.id = t01.room_id"
+				+ " and t03.id = t01.equipment_id"
+		;
 
+    	if (roomId != null && equipmentId != null) {
+    		sqlQuery += String.format("   and t02.id = %s", roomId,"   and t03.id = %s",equipmentId);
+    		sqlQuery += " order by t01.id asc;";
+    	}
+
+    	else {
+    		sqlQuery += " order by t03.id asc, t02.id asc, t01.id asc;";
+    	}
+    	
         try {
+        	return new RoomsEquipmentsRowMapper().mapRows(this.jdbcTemplate.queryForList(sqlQuery));
 
-            statement = connection.prepareStatement(sqlQuery);
-
-            // 	Executing statement
-            ResultSet results = statement.executeQuery();
-            
-            while(results.next()){
-
-            	RoomsEquipments task = new RoomsEquipments();
-                task.setId(results.getLong("id"));
-                
-                Long roomsIdFromDB = results.getLong("room_id");
-                Long equipmentsIdFromDB = results.getLong("equipment_id");
-                
-                
-                RoomsDao roomsDao = new RoomsDao();
-                EquipmentDao equipmentsDao = new EquipmentDao();
-                
-                Rooms rooms = roomsDao.read(roomsIdFromDB);
-                Equipment equipments =equipmentsDao.read(equipmentsIdFromDB);
-                
-                task.setRoom(rooms);
-                task.setEquipment(equipments);
-                
-                tasks.add(task);
-
-            }
-
-            results.close();
-            statement.close();
-
-
+        	
         } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-                connection.close();
-                return tasks;
+        	
+            e.printStackTrace();
+        
         }
+        
+        
+		return null;
 
 
     }
@@ -112,23 +96,45 @@ public class RoomsEquipmentsDao {
 
     //  READ (Single Task)
     public RoomsEquipments read(Long id) throws SQLException{
-        return this.read(id, true);
+        
+    	String sqlQuery = "select t01.id"
+    			+ "     , t02.id as room_id"
+    			+ "     , t02.price "
+    			+ "     , t02.beds "
+    			+ "     , t02.room_number "
+    			+ "     , t02.is_smoking "
+    			+ "     , t03.id as equipment_id"
+				+ "     , t03.label "
+				+ "  from rooms_equipments t01, rooms t02, equipment t03"
+				+ "where t01.id = ?"
+				+ "and t02.id = t01.room_id"
+				+ " and t03.id = t01.equipment_id";
+    	
+    	return this.jdbcTemplate.queryForObject(
+    			sqlQuery,
+        		new Object[] {id},
+        		new RoomsEquipmentsRowMapper()
+        	);
+    	
+    
     }  
 
     
     //  UPDATE
     public void update(RoomsEquipments task) throws SQLException {
-        String sqlQuery = "update rooms_equipments set rooms_id=?, equipments_id=? where id=?";
+        String sqlQuery = "update rooms_equipments set room_id=?, equipment_id=? where id=?";
         
         try {
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-     
-            statement.setLong(1, task.getRoom().getId());
-            statement.setLong(2, task.getEquipment().getId());
-
+        	this.jdbcTemplate.update(
+					sqlQuery,
+					
+					new Object[] {
+						task.getRoomId(),
+						task.getEquipmentId(),
+						task.getId()
+					}
+				);
             
-            statement.execute();
-            statement.close();
             
             System.out.println("RoomsEquipments successfully modified.");
         } 
@@ -136,10 +142,6 @@ public class RoomsEquipmentsDao {
         catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-        finally {
-            connection.close();
         }
         
     }
@@ -150,22 +152,23 @@ public class RoomsEquipmentsDao {
         String sqlQuery = "delete from rooms_equipments where id=?";
 
         try {
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            statement.setLong(1, id);
-            statement.execute();
-            statement.close();
-            
-            System.out.println("RoomsEquipments successfully deleted.");
+
+            System.out.println(
+            		String.format(
+            				"%s record successfully removed from DB!",
+            				
+            				this.jdbcTemplate.update(
+            						sqlQuery,
+            						new Object[] {id}
+        						)
+        				)
+        		);
 
         } 
 
         catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-        finally {
-            connection.close();
         }
 
     }
@@ -175,66 +178,12 @@ public class RoomsEquipmentsDao {
     
     public void complete(Long id) throws SQLException{
         
-    	RoomsEquipments task = this.read(id, false);
-//        task.setIsComplete(true);
-//        task.setDateOfCompletion(Calendar.getInstance());
+    	RoomsEquipments task = this.read(id);
+//       task.setSmoking(true);
+//        task.setDateOfCompletion(new Date(System.currentTimeMillis()));
         
         this.update(task);
         
     }
-  
     
-    //  PRIVATE
-    
-    @SuppressWarnings("finally")
-    private RoomsEquipments read(Long id, boolean closeAfterUse) throws SQLException{
-
-        String sqlQuery = "select * from rooms_equipments where id=?";
-
-        PreparedStatement statement;
-        RoomsEquipments task = new RoomsEquipments();
-
-        try {
-            statement = connection.prepareStatement(sqlQuery);
-
-            //	Replacing "?" through values
-            statement.setLong(1, id);
-
-            // 	Executing statement
-            ResultSet results = statement.executeQuery();
-
-            if(results.next()){
-
-                task.setId(results.getLong("id"));
-                Long roomsIdFromDB = results.getLong("room_id");
-                Long equipmentsIdFromDB = results.getLong("equipment_id");
-                
-                
-                RoomsDao roomsDao = new RoomsDao();
-                EquipmentDao equipmentsDao = new EquipmentDao();
-                
-                Rooms rooms = roomsDao.read(roomsIdFromDB);
-                Equipment equipments =equipmentsDao.read(equipmentsIdFromDB);
-                
-                task.setRoom(rooms);
-                task.setEquipment(equipments);
-            }
-
-            statement.close();
-
-        } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-            
-            if (closeAfterUse) {
-                connection.close();
-    
-            }
-            
-            return task;
-        }
-
-    }
-
 }

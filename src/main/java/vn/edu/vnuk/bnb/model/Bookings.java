@@ -1,6 +1,7 @@
 package vn.edu.vnuk.bnb.model;
 
-import java.util.Calendar;
+import java.sql.Date;
+
 
 import javax.validation.constraints.NotNull;
 
@@ -10,9 +11,9 @@ public class Bookings {
 	private Long id;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar checkIn;
+	private Date checkIn;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar checkOut;
+	private Date checkOut;
 	private int quanlity;
 	
 	@NotNull
@@ -30,16 +31,17 @@ public class Bookings {
 		this.id = id;
 	}
 	
-	public Calendar getCheckIn() {
+	
+	public Date getCheckIn() {
 		return checkIn;
 	}
-	public void setCheckIn(Calendar checkIn) {
+	public void setCheckIn(Date checkIn) {
 		this.checkIn = checkIn;
 	}
-	public Calendar getCheckOut() {
+	public Date getCheckOut() {
 		return checkOut;
 	}
-	public void setCheckOut(Calendar checkOut) {
+	public void setCheckOut(Date checkOut) {
 		this.checkOut = checkOut;
 	}
 	public int getQuanlity() {

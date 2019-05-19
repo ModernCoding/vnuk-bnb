@@ -1,6 +1,6 @@
 package vn.edu.vnuk.bnb.model;
 
-import java.util.Calendar;
+import java.sql.Date;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,9 +13,9 @@ public class Bills {
 	private double totalPrice;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar created;
+	private Date created;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar updated;
+	private Date updated;
 	
 	@NotNull
 	private Long bookingId;
@@ -38,16 +38,17 @@ public class Bills {
 		this.totalPrice = totalPrice;
 	}
 	
-	public Calendar getCreated() {
+	
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(Calendar created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public Calendar getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
-	public void setUpdated(Calendar updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 	public Bookings getBooking() {

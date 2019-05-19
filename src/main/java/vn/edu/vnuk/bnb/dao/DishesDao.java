@@ -1,107 +1,97 @@
 package vn.edu.vnuk.bnb.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import java.util.List;
 
-import vn.edu.vnuk.bnb.jdbc.ConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
 import vn.edu.vnuk.bnb.model.Dishes;
-import vn.edu.vnuk.bnb.model.DishTypes;
+import vn.edu.vnuk.bnb.rowmapper.DishesRowMapper;
+
+
+@Repository
 public class DishesDao {
 	
-    private Connection connection;
-
-    public DishesDao(){
-        this.connection = new ConnectionFactory().getConnection();
-    }
-
-    public DishesDao(Connection connection){
-        this.connection = connection;
+    private final JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    public DishesDao(JdbcTemplate jdbcTemplate) {
+	  this.jdbcTemplate = jdbcTemplate;
     }
 
 
     //  CREATE
     public void create(Dishes task) throws SQLException{
 
-        String sqlQuery = "insert into dishes (price, dish_type_id, label, description) "
-                        +	"values (?, ?, ?, ?)";
-
-        PreparedStatement statement;
+        String sqlQuery = "INSERT INTO dishes (price, dish_type_id, label, description) VALUES (?, ?, ?, ?)";
 
         try {
-                statement = connection.prepareStatement(sqlQuery);
+            System.out.println(
+            		String.format(
+            				"%s new record in DB!",
+            				
+            				this.jdbcTemplate.update(
+            						sqlQuery,
+            						new Object[] {
+            								task.getPrice(),
+            								task.getDishTypesId(),
+            								task.getLabel(),
+            								task.getDescription()
+            									}
+        						)
+        				)
+        		);
 
-                //	Replacing "?" through values
-                statement.setDouble(1, task.getPrice());
-                statement.setLong(2, task.getDishType().getId());
-                statement.setString(3, task.getLabel());
-                statement.setString(4, task.getDescription());
-
-                // 	Executing statement
-                statement.execute();
-
-                System.out.println("New record in DB !");
-
+            
         } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-                System.out.println("Done !");
-                connection.close();
+        	
+            e.printStackTrace();
+        
         }
 
     }
     
     
     //  READ (List of Tasks)
-    @SuppressWarnings("finally")
-    public List<Dishes> read() throws SQLException {
+    public List<Dishes> read(String dishTypesId) throws SQLException {
 
-        String sqlQuery = "select * from dishes";
-        PreparedStatement statement;
-        List<Dishes> tasks = new ArrayList<Dishes>();
+    	String sqlQuery = "select t01.id"
+    			+ "     , t01.price"
+    			+ "     , t01.beds"
+    			+ "     , t02.id as dish_type_id"
+    			+ "     , t01.label"
+    			+ "     , t01.description"
+				+ "     , t02.label as dish_type_label"
+				+ "  from dishes t01, dish_types t02"
+				+ " where t02.id = t01.dish_type_id"
+		;
 
+    	if (dishTypesId != null) {
+    		sqlQuery += String.format("   and t02.id = %s", dishTypesId);
+    		sqlQuery += " order by t01.id asc;";
+    	}
+
+    	else {
+    		sqlQuery += " order by t02.id asc, t01.id asc;";
+    	}
+    	
         try {
+        
+        	return new DishesRowMapper().mapRows(this.jdbcTemplate.queryForList(sqlQuery));
+    			
 
-            statement = connection.prepareStatement(sqlQuery);
-
-            // 	Executing statement
-            ResultSet results = statement.executeQuery();
-            
-            while(results.next()){
-
-            	Dishes task = new Dishes();
-                task.setId(results.getLong("id"));
-                task.setPrice(results.getDouble("price"));
-                
-                Long dishTypesIdFromDB = results.getLong("dish_type_id");
-                task.setLabel(results.getString("label"));
-                task.setDescription(results.getString("description"));
-                
-                DishTypesDao dishTypesDao = new DishTypesDao();
-                
-                DishTypes dishTypes = dishTypesDao.read(dishTypesIdFromDB);
-                
-                task.setDishType(dishTypes);
-                tasks.add(task);
-
-            }
-
-            results.close();
-            statement.close();
-
-
+        	
         } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-                connection.close();
-                return tasks;
+        	
+            e.printStackTrace();
+        
         }
+        
+        
+		return null;
 
 
     }
@@ -109,23 +99,47 @@ public class DishesDao {
 
     //  READ (Single Task)
     public Dishes read(Long id) throws SQLException{
-        return this.read(id, true);
+        
+    	String sqlQuery = "select t01.id"
+    			+ "     , t01.price"
+    			+ "     , t01.beds"
+    			+ "     , t02.id as dish_type_id"
+    			+ "     , t01.label"
+    			+ "     , t01.description"
+				+ "     , t02.label as dish_type_label"
+				+ "  from dishes t01, dish_types t02"
+				+ " where t01.id = ?"
+				+ "   and t02.id = t01.dish_type_id"
+				+ " order by t02.id asc, t01.id asc"
+				+ ";"
+			;
+    	return this.jdbcTemplate.queryForObject(
+    			sqlQuery,
+        		new Object[] {id},
+        		new DishesRowMapper()
+        	);
+    	
+    
     }  
 
     
     //  UPDATE
     public void update(Dishes task) throws SQLException {
-        String sqlQuery = "update dishes set pice=?, dish_type_id=?, label=?, description=? where id=?";
+        String sqlQuery = "update dishes set price=?, dish_type_id=?, label=?, description=? where id=?";
         
         try {
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            statement.setDouble(1, task.getPrice());
-            statement.setLong(2, task.getDishType().getId());
-            statement.setString(3, task.getLabel());
-            statement.setString(4, task.getDescription());
+        	this.jdbcTemplate.update(
+					sqlQuery,
+					
+					new Object[] {
+						task.getPrice(),
+						task.getDishTypesId(),
+						task.getLabel(),
+						task.getDescription(),
+						task.getId()
+					}
+				);
             
-            statement.execute();
-            statement.close();
             
             System.out.println("Dishes successfully modified.");
         } 
@@ -133,10 +147,6 @@ public class DishesDao {
         catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-        finally {
-            connection.close();
         }
         
     }
@@ -147,22 +157,23 @@ public class DishesDao {
         String sqlQuery = "delete from dishes where id=?";
 
         try {
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            statement.setLong(1, id);
-            statement.execute();
-            statement.close();
-            
-            System.out.println("Dishes successfully deleted.");
+
+            System.out.println(
+            		String.format(
+            				"%s record successfully removed from DB!",
+            				
+            				this.jdbcTemplate.update(
+            						sqlQuery,
+            						new Object[] {id}
+        						)
+        				)
+        		);
 
         } 
 
         catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-        finally {
-            connection.close();
         }
 
     }
@@ -172,65 +183,12 @@ public class DishesDao {
     
     public void complete(Long id) throws SQLException{
         
-    	Dishes task = this.read(id, false);
-//        task.setIsComplete(true);
-//        task.setDateOfCompletion(Calendar.getInstance());
+    	Dishes task = this.read(id);
+//        task.setSmoking(true);
+//        task.setDateOfCompletion(new Date(System.currentTimeMillis()));
         
         this.update(task);
         
     }
-  
     
-    //  PRIVATE
-    
-    @SuppressWarnings("finally")
-    private Dishes read(Long id, boolean closeAfterUse) throws SQLException{
-
-        String sqlQuery = "select * from dishes where id=?";
-
-        PreparedStatement statement;
-        Dishes task = new Dishes();
-
-        try {
-            statement = connection.prepareStatement(sqlQuery);
-
-            //	Replacing "?" through values
-            statement.setLong(1, id);
-
-            // 	Executing statement
-            ResultSet results = statement.executeQuery();
-
-            if(results.next()){
-
-                task.setId(results.getLong("id"));
-                task.setPrice(results.getDouble("price"));
-                
-                Long dishTypesIdFromDB = results.getLong("dish_type_id");
-                task.setLabel(results.getString("label"));
-                task.setDescription(results.getString("description"));
-                
-                DishTypesDao dishTypesDao = new DishTypesDao();
-                
-                DishTypes dishTypes = dishTypesDao.read(dishTypesIdFromDB);
-                
-                task.setDishType(dishTypes);
-            }
-
-            statement.close();
-
-        } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        } finally {
-            
-            if (closeAfterUse) {
-                connection.close();
-    
-            }
-            
-            return task;
-        }
-
-    }
-
 }
