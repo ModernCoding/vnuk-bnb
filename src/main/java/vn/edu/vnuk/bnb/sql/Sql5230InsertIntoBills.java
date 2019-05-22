@@ -3,6 +3,7 @@ package vn.edu.vnuk.bnb.sql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 public class Sql5230InsertIntoBills {
 	
@@ -30,8 +31,14 @@ public class Sql5230InsertIntoBills {
             statement.setInt(1, 1);
             statement.setInt(2, 1);
             statement.setDouble(3, 1000);
-            statement.setDate(4, null);
-            statement.setDate(5, null);
+            statement.setDate(4, new java.sql.Date(
+                    Calendar.getInstance().getTimeInMillis()
+            		)
+            );
+            statement.setDate(5, new java.sql.Date(
+                    Calendar.getInstance().getTimeInMillis()
+            		)
+            );
             
             // 	Executing statement
 			statement.execute();

@@ -66,6 +66,8 @@ public class RoomsEquipmentsDao {
 				//+ "join rooms_equipments t01 on t02.id = t01.room_id"
 				+ " where t02.id = t01.room_id"
 				+ " and t03.id = t01.equipment_id"
+				+ " order by t03.id asc, t02.id asc, t01.id asc"
+				+ ";"
 		;
 
     	if (roomId != null && equipmentId != null) {

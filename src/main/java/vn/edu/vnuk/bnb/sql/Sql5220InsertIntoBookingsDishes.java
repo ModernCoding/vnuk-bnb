@@ -12,7 +12,7 @@ public class Sql5220InsertIntoBookingsDishes {
 	public Sql5220InsertIntoBookingsDishes(Connection connection) {
 		this.connection = connection;
 		
-		this.sqlQuery = "INSERT INTO bookings_dishes ((booking_id, dishe_id) "
+		this.sqlQuery = "INSERT INTO bookings_dishes (booking_id, dishe_id) "
                 +	"values (?, ?)";
 	}
 	

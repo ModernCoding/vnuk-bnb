@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -134,6 +133,8 @@ public class BillsDao {
 				+ "	 where t01.id = ?"
 				+ "  and t02.id = t01.booking_id"
 				+ "  and t03.id = t01.user_id"
+				+ " order by t03.id asc, t02.id asc, t01.id asc"
+				+ ";"
 				;
     	
     	return this.jdbcTemplate.queryForObject(

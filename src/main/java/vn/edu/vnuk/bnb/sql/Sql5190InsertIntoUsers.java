@@ -3,6 +3,7 @@ package vn.edu.vnuk.bnb.sql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 public class Sql5190InsertIntoUsers {
 	
@@ -35,8 +36,14 @@ public class Sql5190InsertIntoUsers {
             statement.setString(6, "quang");
             statement.setString(7, "quang");
             statement.setInt(8, 200);
-            statement.setDate(9, null);
-            statement.setDate(10, null);
+            statement.setDate(9, new java.sql.Date(
+                    Calendar.getInstance().getTimeInMillis()
+            		)
+            );
+            statement.setDate(10, new java.sql.Date(
+                    Calendar.getInstance().getTimeInMillis()
+            		)
+            );
             statement.setInt(11, 1);
             statement.setInt(12, 1);
             

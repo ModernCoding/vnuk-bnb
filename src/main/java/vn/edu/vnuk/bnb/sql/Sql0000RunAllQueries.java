@@ -57,6 +57,7 @@ public class Sql0000RunAllQueries {
 		new Sql5190InsertIntoUsers(connectionTable).run();
 		new Sql5200InsertIntoBookings(connectionTable).run();
 		new Sql5210InsertIntoBookingsServices(connectionTable).run();
+		new Sql5211InsertIntoDishes(connectionTable).run();
 		new Sql5220InsertIntoBookingsDishes(connectionTable).run();
 		new Sql5230InsertIntoBills(connectionTable).run();
 		

@@ -73,6 +73,9 @@ public class UserDao {
     			+ "     , t01.address "
     			+ "     , t01.email "
     			+ "     , t01.phone "
+    			+ "     , t01.identification_number "
+    			+ "     , t01.create_at "
+    			+ "     , t01.update_at "
     			+ "     , t02.label "
     			+ "     , t03.id as identification_type_id"
 				+ "     , t03.label "
@@ -130,7 +133,10 @@ public class UserDao {
 				+ "	 where t01.id = ?"
 				+ "  and t02.id = t01.user_type_id"
 				+ "  and t03.id = t01.identification_type_id"
-				+ "  and t04.id = t01.country_id";
+				+ "  and t04.id = t01.country_id"
+				+ " order by t04.id asc, t03.id asc, t02.id asc, t01.id asc"
+				+ ";"
+				;
     	return this.jdbcTemplate.queryForObject(
     			sqlQuery,
         		new Object[] {id},
