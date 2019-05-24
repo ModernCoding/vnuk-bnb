@@ -52,7 +52,7 @@ public class RoomTypesController {
     
     @RequestMapping("/room-types/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("roomtype", dao.read(id));
+        model.addAttribute("roomType", dao.read(id));
         model.addAttribute("template", "roomTypes/show");
         return "_layout";
     }
@@ -78,7 +78,7 @@ public class RoomTypesController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		RoomType roomTypes,
+		RoomType roomType,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -105,10 +105,10 @@ public class RoomTypesController {
     }
     
     
-    @RequestMapping(value="/roomstype", method=RequestMethod.POST)
+    @RequestMapping(value="/room-types", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid RoomType roomTypes,
+    	@Valid RoomType roomType,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -121,19 +121,19 @@ public class RoomTypesController {
             return "redirect:/roomstype/new";
         }
         
-        dao.create(roomTypes);
+        dao.create(roomType);
         return "redirect:/roomstype";
         
         
     }
     
     
-    @RequestMapping(value="/roomstype/{id}", method=RequestMethod.PATCH)
+    @RequestMapping(value="/room-types/{id}", method=RequestMethod.PATCH)
     public String update(
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid RoomType roomTypes,
+    		@Valid RoomType roomType,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes
@@ -146,7 +146,7 @@ public class RoomTypesController {
             return String.format("redirect:/roomstype/%s/edit", id);
         }
         
-        dao.update(roomTypes);
+        dao.update(roomType);
         return backToShow ? String.format("redirect:/roomstype/%s", id) : "redirect:/roomstype";
         
         
@@ -154,7 +154,7 @@ public class RoomTypesController {
     
     
     //  delete with ajax
-    @RequestMapping(value="/roomstype/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value="/room-types/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
     	dao.delete(id);
         response.setStatus(200);
