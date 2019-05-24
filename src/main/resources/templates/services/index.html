@@ -1,118 +1,92 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">List of all the RoomsTypes</title>
+	<title th:fragment="title">List of all Services</title>
 	
 	
 	<section th:fragment="content">
-	
-		<h3 class="my-margin-bottom-28">
-			<em>List of all RoomsTypes</em>
-		</h3>
-	
-	    <a href="tasks/new" class="btn btn-sm btn-success my-margin-bottom-19">
-			<span class="my-margin-right-19">
-				<i class="fa fa-plus" aria-hidden="true"></i>
-			</span>
-			
-	    	<span>Create a new RoomsTypes</span>
-	    </a>
-	
-	
-	    <div id="my-notice" class="my-no-line-height">
-	        <span class="my-margin-right-19">
-				<i aria-hidden="true"></i>
-			</span>
-			
-	    	<span></span>
-		</div>
-		
-       
-       	<table>
-	        <thead>
-	            <tr>
-	                <th></th>
-	                <th>Id</th>
-	                <th>Description</th>
-	                <th>Status</th>
-	                <th>Date of completion</th>
-	            </tr>
-	        </thead>
-	
-	        <tbody>
-	
-                <tr th:each="task : ${tasks}" th:attr="data-task-id=${task.id}">
-                    <td>
-                        
-                        <!-- Show task -->
-                        <a 	
-                        	th:href="@{/tasks/{id}(id=${task.id})}"
-                        	class="btn btn-sm btn-light" 
-                           	data-toggle="tooltip"
-                           	title="Show task"
-                           	data-placement="bottom"
-                        >
-                        
-                            <i class="far fa-eye" aria-hidden="true"></i>
-                            
-                        </a>
-                        
-                        
-                        <!-- Complete task -->
-                        <button
-                        	th:unless="${task.complete}"
-                        	th:value="${task.id}"
-                            type="button"
-                            class="btn btn-sm btn-success my-task-to-complete" 
-                            data-toggle="tooltip" 
-                            title="Complete task" 
-                            data-placement="bottom"
-                        >
-                        
-                            <i class="far fa-check-square" aria-hidden="true"></i>
-                            
-                        </button>
-                        
-                        
-                        <!-- Edit task -->
-                        <a
-                        	th:unless="${task.complete}"
-                        	th:href="@{/tasks/{id}/edit(id=${task.id})}"
-                        	class="btn btn-sm btn-primary my-task-to-edit" 
-                           	data-toggle="tooltip"
-                           	title="Edit task"
-                           	data-placement="bottom"
-                        >
-                        
-                            <i class="far fa-edit" aria-hidden="true"></i>
-                            
-                        </a>
-                           
-                           
-                        <!-- Delete task -->
-                        <button
-                        	type="button"
-                            class="btn btn-sm btn-danger my-task-to-delete" 
-                            th:value="${task.id}"
-                            data-toggle="tooltip" 
-                            title="Delete task" 
-                            data-placement="bottom"
-                        >
-                            
-                        	<i class="far fa-trash-alt" aria-hidden="true"></i>
-                        
-                        </button>
+		<div class="container">
+			<h3 class="my-margin-bottom-28">
+				<em>List of all Services</em>
+			</h3>
 
-                    </td>
-                    
-                    <td th:text="${task.id}"></td>
-                    <td th:text="${task.description}"></td>
-                    <td class="task-status" th:text="${task.complete ? 'Complete' : 'To be done'}"></td>
-                    <td class="task-date-of-completion" th:text="${#dates.format(task.dateOfCompletion, 'dd MMMM yyyy')}"></td>
-                </tr>
-	
-	        </tbody>
-	    </table>    
-    
+			<a th:href="@{/services/new}" class="btn btn-sm btn-success my-margin-bottom-19">
+				<span class="my-margin-right-19">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+				</span>
+				<span>Create a new Service</span>
+			</a>
+
+
+			<div id="my-notice" class="my-no-line-height">
+				<span class="my-margin-right-19">
+					<i aria-hidden="true"></i>
+				</span>
+				<span></span>
+			</div>
+
+
+			<table class="table table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Label</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="service : ${services}" th:attr="data-service-id=${service.id}">
+						<td scope="row" th:text="${service.id}"></td>
+						<td>
+							<div th:text="${service.label}" class="my-margin-bottom-4 d-inline-block" ></div>
+							<div class="d-inline-block">
+								<a th:href="@{/rooms?roomTypeId={id}(id=${service.id})}" class="btn btn-sm btn-info">
+									<i class="fas fa-angle-double-right" aria-hidden="true"></i>
+									<span class="my-margin-left-19">
+										<i>Subcategories</i>
+									</span>
+								</a>
+							</div>
+						</td>
+						<td>
+							<!-- Show category -->
+							<a
+									th:href="@{/services/{id}(id=${service.id})}"
+									class="btn btn-sm btn-light"
+									data-toggle="tooltip"
+									title="Show category"
+									data-placement="bottom"
+							>
+								<i class="far fa-eye" aria-hidden="true"></i>
+							</a>
+
+
+							<!-- Edit category -->
+							<a
+									th:href="@{/services/{id}/edit(id=${service.id})}"
+									class="btn btn-sm btn-primary my-category-to-edit"
+									data-toggle="tooltip"
+									title="Edit category"
+									data-placement="bottom"
+							>
+								<i class="far fa-edit" aria-hidden="true"></i>
+							</a>
+
+							<!-- Delete category -->
+							<button
+									type="button"
+									class="btn btn-sm btn-danger my-category-to-delete"
+									th:value="${service.id}"
+									data-toggle="tooltip"
+									title="Delete category"
+									data-placement="bottom"
+							>
+								<i class="far fa-trash-alt" aria-hidden="true"></i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</section>
 	
 </html>

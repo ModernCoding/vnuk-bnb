@@ -24,42 +24,68 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.UserTypeDao;
-import vn.edu.vnuk.bnb.model.UserType;
+import vn.edu.vnuk.bnb.dao.DishDao;
+import vn.edu.vnuk.bnb.dao.DishTypeDao;
+import vn.edu.vnuk.bnb.model.Dish;
 
 /**
  *
  * @author michel
  */
 @Controller
-public class UserTypesController {
+public class DishesController {
 	
-	private UserTypeDao dao;
-	
+	private DishDao dishDao;
+	private DishTypeDao dishTypeDao;
+
 	@Autowired
-	public void setUserTypesDao(UserTypeDao dao) {
-		this.dao = dao;
+	public void setdishesDao(DishDao dishDao) {
+		this.dishDao = dishDao;
+	}
+
+	@Autowired
+	public void setDishTypesDao(DishTypeDao dishTypeDao) {
+		this.dishTypeDao = dishTypeDao;
 	}
 	
 
-	@RequestMapping("/user-types")
-    public String index(Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("userTypes", dao.read());
-        model.addAttribute("template", "userTypes/index");
+	@RequestMapping("/dishes")
+    public String index(
+		
+		@RequestParam(value="dishTypesId", required = false) String dishTypesId,
+		Model model,
+		ServletRequest request
+
+	) throws SQLException{
+        
+		model.addAttribute("dishes", dishDao.read(dishTypesId));
+		
+		if (dishTypesId != null) {
+			model.addAttribute("dishType", dishTypeDao.read(Long.parseLong(dishTypesId)));
+		}
+		
+        model.addAttribute("template", "dishes/index");
         return "_layout";
-    }
+   
+	}
     
     
-    @RequestMapping("/user-types/{id}")
+    @RequestMapping("/dishes/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("userType", dao.read(id));
-        model.addAttribute("template", "userTypes/show");
+        model.addAttribute("dish", dishTypeDao.read(id));
+        model.addAttribute("template", "dishes/show");
         return "_layout";
     }
     
     
-    @RequestMapping("/user-types/new")
-    public String add(UserType userType, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    @RequestMapping("/dishes/new")
+    public String add(
+    		
+		Dish dish,
+		Model model,
+		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
+	
+	) throws SQLException{
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -68,17 +94,18 @@ public class UserTypesController {
     			);
     	}
     	
-        model.addAttribute("template", "userTypes/new");
+    	model.addAttribute("template", "dishes/new");
+    	model.addAttribute("dishType", dishTypeDao.read());
         return "_layout";
     }
     
     
-    @RequestMapping("/user-types/{id}/edit")
+    @RequestMapping("/dishes/{id}/edit")
     public String edit(
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		UserType userType,
+		Dish dish,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -96,44 +123,43 @@ public class UserTypesController {
     	
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-    	model.addAttribute("userType", dao.read(id));
-        model.addAttribute("template", "userTypes/edit");
+    	model.addAttribute("dish", dishDao.read(id));
+    	model.addAttribute("dishType", dishTypeDao.read());
+        model.addAttribute("template", "dishes/edit");
 
         return "_layout";
     
-        
     }
     
     
-    @RequestMapping(value="/user-types", method=RequestMethod.POST)
+    @RequestMapping(value="/dishes", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid UserType userType,
+    	@Valid Dish dish,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
     
     ) throws SQLException{
-        
     	
         if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return "redirect:/user-types/new";
+            return "redirect:/dishes/new";
         }
         
-        dao.create(userType);
-        return "redirect:/user-types";
         
+        dishDao.create(dish);
+        return "redirect:/dishes";
         
     }
     
     
-    @RequestMapping(value="/user-types/{id}", method=RequestMethod.PATCH)
+    @RequestMapping(value="/dishes/{id}", method=RequestMethod.PATCH)
     public String update(
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid UserType userType,
+    		@Valid Dish dish,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes
@@ -143,20 +169,20 @@ public class UserTypesController {
         
     	if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return String.format("redirect:/user-types/%s/edit", id);
+            return String.format("redirect:/dishes/%s/edit", id);
         }
         
-        dao.update(userType);
-        return backToShow ? String.format("redirect:/user-types/%s", id) : "redirect:/user-types";
+        dishDao.update(dish);
+        return backToShow ? String.format("redirect:/dishes/%s", id) : "redirect:/dishes";
         
         
     }
     
     
     //  delete with ajax
-    @RequestMapping(value="/user-types/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value="/dishes/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
-    	dao.delete(id);
+    	dishDao.delete(id);
         response.setStatus(200);
     }
     

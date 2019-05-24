@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${roomtypes}" th:method="${method}">
+    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${dishType}" th:method="${method}">
 
     	<div>
     		
@@ -9,7 +9,7 @@
     		</div>
     		
         	<div class="my-margin-top-4">
-	    		<textarea th:field="*{description}" rows="4"></textarea>
+	    		<input type="text" th:field="*{label}">
         	</div>
         	
         	<div th:if="${labelFieldError}" class="my-error-field">

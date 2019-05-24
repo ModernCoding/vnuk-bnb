@@ -1,12 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title" th:text="'Edit task #' + ${task.id}"></title>
+	<title th:fragment="title" th:text="'Edit task #' + ${identificationType.id}"></title>
 	
 	
 	<section th:fragment="content">
 	
 		<h3 class="my-margin-bottom-28">
-			<em th:text="'Edit task #' + ${task.id}"></em>
+			<em th:text="'Edit task #' + ${identificationType.id}"></em>
 		</h3>
 		
 		
@@ -18,9 +18,9 @@
 	    				::
 	    				
 	    				form(
-	    					@{/tasks/{id}(id=${task.id}, backToShow=${backToShow})},
+	    					@{/identification-types/{id}(id=${identificationType.id}, backToShow=${backToShow})},
 	    					'patch',
-	    					@{/tasks{urlCompletion}(urlCompletion=${urlCompletion})}
+	    					@{/identification-types{urlCompletion}(urlCompletion=${urlCompletion})}
 	    				)
 	    			}
 	    		"
