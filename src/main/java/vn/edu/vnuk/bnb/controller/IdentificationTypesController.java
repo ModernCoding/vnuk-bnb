@@ -42,24 +42,24 @@ public class IdentificationTypesController {
 	}
 	
 
-	@RequestMapping("/identificationtypes")
+	@RequestMapping("/identification-types")
     public String index(Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("identificationtypes", dao.read());
-        model.addAttribute("template", "identificationtypes/index");
+        model.addAttribute("identificationTypes", dao.read());
+        model.addAttribute("template", "identificationTypes/index");
         return "_layout";
     }
     
     
-    @RequestMapping("/identificationtypes/{id}")
+    @RequestMapping("/identification-types/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("identificationtype", dao.read(id));
-        model.addAttribute("template", "identificationtypes/show");
+        model.addAttribute("identificationType", dao.read(id));
+        model.addAttribute("template", "identificationTypes/show");
         return "_layout";
     }
     
     
-    @RequestMapping("/identificationtypes/new")
-    public String add(IdentificationType identificationtype, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    @RequestMapping("/identification-types/new")
+    public String add(IdentificationType identificationType, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -68,17 +68,17 @@ public class IdentificationTypesController {
     			);
     	}
     	
-        model.addAttribute("template", "identificationtypes/new");
+        model.addAttribute("template", "identificationTypes/new");
         return "_layout";
     }
     
     
-    @RequestMapping("/identificationtypes/{id}/edit")
+    @RequestMapping("/identification-types/{id}/edit")
     public String edit(
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		IdentificationType identificationtype,
+		IdentificationType identificationType,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -96,8 +96,8 @@ public class IdentificationTypesController {
     	
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-    	model.addAttribute("identificationtype", dao.read(id));
-        model.addAttribute("template", "identificationtypes/edit");
+    	model.addAttribute("identificationType", dao.read(id));
+        model.addAttribute("template", "identificationTypes/edit");
 
         return "_layout";
     
@@ -105,10 +105,10 @@ public class IdentificationTypesController {
     }
     
     
-    @RequestMapping(value="/identificationtypes", method=RequestMethod.POST)
+    @RequestMapping(value="/identification-types", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid IdentificationType identificationtype,
+    	@Valid IdentificationType identificationType,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -118,22 +118,22 @@ public class IdentificationTypesController {
     	
         if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return "redirect:/identificationtypes/new";
+            return "redirect:/identification-types/new";
         }
         
-        dao.create(identificationtype);
-        return "redirect:/identificationtypes";
+        dao.create(identificationType);
+        return "redirect:/identification-types";
         
         
     }
     
     
-    @RequestMapping(value="/identificationtypes/{id}", method=RequestMethod.PATCH)
+    @RequestMapping(value="/identification-types/{id}", method=RequestMethod.PATCH)
     public String update(
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid IdentificationType identificationtype,
+    		@Valid IdentificationType identificationType,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes
@@ -143,18 +143,18 @@ public class IdentificationTypesController {
         
     	if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return String.format("redirect:/identificationtypes/%s/edit", id);
+            return String.format("redirect:/identification-types/%s/edit", id);
         }
         
-        dao.update(identificationtype);
-        return backToShow ? String.format("redirect:/identificationtypes/%s", id) : "redirect:/identificationtypes";
+        dao.update(identificationType);
+        return backToShow ? String.format("redirect:/identification-types/%s", id) : "redirect:/identification-types";
         
         
     }
     
     
     //  delete with ajax
-    @RequestMapping(value="/identificationtypes/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value="/identification-types/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
     	dao.delete(id);
         response.setStatus(200);

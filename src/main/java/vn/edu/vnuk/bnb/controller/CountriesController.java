@@ -45,7 +45,7 @@ public class CountriesController {
 	@RequestMapping("/countries")
     public String index(Model model, ServletRequest request) throws SQLException{
         model.addAttribute("countries", dao.read());
-        model.addAttribute("template", "country/index");
+        model.addAttribute("template", "countries/index");
         return "_layout";
     }
     
@@ -53,7 +53,7 @@ public class CountriesController {
     @RequestMapping("/countries/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
         model.addAttribute("country", dao.read(id));
-        model.addAttribute("template", "country/show");
+        model.addAttribute("template", "countries/show");
         return "_layout";
     }
     
@@ -68,7 +68,7 @@ public class CountriesController {
     			);
     	}
     	
-        model.addAttribute("template", "country/new");
+        model.addAttribute("template", "countries/new");
         return "_layout";
     }
     
@@ -97,7 +97,7 @@ public class CountriesController {
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("country", dao.read(id));
-        model.addAttribute("template", "country/edit");
+        model.addAttribute("template", "countries/edit");
 
         return "_layout";
     

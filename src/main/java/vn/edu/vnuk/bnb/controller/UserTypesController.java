@@ -44,22 +44,22 @@ public class UserTypesController {
 
 	@RequestMapping("/usertypes")
     public String index(Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("usertypes", dao.read());
-        model.addAttribute("template", "usertype/index");
+        model.addAttribute("userTypes", dao.read());
+        model.addAttribute("template", "userTypes/index");
         return "_layout";
     }
     
     
     @RequestMapping("/usertypes/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("usertype", dao.read(id));
-        model.addAttribute("template", "usertype/show");
+        model.addAttribute("userType", dao.read(id));
+        model.addAttribute("template", "userTypes/show");
         return "_layout";
     }
     
     
     @RequestMapping("/usertypes/new")
-    public String add(UserType usertype, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    public String add(UserType userType, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -68,7 +68,7 @@ public class UserTypesController {
     			);
     	}
     	
-        model.addAttribute("template", "usertype/new");
+        model.addAttribute("template", "userTypes/new");
         return "_layout";
     }
     
@@ -78,7 +78,7 @@ public class UserTypesController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		UserType usertype,
+		UserType userType,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -96,8 +96,8 @@ public class UserTypesController {
     	
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-    	model.addAttribute("usertype", dao.read(id));
-        model.addAttribute("template", "usertype/edit");
+    	model.addAttribute("userType", dao.read(id));
+        model.addAttribute("template", "userTypes/edit");
 
         return "_layout";
     
@@ -105,10 +105,10 @@ public class UserTypesController {
     }
     
     
-    @RequestMapping(value="/usertype", method=RequestMethod.POST)
+    @RequestMapping(value="/usertypes", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid UserType usertype,
+    	@Valid UserType userType,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -118,11 +118,11 @@ public class UserTypesController {
     	
         if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return "redirect:/usertype/new";
+            return "redirect:/userTypes/new";
         }
         
-        dao.create(usertype);
-        return "redirect:/usertype";
+        dao.create(userType);
+        return "redirect:/userTypes";
         
         
     }
@@ -133,7 +133,7 @@ public class UserTypesController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid UserType usertype,
+    		@Valid UserType userType,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes
@@ -146,7 +146,7 @@ public class UserTypesController {
             return String.format("redirect:/usertypes/%s/edit", id);
         }
         
-        dao.update(usertype);
+        dao.update(userType);
         return backToShow ? String.format("redirect:/usertypes/%s", id) : "redirect:/usertypes";
         
         

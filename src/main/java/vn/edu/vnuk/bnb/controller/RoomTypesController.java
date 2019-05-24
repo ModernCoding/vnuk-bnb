@@ -118,11 +118,11 @@ public class RoomTypesController {
     	
         if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return "redirect:/roomstype/new";
+            return "redirect:/room-types/new";
         }
         
         dao.create(roomType);
-        return "redirect:/roomstype";
+        return "redirect:/room-types";
         
         
     }
@@ -143,11 +143,11 @@ public class RoomTypesController {
         
     	if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return String.format("redirect:/roomstype/%s/edit", id);
+            return String.format("redirect:/room-types/%s/edit", id);
         }
         
         dao.update(roomType);
-        return backToShow ? String.format("redirect:/roomstype/%s", id) : "redirect:/roomstype";
+        return backToShow ? String.format("redirect:/room-types/%s", id) : "redirect:/room-types";
         
         
     }

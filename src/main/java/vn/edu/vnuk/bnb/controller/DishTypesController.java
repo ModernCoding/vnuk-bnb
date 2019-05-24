@@ -42,24 +42,24 @@ public class DishTypesController {
 	}
 	
 
-	@RequestMapping("/dishestypes")
+	@RequestMapping("/dish-types")
     public String index(Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("dishestypes", dao.read());
-        model.addAttribute("template", "dishtype/index");
+        model.addAttribute("dishTypes", dao.read());
+        model.addAttribute("template", "dishtTypes/index");
         return "_layout";
     }
     
     
-    @RequestMapping("/dishestypes/{id}")
+    @RequestMapping("/dish-types/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("dishtypes", dao.read(id));
-        model.addAttribute("template", "dishtype/show");
+        model.addAttribute("dishType", dao.read(id));
+        model.addAttribute("template", "dishtTypes/show");
         return "_layout";
     }
     
     
-    @RequestMapping("/dishestypes/new")
-    public String add(DishType dishtypes, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    @RequestMapping("/dish-types/new")
+    public String add(DishType dishType, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -68,17 +68,17 @@ public class DishTypesController {
     			);
     	}
     	
-        model.addAttribute("template", "dishestypes/new");
+        model.addAttribute("template", "dishtTypes/new");
         return "_layout";
     }
     
     
-    @RequestMapping("/dishestypes/{id}/edit")
+    @RequestMapping("/dish-types/{id}/edit")
     public String edit(
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		DishType dishtypes,
+		DishType dishType,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -96,8 +96,8 @@ public class DishTypesController {
     	
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-    	model.addAttribute("dishtypes", dao.read(id));
-        model.addAttribute("template", "dishestypes/edit");
+    	model.addAttribute("dishType", dao.read(id));
+        model.addAttribute("template", "dishTypes/edit");
 
         return "_layout";
     
@@ -105,10 +105,10 @@ public class DishTypesController {
     }
     
     
-    @RequestMapping(value="/dishestypes", method=RequestMethod.POST)
+    @RequestMapping(value="/dish-types", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid DishType dishtypes,
+    	@Valid DishType dishType,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -118,22 +118,22 @@ public class DishTypesController {
     	
         if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return "redirect:/dishestypes/new";
+            return "redirect:/dish-types/new";
         }
         
-        dao.create(dishtypes);
-        return "redirect:/dishestypes";
+        dao.create(dishType);
+        return "redirect:/dish-types";
         
         
     }
     
     
-    @RequestMapping(value="/dishestypes/{id}", method=RequestMethod.PATCH)
+    @RequestMapping(value="/dish-types/{id}", method=RequestMethod.PATCH)
     public String update(
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid DishType dishtypes,
+    		@Valid DishType dishType,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes
@@ -143,18 +143,18 @@ public class DishTypesController {
         
     	if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return String.format("redirect:/dishestypes/%s/edit", id);
+            return String.format("redirect:/dish-types/%s/edit", id);
         }
         
-        dao.update(dishtypes);
-        return backToShow ? String.format("redirect:/dishestypes/%s", id) : "redirect:/dishestypes";
+        dao.update(dishType);
+        return backToShow ? String.format("redirect:/dish-types/%s", id) : "redirect:/dish-types";
         
         
     }
     
     
     //  delete with ajax
-    @RequestMapping(value="/dishestypes/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value="/dish-types/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
     	dao.delete(id);
         response.setStatus(200);

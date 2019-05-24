@@ -45,7 +45,7 @@ public class EquipmentController {
 	@RequestMapping("/equipments")
     public String index(Model model, ServletRequest request) throws SQLException{
         model.addAttribute("equipments", dao.read());
-        model.addAttribute("template", "equipment/index");
+        model.addAttribute("template", "equipments/index");
         return "_layout";
     }
     
@@ -53,7 +53,7 @@ public class EquipmentController {
     @RequestMapping("/equipments/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
         model.addAttribute("equipment", dao.read(id));
-        model.addAttribute("template", "equipment/show");
+        model.addAttribute("template", "equipments/show");
         return "_layout";
     }
     
@@ -68,7 +68,7 @@ public class EquipmentController {
     			);
     	}
     	
-        model.addAttribute("template", "equipment/new");
+        model.addAttribute("template", "equipments/new");
         return "_layout";
     }
     
@@ -97,7 +97,7 @@ public class EquipmentController {
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("equipment", dao.read(id));
-        model.addAttribute("template", "equipment/edit");
+        model.addAttribute("template", "equipments/edit");
 
         return "_layout";
     
