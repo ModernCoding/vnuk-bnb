@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<title th:fragment="title" th:text="'Edit task #' + ${userType.id}"></title>
+	
+	
+	<section th:fragment="content">
+	
+		<h3 class="my-margin-bottom-28">
+			<em th:text="'Edit task #' + ${userType.id}"></em>
+		</h3>
+		
+		
+	    <form
+	    	th:replace="
+	    			~{
+	    				/userTypes/_form
+	    				
+	    				::
+	    				
+	    				form(
+	    					@{/user-types/{id}(id=${userType.id}, backToShow=${backToShow})},
+	    					'patch',
+	    					@{/user-types{urlCompletion}(urlCompletion=${urlCompletion})}
+	    				)
+	    			}
+	    		"
+	    >
+	    </form>
+	
+	</section>
+	
+</html>
