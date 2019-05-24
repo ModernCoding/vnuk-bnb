@@ -34,7 +34,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="dishType : ${dishTypes}" th:attr="data-dishType-id=${dishType.id}">
+					<tr th:each="dishType : ${dishTypes}" th:attr="data-dish-type-id=${dishType.id}">
 						<td scope="row" th:text="${dishType.id}"></td>
 						<td>
 							<div th:text="${dishType.label}" class="my-margin-bottom-4 d-inline-block" ></div>

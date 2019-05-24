@@ -1,20 +1,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">List of all the tasks</title>
+	<title th:fragment="title">List of all the Rooms</title>
 	
 	
 	<section th:fragment="content">
 	
 		<h3 class="my-margin-bottom-28">
-			<em>List of all tasks</em>
+			<em th:if="${roomType == null}">List of all Rooms</em>
+			
+			<em th:unless="${roomType == null}">
+				Rooms of <b th:text="${roomType.label}"></b>
+			</em>
 		</h3>
 	
-	    <a href="tasks/new" class="btn btn-sm btn-success my-margin-bottom-19">
+	    <a href="rooms/new" class="btn btn-sm btn-success my-margin-bottom-19">
 			<span class="my-margin-right-19">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</span>
 			
-	    	<span>Create a new task</span>
+	    	<span>Create a new rooms</span>
 	    </a>
 	
 	
@@ -32,23 +36,22 @@
 	            <tr>
 	                <th></th>
 	                <th>Id</th>
-	                <th>Description</th>
-	                <th>Status</th>
-	                <th>Date of completion</th>
+	                <th>Label</th>
+	                <th>Room Types</th>
 	            </tr>
 	        </thead>
 	
 	        <tbody>
 	
-                <tr th:each="task : ${tasks}" th:attr="data-task-id=${task.id}">
+                <tr th:each="room : ${rooms}" th:attr="data-room-id=${room.id}">
                     <td>
                         
-                        <!-- Show task -->
+                        <!-- Show room -->
                         <a 	
-                        	th:href="@{/tasks/{id}(id=${task.id})}"
+                        	th:href="@{/rooms/{id}(id=${room.id})}"
                         	class="btn btn-sm btn-light" 
                            	data-toggle="tooltip"
-                           	title="Show task"
+                           	title="Show subcategory"
                            	data-placement="bottom"
                         >
                         
@@ -57,29 +60,12 @@
                         </a>
                         
                         
-                        <!-- Complete task -->
-                        <button
-                        	th:unless="${task.complete}"
-                        	th:value="${task.id}"
-                            type="button"
-                            class="btn btn-sm btn-success my-task-to-complete" 
-                            data-toggle="tooltip" 
-                            title="Complete task" 
-                            data-placement="bottom"
-                        >
-                        
-                            <i class="far fa-check-square" aria-hidden="true"></i>
-                            
-                        </button>
-                        
-                        
-                        <!-- Edit task -->
+                        <!-- Edit subcategory -->
                         <a
-                        	th:unless="${task.complete}"
-                        	th:href="@{/tasks/{id}/edit(id=${task.id})}"
-                        	class="btn btn-sm btn-primary my-task-to-edit" 
+                        	th:href="@{/rooms/{id}/edit(id=${room.id})}"
+                        	class="btn btn-sm btn-primary my-subcategory-to-edit" 
                            	data-toggle="tooltip"
-                           	title="Edit task"
+                           	title="Edit subcategory"
                            	data-placement="bottom"
                         >
                         
@@ -88,13 +74,13 @@
                         </a>
                            
                            
-                        <!-- Delete task -->
+                        <!-- Delete subcategory -->
                         <button
                         	type="button"
-                            class="btn btn-sm btn-danger my-task-to-delete" 
-                            th:value="${task.id}"
+                            class="btn btn-sm btn-danger my-subcategory-to-delete" 
+                            th:value="${room.id}"
                             data-toggle="tooltip" 
-                            title="Delete task" 
+                            title="Delete subcategory" 
                             data-placement="bottom"
                         >
                             
@@ -104,10 +90,9 @@
 
                     </td>
                     
-                    <td th:text="${task.id}"></td>
-                    <td th:text="${task.description}"></td>
-                    <td class="task-status" th:text="${task.complete ? 'Complete' : 'To be done'}"></td>
-                    <td class="task-date-of-completion" th:text="${#dates.format(task.dateOfCompletion, 'dd MMMM yyyy')}"></td>
+                    <td th:text="${room.id}"></td>
+                    <td th:text="${room.label}"></td>
+                    <td th:text="${room.roomType.label}"></td>
                 </tr>
 	
 	        </tbody>

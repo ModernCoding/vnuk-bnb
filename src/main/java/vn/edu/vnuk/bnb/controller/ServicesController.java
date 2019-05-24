@@ -45,7 +45,7 @@ public class ServicesController {
 	@RequestMapping("/services")
     public String index(Model model, ServletRequest request) throws SQLException{
         model.addAttribute("services", dao.read());
-        model.addAttribute("template", "service/index");
+        model.addAttribute("template", "services/index");
         return "_layout";
     }
     
@@ -53,7 +53,7 @@ public class ServicesController {
     @RequestMapping("/services/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
         model.addAttribute("service", dao.read(id));
-        model.addAttribute("template", "service/show");
+        model.addAttribute("template", "services/show");
         return "_layout";
     }
     
@@ -68,7 +68,7 @@ public class ServicesController {
     			);
     	}
     	
-        model.addAttribute("template", "service/new");
+        model.addAttribute("template", "services/new");
         return "_layout";
     }
     
@@ -97,7 +97,7 @@ public class ServicesController {
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("service", dao.read(id));
-        model.addAttribute("template", "service/edit");
+        model.addAttribute("template", "services/edit");
 
         return "_layout";
     

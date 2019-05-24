@@ -26,15 +26,15 @@
         	<!-- CATEGORY -->
     		
     		<div class="my-margin-top-19">
-    			<label>RoomTypes</label>
+    			<label>Room Types</label>
     		</div>
     		
         	<div class="my-margin-top-4">
-	        	<select th:field="*{roomtypesId}">
+	        	<select th:field="*{roomTypesId}">
 				    <option
-				    	th:each="roomtypes : ${rooms}"
-				    	th:value="${roomtypes.id}"
-				    	th:text="${roomtypes.label}"
+				    	th:each="roomType : ${roomTypes}"
+				    	th:value="${roomType.id}"
+				    	th:text="${roomType.label}"
 				    >
 				    </option>
 				</select>

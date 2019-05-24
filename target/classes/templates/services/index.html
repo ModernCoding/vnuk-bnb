@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">List of all Services</title>
+	<title th:fragment="title">List of all room types</title>
 	
 	
 	<section th:fragment="content">
@@ -13,7 +13,7 @@
 				<span class="my-margin-right-19">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 				</span>
-				<span>Create a new Service</span>
+				<span>Create a new Services</span>
 			</a>
 
 
@@ -34,7 +34,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="service : ${services}" th:attr="data-service-id=${service.id}">
+					<tr th:each="service : ${services}" th:attr="data-room-type-id=${service.id}">
 						<td scope="row" th:text="${service.id}"></td>
 						<td>
 							<div th:text="${service.label}" class="my-margin-bottom-4 d-inline-block" ></div>
