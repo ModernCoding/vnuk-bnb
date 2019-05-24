@@ -8,29 +8,29 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import vn.edu.vnuk.bnb.model.Bookings;
-import vn.edu.vnuk.bnb.model.Bills;
-import vn.edu.vnuk.bnb.model.Users;
-import vn.edu.vnuk.bnb.model.UserTypes;
-import vn.edu.vnuk.bnb.model.Countries;
-import vn.edu.vnuk.bnb.model.IdentificationTypes;
-import vn.edu.vnuk.bnb.model.Rooms;
+import vn.edu.vnuk.bnb.model.Booking;
+import vn.edu.vnuk.bnb.model.Bill;
+import vn.edu.vnuk.bnb.model.User;
+import vn.edu.vnuk.bnb.model.UserType;
+import vn.edu.vnuk.bnb.model.Country;
+import vn.edu.vnuk.bnb.model.IdentificationType;
+import vn.edu.vnuk.bnb.model.Room;
 import vn.edu.vnuk.bnb.model.RoomType;
 
 
-public class BillsRowMapper implements RowMapper<Bills> {
+public class BillsRowMapper implements RowMapper<Bill> {
 
 	@Override
-	public Bills mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public Bill mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		Bookings booking = new Bookings();
-		Rooms room = new Rooms();
-		Users user= new Users();
+		Booking booking = new Booking();
+		Room room = new Room();
+		User user= new User();
 		RoomType roomtype = new RoomType();
-		UserTypes usertype = new UserTypes();
-		Countries country = new Countries();
-		IdentificationTypes identificationtype = new IdentificationTypes();
-		Bills bill = new Bills();
+		UserType usertype = new UserType();
+		Country country = new Country();
+		IdentificationType identificationtype = new IdentificationType();
+		Bill bill = new Bill();
 		
 		
 		country.setId(rs.getLong("country_id"));
@@ -92,21 +92,21 @@ public class BillsRowMapper implements RowMapper<Bills> {
 	}
 	
 	
-	public List<Bills> mapRows(List<Map<String, Object>> rows) throws SQLException {
+	public List<Bill> mapRows(List<Map<String, Object>> rows) throws SQLException {
 		
-		List<Bills> bills = new ArrayList<Bills>();
+		List<Bill> bills = new ArrayList<Bill>();
 		
 		
     	for (Map<String, Object> row : rows) {
 			
-    		Bookings booking = new Bookings();
-    		Rooms room = new Rooms();
-    		Users user= new Users();
+    		Booking booking = new Booking();
+    		Room room = new Room();
+    		User user= new User();
     		RoomType roomtype = new RoomType();
-    		UserTypes usertype = new UserTypes();
-    		Countries country = new Countries();
-    		IdentificationTypes identificationtype = new IdentificationTypes();
-    		Bills bill = new Bills();
+    		UserType usertype = new UserType();
+    		Country country = new Country();
+    		IdentificationType identificationtype = new IdentificationType();
+    		Bill bill = new Bill();
     		
 			
     		roomtype.setId((Long) row.get("room_type_id"));

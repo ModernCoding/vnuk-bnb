@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.vnuk.bnb.dao.RoomTypeDao;
-import vn.edu.vnuk.bnb.dao.RoomsDao;
-import vn.edu.vnuk.bnb.model.Rooms;
+import vn.edu.vnuk.bnb.dao.RoomDao;
+import vn.edu.vnuk.bnb.model.Room;
 
 /**
  *
@@ -35,11 +35,11 @@ import vn.edu.vnuk.bnb.model.Rooms;
 @Controller
 public class RoomsController {
 	
-	private RoomsDao roomDao;
+	private RoomDao roomDao;
 	private RoomTypeDao roomTypeDao;
 
 	@Autowired
-	public void setRoomsDao(RoomsDao roomDao) {
+	public void setRoomsDao(RoomDao roomDao) {
 		this.roomDao = roomDao;
 	}
 
@@ -81,7 +81,7 @@ public class RoomsController {
     @RequestMapping("/rooms/new")
     public String add(
     		
-		Rooms room,
+		Room room,
 		Model model,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
 	
@@ -105,7 +105,7 @@ public class RoomsController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		Rooms room,
+		Room room,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -135,7 +135,7 @@ public class RoomsController {
     @RequestMapping(value="/rooms", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid Rooms room,
+    	@Valid Room room,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -159,7 +159,7 @@ public class RoomsController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid Rooms room,
+    		@Valid Room room,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes

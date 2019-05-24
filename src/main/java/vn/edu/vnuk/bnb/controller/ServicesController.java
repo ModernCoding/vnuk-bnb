@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.ServicesDao;
-import vn.edu.vnuk.bnb.model.Services;
+import vn.edu.vnuk.bnb.dao.ServiceDao;
+import vn.edu.vnuk.bnb.model.Service;
 
 /**
  *
@@ -34,10 +34,10 @@ import vn.edu.vnuk.bnb.model.Services;
 @Controller
 public class ServicesController {
 	
-	private ServicesDao dao;
+	private ServiceDao dao;
 	
 	@Autowired
-	public void setServicesDao(ServicesDao dao) {
+	public void setServicesDao(ServiceDao dao) {
 		this.dao = dao;
 	}
 	
@@ -59,7 +59,7 @@ public class ServicesController {
     
     
     @RequestMapping("/services/new")
-    public String add(Services service, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    public String add(Service service, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -78,7 +78,7 @@ public class ServicesController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		Services service,
+		Service service,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -108,7 +108,7 @@ public class ServicesController {
     @RequestMapping(value="/services", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid Services service,
+    	@Valid Service service,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -133,7 +133,7 @@ public class ServicesController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid Services service,
+    		@Valid Service service,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes

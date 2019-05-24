@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.IdentificationTypesDao;
-import vn.edu.vnuk.bnb.model.IdentificationTypes;
+import vn.edu.vnuk.bnb.dao.IdentificationTypeDao;
+import vn.edu.vnuk.bnb.model.IdentificationType;
 
 /**
  *
@@ -34,10 +34,10 @@ import vn.edu.vnuk.bnb.model.IdentificationTypes;
 @Controller
 public class IdentificationTypesController {
 	
-	private IdentificationTypesDao dao;
+	private IdentificationTypeDao dao;
 	
 	@Autowired
-	public void setIdentificationTypesDao(IdentificationTypesDao dao) {
+	public void setIdentificationTypesDao(IdentificationTypeDao dao) {
 		this.dao = dao;
 	}
 	
@@ -59,7 +59,7 @@ public class IdentificationTypesController {
     
     
     @RequestMapping("/identificationtypes/new")
-    public String add(IdentificationTypes identificationtype, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    public String add(IdentificationType identificationtype, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -78,7 +78,7 @@ public class IdentificationTypesController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		IdentificationTypes identificationtype,
+		IdentificationType identificationtype,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -108,7 +108,7 @@ public class IdentificationTypesController {
     @RequestMapping(value="/identificationtypes", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid IdentificationTypes identificationtype,
+    	@Valid IdentificationType identificationtype,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -133,7 +133,7 @@ public class IdentificationTypesController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid IdentificationTypes identificationtype,
+    		@Valid IdentificationType identificationtype,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes

@@ -8,19 +8,19 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import vn.edu.vnuk.bnb.model.Rooms;
+import vn.edu.vnuk.bnb.model.Room;
 import vn.edu.vnuk.bnb.model.Equipment;
 import vn.edu.vnuk.bnb.model.RoomType;
-import vn.edu.vnuk.bnb.model.RoomsEquipments;
+import vn.edu.vnuk.bnb.model.RoomEquipment;
 
-public class RoomsEquipmentsRowMapper implements RowMapper<RoomsEquipments> {
+public class RoomsEquipmentsRowMapper implements RowMapper<RoomEquipment> {
 
 	@Override
-	public RoomsEquipments mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public RoomEquipment mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		RoomType roomtypes = new RoomType();
-		Rooms room = new Rooms();
-		RoomsEquipments roomequipment= new RoomsEquipments();
+		Room room = new Room();
+		RoomEquipment roomequipment= new RoomEquipment();
 		Equipment equipment = new Equipment();
 		
 		roomtypes.setId(rs.getLong("room_type_id"));
@@ -48,17 +48,17 @@ public class RoomsEquipmentsRowMapper implements RowMapper<RoomsEquipments> {
 	}
 	
 	
-	public List<RoomsEquipments> mapRows(List<Map<String, Object>> rows) throws SQLException {
+	public List<RoomEquipment> mapRows(List<Map<String, Object>> rows) throws SQLException {
 		
-		List<RoomsEquipments> roomsequipment = new ArrayList<RoomsEquipments>();
+		List<RoomEquipment> roomsequipment = new ArrayList<RoomEquipment>();
 		
 		
     	for (Map<String, Object> row : rows) {
 			
     		Equipment equipment = new Equipment();
     		RoomType roomtypes = new RoomType();
-    		RoomsEquipments roomequipment= new RoomsEquipments();
-			Rooms room = new Rooms();
+    		RoomEquipment roomequipment= new RoomEquipment();
+			Room room = new Room();
 			
 			roomtypes.setId((Long) row.get("room_type_id"));
 			roomtypes.setLabel((String) row.get("room_type_label"));

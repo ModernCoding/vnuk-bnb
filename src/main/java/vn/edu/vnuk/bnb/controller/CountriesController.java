@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.CountriesDao;
-import vn.edu.vnuk.bnb.model.Countries;
+import vn.edu.vnuk.bnb.dao.CountryDao;
+import vn.edu.vnuk.bnb.model.Country;
 
 /**
  *
@@ -34,10 +34,10 @@ import vn.edu.vnuk.bnb.model.Countries;
 @Controller
 public class CountriesController {
 	
-	private CountriesDao dao;
+	private CountryDao dao;
 	
 	@Autowired
-	public void setCountriesDao(CountriesDao dao) {
+	public void setCountriesDao(CountryDao dao) {
 		this.dao = dao;
 	}
 	
@@ -59,7 +59,7 @@ public class CountriesController {
     
     
     @RequestMapping("/countries/new")
-    public String add(Countries country, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    public String add(Country country, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -78,7 +78,7 @@ public class CountriesController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		Countries country,
+		Country country,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -108,7 +108,7 @@ public class CountriesController {
     @RequestMapping(value="/countries", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid Countries country,
+    	@Valid Country country,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -133,7 +133,7 @@ public class CountriesController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid Countries country,
+    		@Valid Country country,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes

@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.UserTypesDao;
-import vn.edu.vnuk.bnb.model.UserTypes;
+import vn.edu.vnuk.bnb.dao.UserTypeDao;
+import vn.edu.vnuk.bnb.model.UserType;
 
 /**
  *
@@ -34,10 +34,10 @@ import vn.edu.vnuk.bnb.model.UserTypes;
 @Controller
 public class UserTypesController {
 	
-	private UserTypesDao dao;
+	private UserTypeDao dao;
 	
 	@Autowired
-	public void setUserTypesDao(UserTypesDao dao) {
+	public void setUserTypesDao(UserTypeDao dao) {
 		this.dao = dao;
 	}
 	
@@ -59,7 +59,7 @@ public class UserTypesController {
     
     
     @RequestMapping("/usertypes/new")
-    public String add(UserTypes usertype, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    public String add(UserType usertype, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -78,7 +78,7 @@ public class UserTypesController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		UserTypes usertype,
+		UserType usertype,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -108,7 +108,7 @@ public class UserTypesController {
     @RequestMapping(value="/usertype", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid UserTypes usertype,
+    	@Valid UserType usertype,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -133,7 +133,7 @@ public class UserTypesController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid UserTypes usertype,
+    		@Valid UserType usertype,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes

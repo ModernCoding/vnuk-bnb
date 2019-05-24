@@ -8,20 +8,20 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import vn.edu.vnuk.bnb.model.Users;
-import vn.edu.vnuk.bnb.model.UserTypes;
-import vn.edu.vnuk.bnb.model.Countries;
-import vn.edu.vnuk.bnb.model.IdentificationTypes;
+import vn.edu.vnuk.bnb.model.User;
+import vn.edu.vnuk.bnb.model.UserType;
+import vn.edu.vnuk.bnb.model.Country;
+import vn.edu.vnuk.bnb.model.IdentificationType;
 
-public class UsersRowMapper implements RowMapper<Users> {
+public class UsersRowMapper implements RowMapper<User> {
 
 	@Override
-	public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		UserTypes usertype = new UserTypes();
-		Users user = new Users();
-		IdentificationTypes identificationtype = new IdentificationTypes();
-		Countries country = new Countries();
+		UserType usertype = new UserType();
+		User user = new User();
+		IdentificationType identificationtype = new IdentificationType();
+		Country country = new Country();
 		
 		country.setId(rs.getLong("country_id"));
 		country.setLabel(rs.getString("label"));
@@ -51,17 +51,17 @@ public class UsersRowMapper implements RowMapper<Users> {
 	}
 	
 	
-	public List<Users> mapRows(List<Map<String, Object>> rows) throws SQLException {
+	public List<User> mapRows(List<Map<String, Object>> rows) throws SQLException {
 		
-		List<Users> users = new ArrayList<Users>();
+		List<User> users = new ArrayList<User>();
 		
 		
     	for (Map<String, Object> row : rows) {
 			
-    		UserTypes usertype = new UserTypes();
-    		Users user = new Users();
-    		IdentificationTypes identificationtype = new IdentificationTypes();
-    		Countries country = new Countries();
+    		UserType usertype = new UserType();
+    		User user = new User();
+    		IdentificationType identificationtype = new IdentificationType();
+    		Country country = new Country();
 			
     		usertype.setId((Long) row.get("user_type_id"));
     		usertype.setLabel((String) row.get("label"));

@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.DishTypesDao;
-import vn.edu.vnuk.bnb.model.DishTypes;
+import vn.edu.vnuk.bnb.dao.DishTypeDao;
+import vn.edu.vnuk.bnb.model.DishType;
 
 /**
  *
@@ -34,10 +34,10 @@ import vn.edu.vnuk.bnb.model.DishTypes;
 @Controller
 public class DishTypesController {
 	
-	private DishTypesDao dao;
+	private DishTypeDao dao;
 	
 	@Autowired
-	public void setDishTypesDao(DishTypesDao dao) {
+	public void setDishTypesDao(DishTypeDao dao) {
 		this.dao = dao;
 	}
 	
@@ -59,7 +59,7 @@ public class DishTypesController {
     
     
     @RequestMapping("/dishestypes/new")
-    public String add(DishTypes dishtypes, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    public String add(DishType dishtypes, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -78,7 +78,7 @@ public class DishTypesController {
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		DishTypes dishtypes,
+		DishType dishtypes,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -108,7 +108,7 @@ public class DishTypesController {
     @RequestMapping(value="/dishestypes", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid DishTypes dishtypes,
+    	@Valid DishType dishtypes,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -133,7 +133,7 @@ public class DishTypesController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid DishTypes dishtypes,
+    		@Valid DishType dishtypes,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes

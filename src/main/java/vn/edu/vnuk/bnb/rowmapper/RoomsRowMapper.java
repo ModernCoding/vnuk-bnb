@@ -8,15 +8,15 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import vn.edu.vnuk.bnb.model.Rooms;
+import vn.edu.vnuk.bnb.model.Room;
 import vn.edu.vnuk.bnb.model.RoomType;
 
-public class RoomsRowMapper implements RowMapper<Rooms> {
+public class RoomsRowMapper implements RowMapper<Room> {
 
 	@Override
-	public Rooms mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public Room mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		Rooms room = new Rooms();
+		Room room = new Room();
 		RoomType roomtypes = new RoomType();
 		
 		roomtypes.setId(rs.getLong("room_type_id"));
@@ -34,15 +34,15 @@ public class RoomsRowMapper implements RowMapper<Rooms> {
 	}
 	
 	
-	public List<Rooms> mapRows(List<Map<String, Object>> rows) throws SQLException {
+	public List<Room> mapRows(List<Map<String, Object>> rows) throws SQLException {
 		
-		List<Rooms> rooms = new ArrayList<Rooms>();
+		List<Room> rooms = new ArrayList<Room>();
 		
 		
     	for (Map<String, Object> row : rows) {
 			
     		RoomType roomtypes = new RoomType();
-			Rooms room = new Rooms();
+			Room room = new Room();
 			
 			roomtypes.setId((Long) row.get("room_type_id"));
 			roomtypes.setLabel((String) row.get("label"));

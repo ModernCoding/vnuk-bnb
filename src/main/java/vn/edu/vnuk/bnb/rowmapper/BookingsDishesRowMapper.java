@@ -8,30 +8,30 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import vn.edu.vnuk.bnb.model.Bookings;
-import vn.edu.vnuk.bnb.model.Dishes;
-import vn.edu.vnuk.bnb.model.Users;
-import vn.edu.vnuk.bnb.model.UserTypes;
-import vn.edu.vnuk.bnb.model.Countries;
-import vn.edu.vnuk.bnb.model.IdentificationTypes;
-import vn.edu.vnuk.bnb.model.Rooms;
+import vn.edu.vnuk.bnb.model.Booking;
+import vn.edu.vnuk.bnb.model.Dish;
+import vn.edu.vnuk.bnb.model.User;
+import vn.edu.vnuk.bnb.model.UserType;
+import vn.edu.vnuk.bnb.model.Country;
+import vn.edu.vnuk.bnb.model.IdentificationType;
+import vn.edu.vnuk.bnb.model.Room;
 import vn.edu.vnuk.bnb.model.RoomType;
-import vn.edu.vnuk.bnb.model.BookingsDishes;
+import vn.edu.vnuk.bnb.model.BookingDish;
 
-public class BookingsDishesRowMapper implements RowMapper<BookingsDishes> {
+public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 
 	@Override
-	public BookingsDishes mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public BookingDish mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		Bookings booking = new Bookings();
-		Rooms room = new Rooms();
-		Users user= new Users();
+		Booking booking = new Booking();
+		Room room = new Room();
+		User user= new User();
 		RoomType roomtype = new RoomType();
-		UserTypes usertype = new UserTypes();
-		Countries country = new Countries();
-		IdentificationTypes identificationtype = new IdentificationTypes();
-		Dishes dish = new Dishes();
-		BookingsDishes bookingdish = new BookingsDishes();
+		UserType usertype = new UserType();
+		Country country = new Country();
+		IdentificationType identificationtype = new IdentificationType();
+		Dish dish = new Dish();
+		BookingDish bookingdish = new BookingDish();
 		
 		country.setId(rs.getLong("country_id"));
 		country.setLabel(rs.getString("label"));
@@ -92,22 +92,22 @@ public class BookingsDishesRowMapper implements RowMapper<BookingsDishes> {
 	}
 	
 	
-	public List<BookingsDishes> mapRows(List<Map<String, Object>> rows) throws SQLException {
+	public List<BookingDish> mapRows(List<Map<String, Object>> rows) throws SQLException {
 		
-		List<BookingsDishes> bookingdishes = new ArrayList<BookingsDishes>();
+		List<BookingDish> bookingdishes = new ArrayList<BookingDish>();
 		
 		
     	for (Map<String, Object> row : rows) {
 			
-    		Bookings booking = new Bookings();
-    		Rooms room = new Rooms();
-    		Users user= new Users();
+    		Booking booking = new Booking();
+    		Room room = new Room();
+    		User user= new User();
     		RoomType roomtype = new RoomType();
-    		UserTypes usertype = new UserTypes();
-    		Countries country = new Countries();
-    		IdentificationTypes identificationtype = new IdentificationTypes();
-    		Dishes dish = new Dishes();
-    		BookingsDishes bookingdish = new BookingsDishes();
+    		UserType usertype = new UserType();
+    		Country country = new Country();
+    		IdentificationType identificationtype = new IdentificationType();
+    		Dish dish = new Dish();
+    		BookingDish bookingdish = new BookingDish();
 			
     		roomtype.setId((Long) row.get("room_type_id"));
     		roomtype.setLabel((String) row.get("label"));

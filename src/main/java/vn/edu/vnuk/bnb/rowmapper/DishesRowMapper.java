@@ -8,16 +8,16 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import vn.edu.vnuk.bnb.model.Dishes;
-import vn.edu.vnuk.bnb.model.DishTypes;
+import vn.edu.vnuk.bnb.model.Dish;
+import vn.edu.vnuk.bnb.model.DishType;
 
-public class DishesRowMapper implements RowMapper<Dishes> {
+public class DishesRowMapper implements RowMapper<Dish> {
 
 	@Override
-	public Dishes mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public Dish mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		Dishes dish = new Dishes();
-		DishTypes dishtypes = new DishTypes();
+		Dish dish = new Dish();
+		DishType dishtypes = new DishType();
 		
 		dishtypes.setId(rs.getLong("dish_type_id"));
 		dishtypes.setLabel(rs.getString("label"));
@@ -34,15 +34,15 @@ public class DishesRowMapper implements RowMapper<Dishes> {
 	}
 	
 	
-	public List<Dishes> mapRows(List<Map<String, Object>> rows) throws SQLException {
+	public List<Dish> mapRows(List<Map<String, Object>> rows) throws SQLException {
 		
-		List<Dishes> dishes = new ArrayList<Dishes>();
+		List<Dish> dishes = new ArrayList<Dish>();
 		
 		
     	for (Map<String, Object> row : rows) {
 			
-    		DishTypes dishtypes = new DishTypes();
-    		Dishes dish = new Dishes();
+    		DishType dishtypes = new DishType();
+    		Dish dish = new Dish();
 			
     		dishtypes.setId((Long) row.get("dish_type_id"));
     		dishtypes.setLabel((String) row.get("label"));

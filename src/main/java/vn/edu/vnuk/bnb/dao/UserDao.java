@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import vn.edu.vnuk.bnb.model.Users;
+import vn.edu.vnuk.bnb.model.User;
 import vn.edu.vnuk.bnb.rowmapper.UsersRowMapper;
 
 @Repository
@@ -23,7 +23,7 @@ public class UserDao {
 
 
     //  CREATE
-    public void create(Users task) throws SQLException{
+    public void create(User task) throws SQLException{
 
         String sqlQuery = "INSERT INTO users (user_type_id, first_name, middle_name, last_name, address, email, phone, identification_number, create_at, update_at, identification_type_id, country_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -63,7 +63,7 @@ public class UserDao {
     
     
     //  READ (List of Tasks)
-    public List<Users> read(String userTypesId,String identificationTypesId, String countryId) throws SQLException {
+    public List<User> read(String userTypesId,String identificationTypesId, String countryId) throws SQLException {
 
     	String sqlQuery = "select t01.id"
     			+ "     , t02.id as user_type_id"
@@ -114,7 +114,7 @@ public class UserDao {
 
 
     //  READ (Single Task)
-    public Users read(Long id) throws SQLException{
+    public User read(Long id) throws SQLException{
         
     	String sqlQuery = "select t01.id"
     			+ "     , t02.id as user_type_id"
@@ -148,7 +148,7 @@ public class UserDao {
 
     
     //  UPDATE
-    public void update(Users task) throws SQLException {
+    public void update(User task) throws SQLException {
         String sqlQuery = "update users set user_type_id=?, first_name=?, middle_name=?, last_name=?, address=?, email=?, phone=?, identification_number=?, create_at=?, update_at=?, identification_type_id=?, country_id=? where id=?";
         
         try {
@@ -215,7 +215,7 @@ public class UserDao {
     
     public void complete(Long id) throws SQLException{
         
-    	Users task = this.read(id);
+    	User task = this.read(id);
 //        task.setIsComplete(true);
         task.setCreateAt(new Date(System.currentTimeMillis()));
         task.setUpdateAt(new Date(System.currentTimeMillis()));
