@@ -61,10 +61,10 @@ public class RoomsController {
 		model.addAttribute("rooms", roomDao.read(roomTypesId));
 		
 		if (roomTypesId != null) {
-			model.addAttribute("roomtype", roomTypeDao.read(Long.parseLong(roomTypesId)));
+			model.addAttribute("roomType", roomTypeDao.read(Long.parseLong(roomTypesId)));
 		}
 		
-        model.addAttribute("template", "room/index");
+        model.addAttribute("template", "rooms/index");
         return "_layout";
    
 	}
@@ -73,7 +73,7 @@ public class RoomsController {
     @RequestMapping("/rooms/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
         model.addAttribute("room", roomTypeDao.read(id));
-        model.addAttribute("template", "room/show");
+        model.addAttribute("template", "rooms/show");
         return "_layout";
     }
     
@@ -94,8 +94,8 @@ public class RoomsController {
     			);
     	}
     	
-    	model.addAttribute("template", "room/new");
-    	model.addAttribute("roomtype", roomTypeDao.read());
+    	model.addAttribute("template", "rooms/new");
+    	model.addAttribute("roomType", roomTypeDao.read());
         return "_layout";
     }
     
@@ -124,8 +124,8 @@ public class RoomsController {
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("room", roomDao.read(id));
-    	model.addAttribute("roomtype", roomTypeDao.read());
-        model.addAttribute("template", "room/edit");
+    	model.addAttribute("roomType", roomTypeDao.read());
+        model.addAttribute("template", "rooms/edit");
 
         return "_layout";
     
