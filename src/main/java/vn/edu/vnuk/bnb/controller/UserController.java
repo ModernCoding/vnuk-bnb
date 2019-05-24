@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,14 +22,9 @@ import vn.edu.vnuk.bnb.dao.CountryDao;
 import vn.edu.vnuk.bnb.dao.IdentificationTypeDao;
 import vn.edu.vnuk.bnb.dao.UserDao;
 import vn.edu.vnuk.bnb.dao.UserTypeDao;
-import vn.edu.vnuk.bnb.model.Room;
 import vn.edu.vnuk.bnb.model.User;
 
-/**
- *
- * @author michel
- */
-@Controller
+
 public class UserController {
 	
 	private UserDao userDao;
