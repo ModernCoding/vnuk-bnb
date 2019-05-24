@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.RoomTypesDao;
+import vn.edu.vnuk.bnb.dao.RoomTypeDao;
 import vn.edu.vnuk.bnb.dao.RoomsDao;
 import vn.edu.vnuk.bnb.model.Rooms;
 
@@ -36,7 +36,7 @@ import vn.edu.vnuk.bnb.model.Rooms;
 public class RoomsController {
 	
 	private RoomsDao roomDao;
-	private RoomTypesDao roomTypeDao;
+	private RoomTypeDao roomTypeDao;
 
 	@Autowired
 	public void setRoomsDao(RoomsDao roomDao) {
@@ -44,7 +44,7 @@ public class RoomsController {
 	}
 
 	@Autowired
-	public void setRoomTypesDao(RoomTypesDao roomTypeDao) {
+	public void setRoomTypesDao(RoomTypeDao roomTypeDao) {
 		this.roomTypeDao = roomTypeDao;
 	}
 	

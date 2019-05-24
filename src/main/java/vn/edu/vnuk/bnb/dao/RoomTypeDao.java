@@ -8,21 +8,21 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import vn.edu.vnuk.bnb.model.RoomTypes;
+import vn.edu.vnuk.bnb.model.RoomType;
 
 @Repository
-public class RoomTypesDao {
+public class RoomTypeDao {
 	
     private final JdbcTemplate jdbcTemplate;
     
     @Autowired
-    public RoomTypesDao(JdbcTemplate jdbcTemplate) {
+    public RoomTypeDao(JdbcTemplate jdbcTemplate) {
 	  this.jdbcTemplate = jdbcTemplate;
     }
 
 
     //  CREATE
-    public void create(RoomTypes task) throws SQLException{
+    public void create(RoomType task) throws SQLException{
 
         String sqlQuery = "INSERT INTO room_types (label) VALUES (?)";
 
@@ -49,13 +49,13 @@ public class RoomTypesDao {
     
     
     //  READ (List of Tasks)
-    public List<RoomTypes> read() throws SQLException {
+    public List<RoomType> read() throws SQLException {
 
         try {
         
         	return this.jdbcTemplate.query(
         			"SELECT * FROM room_types",
-        			new BeanPropertyRowMapper<RoomTypes>(RoomTypes.class)
+        			new BeanPropertyRowMapper<RoomType>(RoomType.class)
     			);
 
         	
@@ -73,12 +73,12 @@ public class RoomTypesDao {
 
 
     //  READ (Single Task)
-    public RoomTypes read(Long id) throws SQLException{
+    public RoomType read(Long id) throws SQLException{
         
     	return this.jdbcTemplate.queryForObject(
     			"SELECT * FROM room_types where id = ?",
         		new Object[] {id},
-        		new BeanPropertyRowMapper<RoomTypes>(RoomTypes.class)
+        		new BeanPropertyRowMapper<RoomType>(RoomType.class)
         	);
     	
     
@@ -86,7 +86,7 @@ public class RoomTypesDao {
 
     
     //  UPDATE
-    public void update(RoomTypes task) throws SQLException {
+    public void update(RoomType task) throws SQLException {
         String sqlQuery = "update room_types set label=? where id=?";
         
         try {
@@ -142,7 +142,7 @@ public class RoomTypesDao {
     
     public void complete(Long id) throws SQLException{
         
-    	RoomTypes task = this.read(id);
+    	RoomType task = this.read(id);
 //        task.setIsComplete(true);
 //        task.setDateOfCompletion(new Date(System.currentTimeMillis()));
         

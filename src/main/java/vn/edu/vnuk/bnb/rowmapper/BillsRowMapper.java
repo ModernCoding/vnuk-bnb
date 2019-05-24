@@ -15,7 +15,7 @@ import vn.edu.vnuk.bnb.model.UserTypes;
 import vn.edu.vnuk.bnb.model.Countries;
 import vn.edu.vnuk.bnb.model.IdentificationTypes;
 import vn.edu.vnuk.bnb.model.Rooms;
-import vn.edu.vnuk.bnb.model.RoomTypes;
+import vn.edu.vnuk.bnb.model.RoomType;
 
 
 public class BillsRowMapper implements RowMapper<Bills> {
@@ -26,7 +26,7 @@ public class BillsRowMapper implements RowMapper<Bills> {
 		Bookings booking = new Bookings();
 		Rooms room = new Rooms();
 		Users user= new Users();
-		RoomTypes roomtype = new RoomTypes();
+		RoomType roomtype = new RoomType();
 		UserTypes usertype = new UserTypes();
 		Countries country = new Countries();
 		IdentificationTypes identificationtype = new IdentificationTypes();
@@ -102,7 +102,7 @@ public class BillsRowMapper implements RowMapper<Bills> {
     		Bookings booking = new Bookings();
     		Rooms room = new Rooms();
     		Users user= new Users();
-    		RoomTypes roomtype = new RoomTypes();
+    		RoomType roomtype = new RoomType();
     		UserTypes usertype = new UserTypes();
     		Countries country = new Countries();
     		IdentificationTypes identificationtype = new IdentificationTypes();

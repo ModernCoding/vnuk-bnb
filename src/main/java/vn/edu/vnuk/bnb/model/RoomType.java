@@ -3,7 +3,7 @@ package vn.edu.vnuk.bnb.model;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class RoomTypes {
+public class RoomType {
 	private Long id;
 	
 	@NotNull

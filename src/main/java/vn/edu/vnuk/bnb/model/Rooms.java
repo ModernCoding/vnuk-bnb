@@ -16,7 +16,7 @@ public class Rooms {
 	@NotNull
 	private Long roomTypesId;
 	
-	private RoomTypes roomTypes;
+	private RoomType roomTypes;
 	
 	public Long getId() {
 		return id;
@@ -48,10 +48,10 @@ public class Rooms {
 	public void setSmoking(boolean isSmoking) {
 		this.isSmoking = isSmoking;
 	}
-	public RoomTypes getRoomTypes() {
+	public RoomType getRoomTypes() {
 		return roomTypes;
 	}
-	public void setRoomTypes(RoomTypes roomTypes) {
+	public void setRoomTypes(RoomType roomTypes) {
 		this.roomTypes = roomTypes;
 	}
 	public Long getRoomTypesId() {

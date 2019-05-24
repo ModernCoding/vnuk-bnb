@@ -9,7 +9,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.RowMapper;
 
 import vn.edu.vnuk.bnb.model.Rooms;
-import vn.edu.vnuk.bnb.model.RoomTypes;
+import vn.edu.vnuk.bnb.model.RoomType;
 
 public class RoomsRowMapper implements RowMapper<Rooms> {
 
@@ -17,7 +17,7 @@ public class RoomsRowMapper implements RowMapper<Rooms> {
 	public Rooms mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		Rooms room = new Rooms();
-		RoomTypes roomtypes = new RoomTypes();
+		RoomType roomtypes = new RoomType();
 		
 		roomtypes.setId(rs.getLong("room_type_id"));
 		roomtypes.setLabel(rs.getString("label"));
@@ -41,7 +41,7 @@ public class RoomsRowMapper implements RowMapper<Rooms> {
 		
     	for (Map<String, Object> row : rows) {
 			
-    		RoomTypes roomtypes = new RoomTypes();
+    		RoomType roomtypes = new RoomType();
 			Rooms room = new Rooms();
 			
 			roomtypes.setId((Long) row.get("room_type_id"));

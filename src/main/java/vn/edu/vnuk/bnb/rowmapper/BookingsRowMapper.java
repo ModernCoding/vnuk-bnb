@@ -14,7 +14,7 @@ import vn.edu.vnuk.bnb.model.Users;
 import vn.edu.vnuk.bnb.model.UserTypes;
 import vn.edu.vnuk.bnb.model.Countries;
 import vn.edu.vnuk.bnb.model.IdentificationTypes;
-import vn.edu.vnuk.bnb.model.RoomTypes;
+import vn.edu.vnuk.bnb.model.RoomType;
 
 public class BookingsRowMapper implements RowMapper<Bookings> {
 
@@ -27,7 +27,7 @@ public class BookingsRowMapper implements RowMapper<Bookings> {
 		UserTypes usertype = new UserTypes();
 		Countries country = new Countries();
 		IdentificationTypes identificationtype = new IdentificationTypes();
-		RoomTypes roomtype = new RoomTypes();
+		RoomType roomtype = new RoomType();
 		
 		country.setId(rs.getLong("country_id"));
 		country.setLabel(rs.getString("label"));
@@ -91,7 +91,7 @@ public class BookingsRowMapper implements RowMapper<Bookings> {
     		UserTypes usertype = new UserTypes();
     		Countries country = new Countries();
     		IdentificationTypes identificationtype = new IdentificationTypes();
-    		RoomTypes roomtype = new RoomTypes();
+    		RoomType roomtype = new RoomType();
 			
     		roomtype.setId((Long) row.get("room_type_id"));
     		roomtype.setLabel((String) row.get("label"));

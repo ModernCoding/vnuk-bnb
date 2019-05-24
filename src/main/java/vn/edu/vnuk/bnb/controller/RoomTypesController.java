@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.RoomTypesDao;
-import vn.edu.vnuk.bnb.model.RoomTypes;
+import vn.edu.vnuk.bnb.dao.RoomTypeDao;
+import vn.edu.vnuk.bnb.model.RoomType;
 
 /**
  *
@@ -34,32 +34,32 @@ import vn.edu.vnuk.bnb.model.RoomTypes;
 @Controller
 public class RoomTypesController {
 	
-	private RoomTypesDao dao;
+	private RoomTypeDao dao;
 	
 	@Autowired
-	public void setRoomTypesDao(RoomTypesDao dao) {
+	public void setRoomTypesDao(RoomTypeDao dao) {
 		this.dao = dao;
 	}
 	
 
-	@RequestMapping("/roomstype")
+	@RequestMapping("/room-types")
     public String index(Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("roomstype", dao.read());
-        model.addAttribute("template", "roomtypes/index");
+        model.addAttribute("roomTypes", dao.read());
+        model.addAttribute("template", "roomTypes/index");
         return "_layout";
     }
     
     
-    @RequestMapping("/roomstype/{id}")
+    @RequestMapping("/room-types/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
         model.addAttribute("roomtype", dao.read(id));
-        model.addAttribute("template", "roomtypes/show");
+        model.addAttribute("template", "roomTypes/show");
         return "_layout";
     }
     
     
-    @RequestMapping("/roomstype/new")
-    public String add(RoomTypes roomTypes, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    @RequestMapping("/room-types/new")
+    public String add(RoomType roomType, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
     	
     	for(FieldError fieldError : fieldErrors) {
     		model.addAttribute(
@@ -68,17 +68,17 @@ public class RoomTypesController {
     			);
     	}
     	
-        model.addAttribute("template", "roomtypes/new");
+        model.addAttribute("template", "roomTypes/new");
         return "_layout";
     }
     
     
-    @RequestMapping("/roomstype/{id}/edit")
+    @RequestMapping("/room-types/{id}/edit")
     public String edit(
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		RoomTypes roomTypes,
+		RoomType roomTypes,
 		Model model,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
@@ -97,7 +97,7 @@ public class RoomTypesController {
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("roomtype", dao.read(id));
-        model.addAttribute("template", "roomtypes/edit");
+        model.addAttribute("template", "roomTypes/edit");
 
         return "_layout";
     
@@ -108,7 +108,7 @@ public class RoomTypesController {
     @RequestMapping(value="/roomstype", method=RequestMethod.POST)
     public String create(
 		
-    	@Valid RoomTypes roomTypes,
+    	@Valid RoomType roomTypes,
     	BindingResult bindingResult,
     	ServletRequest request,
     	RedirectAttributes redirectAttributes
@@ -133,7 +133,7 @@ public class RoomTypesController {
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
     		@PathVariable("id") Long id,
-    		@Valid RoomTypes roomTypes,
+    		@Valid RoomType roomTypes,
     		BindingResult bindingResult,
     		ServletRequest request,
     		RedirectAttributes redirectAttributes

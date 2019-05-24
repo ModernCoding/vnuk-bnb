@@ -1,19 +1,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">List of all the roomtype</title>
+	<title th:fragment="title">List of all room types</title>
 	
 	
 	<section th:fragment="content">
 		<div class="container">
 			<h3 class="my-margin-bottom-28">
-				<em>List of all roomtype</em>
+				<em>List of all room types</em>
 			</h3>
 
-			<a href="roomstype/new" class="btn btn-sm btn-success my-margin-bottom-19">
+			<a th:href="@{/room-types/new}" class="btn btn-sm btn-success my-margin-bottom-19">
 				<span class="my-margin-right-19">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 				</span>
-				<span>Create a new roomtype</span>
+				<span>Create a new room type</span>
 			</a>
 
 
@@ -34,12 +34,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="roomtype : ${roomstype}" th:attr="data-category-id=${roomtype.id}">
-						<td scope="row" th:text="${roomtype.id}"></td>
+					<tr th:each="roomType : ${roomTypes}" th:attr="data-room-type-id=${roomType.id}">
+						<td scope="row" th:text="${roomType.id}"></td>
 						<td>
-							<div th:text="${roomtype.label}" class="my-margin-bottom-4 d-inline-block" ></div>
+							<div th:text="${roomType.label}" class="my-margin-bottom-4 d-inline-block" ></div>
 							<div class="d-inline-block">
-								<a th:href="@{/rooms?roomTypesId={id}(id=${roomTypesId.id})}" class="btn btn-sm btn-info">
+								<a th:href="@{/rooms?roomTypeId={id}(id=${roomType.id})}" class="btn btn-sm btn-info">
 									<i class="fas fa-angle-double-right" aria-hidden="true"></i>
 									<span class="my-margin-left-19">
 										<i>Subcategories</i>
@@ -50,7 +50,7 @@
 						<td>
 							<!-- Show category -->
 							<a
-									th:href="@{/roomstype/{id}(id=${roomtype.id})}"
+									th:href="@{/room-types/{id}(id=${roomType.id})}"
 									class="btn btn-sm btn-light"
 									data-toggle="tooltip"
 									title="Show category"
@@ -62,7 +62,7 @@
 
 							<!-- Edit category -->
 							<a
-									th:href="@{/roomstype/{id}/edit(id=${roomtype.id})}"
+									th:href="@{/room-types/{id}/edit(id=${roomType.id})}"
 									class="btn btn-sm btn-primary my-category-to-edit"
 									data-toggle="tooltip"
 									title="Edit category"
@@ -75,7 +75,7 @@
 							<button
 									type="button"
 									class="btn btn-sm btn-danger my-category-to-delete"
-									th:value="${roomtype.id}"
+									th:value="${roomType.id}"
 									data-toggle="tooltip"
 									title="Delete category"
 									data-placement="bottom"
