@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Built-By: ADMIN
-Build-Jdk: 11.0.3
+Built-By: tuannguyen
+Build-Jdk: 11.0.2
 Implementation-Title: vnuk-bnb
 Implementation-Version: 0.0.1.
 Implementation-Vendor-Id: vn.edu.vnuk.bnb
