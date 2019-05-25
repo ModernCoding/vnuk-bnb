@@ -25,7 +25,7 @@ import vn.edu.vnuk.bnb.dao.UserTypeDao;
 import vn.edu.vnuk.bnb.model.User;
 
 
-public class UserController {
+public class UsersController {
 	
 	private UserDao userDao;
 	private UserTypeDao userTypeDao;
@@ -103,9 +103,9 @@ public class UserController {
 	    	}
 	    	
 	    	model.addAttribute("template", "users/new");
-	    	model.addAttribute("roomType", userTypeDao.read());
+	    	model.addAttribute("userType", userTypeDao.read());
 	    	model.addAttribute("user", identificationTypeDao.read());
-	        model.addAttribute("user", countryDao.read());
+	        model.addAttribute("country", countryDao.read());
 	        return "_layout";
 	    }
 	
@@ -134,6 +134,7 @@ public class UserController {
 	    	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
 	    	model.addAttribute("user", userDao.read(id));
 	    	model.addAttribute("userType", userTypeDao.read());
+	    	model.addAttribute("identification", identificationTypeDao.read());
 	    	model.addAttribute("country", countryDao.read());
 	        model.addAttribute("template", "user/edit");
 	        return "_layout";
