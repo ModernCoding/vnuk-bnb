@@ -16,6 +16,7 @@ public class Room {
 	@NotNull
 	private Long roomTypesId;
 	
+	
 	private RoomType roomTypes;
 	
 	public Long getId() {

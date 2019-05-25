@@ -36,7 +36,10 @@
 	            <tr>
 	                <th></th>
 	                <th>Id</th>
-	                <th>Label</th>
+	                <th>Price</th>
+	                <th>Beds</th>
+	                <th>Room Number</th>
+	                <th>Is Smoking</th>
 	                <th>Room Types</th>
 	            </tr>
 	        </thead>
@@ -91,7 +94,10 @@
                     </td>
                     
                     <td th:text="${room.id}"></td>
-                    <td th:text="${room.label}"></td>
+                    <td th:text="${room.price}"></td>
+                    <td th:text="${room.beds}"></td>
+                    <td th:text="${room.room_number}"></td>
+                    <td th:text="${room.is_smoking}"></td>
                     <td th:text="${room.roomType.label}"></td>
                 </tr>
 	
