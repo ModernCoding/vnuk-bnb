@@ -1,19 +1,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">List of all Countries</title>
+	<title th:fragment="title">List of all IdentificationTypes</title>
 	
 	
 	<section th:fragment="content">
 		<div class="container">
 			<h3 class="my-margin-bottom-28">
-				<em>List of all Countries</em>
+				<em>List of all IdentificationTypes</em>
 			</h3>
 
-			<a th:href="@{/countries/new}" class="btn btn-sm btn-success my-margin-bottom-19">
+			<a th:href="@{/identification-types/new}" class="btn btn-sm btn-success my-margin-bottom-19">
 				<span class="my-margin-right-19">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 				</span>
-				<span>Create a new Countries</span>
+				<span>Create a new IdentificationTypes</span>
 			</a>
 
 
@@ -34,12 +34,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="country : ${countries}" th:attr="data-country-id=${country.id}">
-						<td scope="row" th:text="${country.id}"></td>
+					<tr th:each="identificationType : ${identificationTypes}" th:attr="data-identification-type-id=${identificationType.id}">
+						<td scope="row" th:text="${identificationType.id}"></td>
 						<td>
-							<div th:text="${country.label}" class="my-margin-bottom-4 d-inline-block" ></div>
+							<div th:text="${identificationType.label}" class="my-margin-bottom-4 d-inline-block" ></div>
 							<div class="d-inline-block">
-								<a th:href="@{/rooms?roomTypeId={id}(id=${country.id})}" class="btn btn-sm btn-info">
+								<a th:href="@{/rooms?roomTypeId={id}(id=${identificationType.id})}" class="btn btn-sm btn-info">
 									<i class="fas fa-angle-double-right" aria-hidden="true"></i>
 									<span class="my-margin-left-19">
 										<i>Subcategories</i>
@@ -50,7 +50,7 @@
 						<td>
 							<!-- Show category -->
 							<a
-									th:href="@{/countries/{id}(id=${country.id})}"
+									th:href="@{/identification-types/{id}(id=${identificationType.id})}"
 									class="btn btn-sm btn-light"
 									data-toggle="tooltip"
 									title="Show category"
@@ -62,7 +62,7 @@
 
 							<!-- Edit category -->
 							<a
-									th:href="@{/countries/{id}/edit(id=${country.id})}"
+									th:href="@{/identification-types/{id}/edit(id=${identificationType.id})}"
 									class="btn btn-sm btn-primary my-category-to-edit"
 									data-toggle="tooltip"
 									title="Edit category"
@@ -75,7 +75,7 @@
 							<button
 									type="button"
 									class="btn btn-sm btn-danger my-category-to-delete"
-									th:value="${country.id}"
+									th:value="${identificationType.id}"
 									data-toggle="tooltip"
 									title="Delete category"
 									data-placement="bottom"
