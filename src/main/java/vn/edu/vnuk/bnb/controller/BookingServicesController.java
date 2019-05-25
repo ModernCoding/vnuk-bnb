@@ -91,7 +91,10 @@ public class BookingServicesController {
     public String add(
     		
 		BookingService bookingService,
+		@RequestParam(value="roomId", required = false) String roomId,
+		@RequestParam(value="userId", required = false) String userId,
 		Model model,
+		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
 	
 	) throws SQLException{
@@ -104,7 +107,7 @@ public class BookingServicesController {
     	}
     	
     	model.addAttribute("template", "bookingServices/new");
-    	model.addAttribute("booking", bookingDao.read(null, null));
+    	model.addAttribute("booking", bookingDao.read(roomId, userId));
     	model.addAttribute("service", serviceDao.read());
         return "_layout";
     }

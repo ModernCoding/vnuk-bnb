@@ -43,12 +43,7 @@ public class Room {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public boolean isSmoking() {
-		return isSmoking;
-	}
-	public void setSmoking(boolean isSmoking) {
-		this.isSmoking = isSmoking;
-	}
+
 	public RoomType getRoomTypes() {
 		return roomTypes;
 	}
@@ -60,6 +55,12 @@ public class Room {
 	}
 	public void setRoomTypesId(Long roomTypesId) {
 		this.roomTypesId = roomTypesId;
+	}
+	public boolean isSmoking() {
+		return isSmoking;
+	}
+	public void setSmoking(boolean isSmoking) {
+		this.isSmoking = isSmoking;
 	}
 	
 }

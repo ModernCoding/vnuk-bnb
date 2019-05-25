@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.edu.vnuk.bnb.dao.EquipmentDao;
 import vn.edu.vnuk.bnb.dao.RoomDao;
 import vn.edu.vnuk.bnb.dao.RoomEquipmentDao;
-import vn.edu.vnuk.bnb.dao.RoomTypeDao;
 import vn.edu.vnuk.bnb.model.Room;
 import vn.edu.vnuk.bnb.model.RoomEquipment;
 
@@ -47,7 +46,7 @@ public class RoomEquipmentsController {
 		this.equipmentDao = equipmentDao;
 	}
 	
-	@RequestMapping("/roomEquipments")
+	@RequestMapping("/room-Equipments")
     public String index(
 		
 		@RequestParam(value="roomId", required = false) String roomId,
@@ -71,18 +70,20 @@ public class RoomEquipmentsController {
 	
 	@RequestMapping("/roomEquipments/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("room", roomDao.read(id));
-        model.addAttribute("room", equipmentDao.read(id));
+        model.addAttribute("roomEquipment", roomDao.read(id));
+        model.addAttribute("roomEquipment", equipmentDao.read(id));
         model.addAttribute("template", "roomEquipments/show");
         return "_layout";
         
     }
     
-    @RequestMapping("/roomEquipments/new")
+    @RequestMapping("/room-Equipments/new")
     public String add(
     		
 		RoomEquipment roomEquipment,
+		@RequestParam(value="roomTypesId", required = false) String roomTypesId,
 		Model model,
+		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
 	
 	) throws SQLException{
@@ -95,13 +96,13 @@ public class RoomEquipmentsController {
     	}
     	
     	model.addAttribute("template", "roomEquipments/new");
-    	//model.addAttribute("room", roomDao.read(null));
+    	model.addAttribute("room", roomDao.read(roomTypesId));
     	model.addAttribute("equiment", equipmentDao.read());
         return "_layout";
     }
     
     
-    @RequestMapping("/roomEquipments/{id}/edit")
+    @RequestMapping("/room-Equipments/{id}/edit")
     public String edit(
     		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
@@ -125,7 +126,7 @@ public class RoomEquipmentsController {
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("rommEquipment", roomEquipmentDao.read(id));
     	model.addAttribute("room", roomDao.read(id));
-    	model.addAttribute("roomType", equipmentDao.read());
+    	model.addAttribute("equipment", equipmentDao.read());
         model.addAttribute("template", "roomEquipments/edit");
 
         return "_layout";
@@ -133,7 +134,7 @@ public class RoomEquipmentsController {
     }
     
     
-    @RequestMapping(value="/roomEquipments", method=RequestMethod.POST)
+    @RequestMapping(value="/room-Equipments", method=RequestMethod.POST)
     public String create(
 		
     	@Valid RoomEquipment roomEquipment,
@@ -145,17 +146,17 @@ public class RoomEquipmentsController {
     	
         if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return "redirect:/roomEquipments/new";
+            return "redirect:/room-Equipments/new";
         }
         
         
         roomEquipmentDao.create(roomEquipment);
-        return "redirect:/roomEquipments";
+        return "redirect:/room-Equipments";
         
     }
     
     
-    @RequestMapping(value="/roomEquipments/{id}", method=RequestMethod.PATCH)
+    @RequestMapping(value="/room-Equipments/{id}", method=RequestMethod.PATCH)
     public String update(
     		
     		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
@@ -170,18 +171,18 @@ public class RoomEquipmentsController {
         
     	if (bindingResult.hasErrors()) {
         	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return String.format("redirect:/rooms/%s/edit", id);
+            return String.format("redirect:/room-Equipments/%s/edit", id);
         }
         
     	roomEquipmentDao.update(roomEquipment);
-        return backToShow ? String.format("redirect:/roomEquipments/%s", id) : "redirect:/roomEquipments";
+        return backToShow ? String.format("redirect:/room-Equipments/%s", id) : "redirect:/roomEquipments";
         
         
     }
     
     
     //  delete with ajax
-    @RequestMapping(value="/roomEquipments/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value="/room-Equipments/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
     	roomEquipmentDao.delete(id);
         response.setStatus(200);
