@@ -95,7 +95,7 @@ public class RoomEquipmentsController {
     	}
     	
     	model.addAttribute("template", "roomEquipments/new");
-    	model.addAttribute("room", roomDao.read());
+    	//model.addAttribute("room", roomDao.read(null));
     	model.addAttribute("equiment", equipmentDao.read());
         return "_layout";
     }
