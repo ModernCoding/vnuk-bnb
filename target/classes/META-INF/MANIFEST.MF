@@ -7,4 +7,3 @@ Implementation-Vendor-Id: vn.edu.vnuk.bnb
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
  -starter-parent/vnuk-bnb
 Created-By: Maven Integration for Eclipse
-
