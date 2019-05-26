@@ -109,6 +109,7 @@ public class RoomEquipmentsController {
 		@PathVariable("id") Long id,
 		Room room,
 		Model model,
+		@RequestParam(value="roomTypesId", required = false) String roomTypesId,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
 		
@@ -125,7 +126,7 @@ public class RoomEquipmentsController {
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("rommEquipment", roomEquipmentDao.read(id));
-    	model.addAttribute("room", roomDao.read(id));
+    	model.addAttribute("room", roomDao.read(roomTypesId));
     	model.addAttribute("equipment", equipmentDao.read());
         model.addAttribute("template", "roomEquipments/edit");
 

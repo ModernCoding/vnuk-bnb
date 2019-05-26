@@ -120,6 +120,8 @@ public class BookingServicesController {
 		@PathVariable("id") Long id,
 		BookingService bookingService,
 		Model model,
+		@RequestParam(value="roomId", required = false) String roomId,
+		@RequestParam(value="userId", required = false) String userId,
 		ServletRequest request,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
 		
@@ -137,7 +139,7 @@ public class BookingServicesController {
     	model.addAttribute("backToShow", backToShow);
     	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
     	model.addAttribute("bookingService", bookingServiceDao.read(id));
-    	model.addAttribute("booking", bookingDao.read(id));
+    	model.addAttribute("booking", bookingDao.read(roomId, userId));
     	model.addAttribute("service", serviceDao.read());
         model.addAttribute("template", "bookingServices/edit");
 

@@ -18,22 +18,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.vnuk.bnb.dao.BillDao;
+import vn.edu.vnuk.bnb.dao.BookingDishDao;
 import vn.edu.vnuk.bnb.dao.BookingDao;
-import vn.edu.vnuk.bnb.dao.UserDao;
-import vn.edu.vnuk.bnb.model.Bill;
+import vn.edu.vnuk.bnb.dao.DishDao;
+import vn.edu.vnuk.bnb.model.BookingDish;
 
 
 
-public class BillsController {
+public class BookingDishesController {
 	
-	private BillDao billDao;
+	private BookingDishDao bookingDishDao;
 	private BookingDao bookingDao;
-	private UserDao userDao;
+	private DishDao dishDao;
 	
 	@Autowired
-	public void setBillDao(BillDao billDao) {
-		this.billDao = billDao;
+	public void setBookingDishDao(BookingDishDao bookingDishDao) {
+		this.bookingDishDao = bookingDishDao;
 	}
 	
 	@Autowired
@@ -43,48 +43,46 @@ public class BillsController {
 	
 	
 	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
+	public void setDishDao(DishDao dishDao) {
+		this.dishDao = dishDao;
 	}
 	
-	@RequestMapping("/bills")
+	@RequestMapping("/booking-Dishes")
     public String index(
 		
 		@RequestParam(value="bookingId", required = false) String bookingId,
-		@RequestParam(value="userId", required = false) String userId,
+		@RequestParam(value="dishId", required = false) String dishId,
 		Model model,
 		ServletRequest request
 
 	) throws SQLException{
         
-		model.addAttribute("bills", billDao.read(bookingId, userId));
+		model.addAttribute("bookingDishes", bookingDishDao.read(bookingId, dishId));
 		
-		if (bookingId != null && userId!= null) {
+		if (bookingId != null && dishId!= null) {
 			model.addAttribute("booking", bookingDao.read(Long.parseLong(bookingId)));
-			model.addAttribute("user", userDao.read(Long.parseLong(userId)));
+			model.addAttribute("dish", dishDao.read(Long.parseLong(dishId)));
 		}
 		
-        model.addAttribute("template", "bills/index");
+        model.addAttribute("template", "bookingDishes/index");
         return "_layout";
    
 	}
 	
-	@RequestMapping("/bills/{id}")
+	@RequestMapping("/booking-Dishes/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("bill", bookingDao.read(id));
-        model.addAttribute("bill", userDao.read(id));
+        model.addAttribute("bookingDish", bookingDao.read(id));
+        model.addAttribute("bookingDish", dishDao.read(id));
         return "_layout";
     }
  
- @RequestMapping("/bills/new")
+ @RequestMapping("/booking-Dishes/new")
     public String add(
     		
-		Bill bill,
+		BookingDish bookingDish,
 		@RequestParam(value="roomId", required = false) String roomId,
 		@RequestParam(value="userId", required = false) String userId,
-		@RequestParam(value="userTypesId", required = false) String userTypesId,
-		@RequestParam(value="identificationTypesId", required = false) String identificationTypesId,
-		@RequestParam(value="countryId", required = false) String countryId,
+		@RequestParam(value="dishTypesId", required = false) String dishTypesId,
 		ServletRequest request,
 		
 		Model model,
@@ -101,23 +99,21 @@ public class BillsController {
     	
     	model.addAttribute("template", "bills/new");
     	model.addAttribute("booking", bookingDao.read(roomId, userId));
-    	model.addAttribute("user", userDao.read(userTypesId, identificationTypesId, countryId));
+    	model.addAttribute("dish", dishDao.read(dishTypesId));
         return "_layout";
     }
  
- @RequestMapping("/bills/{id}/edit")
+ @RequestMapping("/booking-Dishes/{id}/edit")
  public String edit(
  		
 		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
 		@PathVariable("id") Long id,
-		Bill bill,
-		Model model,
+		BookingDish bookingDish,
 		@RequestParam(value="roomId", required = false) String roomId,
 		@RequestParam(value="userId", required = false) String userId,
-		@RequestParam(value="userTypesId", required = false) String userTypesId,
-		@RequestParam(value="identificationTypesId", required = false) String identificationTypesId,
-		@RequestParam(value="countryId", required = false) String countryId,
+		@RequestParam(value="dishTypesId", required = false) String dishTypesId,
 		ServletRequest request,
+		Model model,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
 		
 	) throws SQLException{
@@ -133,18 +129,18 @@ public class BillsController {
  	
  	model.addAttribute("backToShow", backToShow);
  	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
- 	model.addAttribute("bill", billDao.read(id));
+ 	model.addAttribute("bookingDish", bookingDishDao.read(id));
  	model.addAttribute("booking", bookingDao.read(roomId, userId));
- 	model.addAttribute("user", userDao.read(userTypesId, identificationTypesId, countryId));
-     model.addAttribute("template", "bills/edit");
+ 	model.addAttribute("dish", dishDao.read(dishTypesId));
+     model.addAttribute("template", "bookingDishes/edit");
      return "_layout";
  
  }
  
- @RequestMapping(value="/bills", method=RequestMethod.POST)
+ @RequestMapping(value="/booking-Dishes", method=RequestMethod.POST)
  public String create(
 		
- 	@Valid Bill bill,
+ 	@Valid BookingDish bookingDish,
  	BindingResult bindingResult,
  	ServletRequest request,
  	RedirectAttributes redirectAttributes
@@ -153,22 +149,22 @@ public class BillsController {
  	
      if (bindingResult.hasErrors()) {
      	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-         return "redirect:/bills/new";
+         return "redirect:/booking-Dishes/new";
      }
      
      
-     billDao.create(bill);
-     return "redirect:/bills";
+     bookingDishDao.create(bookingDish);
+     return "redirect:/booking-Dishes";
      
  }
 
 
-@RequestMapping(value="/bills/{id}", method=RequestMethod.PATCH)
+@RequestMapping(value="/booking-Dishes/{id}", method=RequestMethod.PATCH)
  public String update(
  		
  		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
  		@PathVariable("id") Long id,
- 		@Valid Bill bill,
+ 		@Valid BookingDish bookingDish,
  		BindingResult bindingResult,
  		ServletRequest request,
  		RedirectAttributes redirectAttributes
@@ -178,20 +174,20 @@ public class BillsController {
      
  	if (bindingResult.hasErrors()) {
      	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-         return String.format("redirect:/bills/%s/edit", id);
+         return String.format("redirect:/booking-Dishes/%s/edit", id);
      }
      
-     billDao.update(bill);
-     return backToShow ? String.format("redirect:/bills/%s", id) : "redirect:/bills";
+     bookingDishDao.update(bookingDish);
+     return backToShow ? String.format("redirect:/booking-Dishes/%s", id) : "redirect:/booking-Dishes";
      
      
  }
  
  
  //  delete with ajax
- @RequestMapping(value="/bills/{id}", method = RequestMethod.DELETE)
+ @RequestMapping(value="/booking-Dishes/{id}", method = RequestMethod.DELETE)
  public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
- 	billDao.delete(id);
+ 	bookingDishDao.delete(id);
      response.setStatus(200);
  }
 	
