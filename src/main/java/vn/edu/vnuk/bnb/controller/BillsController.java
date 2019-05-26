@@ -22,7 +22,6 @@ import vn.edu.vnuk.bnb.dao.BillDao;
 import vn.edu.vnuk.bnb.dao.BookingDao;
 import vn.edu.vnuk.bnb.dao.UserDao;
 import vn.edu.vnuk.bnb.model.Bill;
-import vn.edu.vnuk.bnb.model.User;
 
 
 
@@ -51,8 +50,8 @@ public class BillsController {
 	@RequestMapping("/bills")
     public String index(
 		
-		@RequestParam(value="booking", required = false) String bookingId,
-		@RequestParam(value="user", required = false) String userId,
+		@RequestParam(value="bookingId", required = false) String bookingId,
+		@RequestParam(value="userId", required = false) String userId,
 		Model model,
 		ServletRequest request
 
@@ -61,8 +60,8 @@ public class BillsController {
 		model.addAttribute("bills", billDao.read(bookingId, userId));
 		
 		if (bookingId != null && userId!= null) {
-			model.addAttribute("userType", bookingDao.read(Long.parseLong(bookingId)));
-			model.addAttribute("identificationType", userDao.read(Long.parseLong(userId)));
+			model.addAttribute("booking", bookingDao.read(Long.parseLong(bookingId)));
+			model.addAttribute("user", userDao.read(Long.parseLong(userId)));
 		}
 		
         model.addAttribute("template", "bills/index");
@@ -72,8 +71,8 @@ public class BillsController {
 	
 	@RequestMapping("/bills/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("userType", bookingDao.read(id));
-        model.addAttribute("identificationType", userDao.read(id));
+        model.addAttribute("bill", bookingDao.read(id));
+        model.addAttribute("bill", userDao.read(id));
         return "_layout";
     }
  
@@ -81,6 +80,13 @@ public class BillsController {
     public String add(
     		
 		Bill bill,
+		@RequestParam(value="roomId", required = false) String roomId,
+		@RequestParam(value="userId", required = false) String userId,
+		@RequestParam(value="userTypesId", required = false) String userTypesId,
+		@RequestParam(value="identificationTypesId", required = false) String identificationTypesId,
+		@RequestParam(value="countryId", required = false) String countryId,
+		ServletRequest request,
+		
 		Model model,
 		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
 	
@@ -94,8 +100,8 @@ public class BillsController {
     	}
     	
     	model.addAttribute("template", "bills/new");
-    	model.addAttribute("booking", bookingDao.read(id));
-    	model.addAttribute("user", userDao.read(id));
+    	model.addAttribute("booking", bookingDao.read(roomId, userId));
+    	model.addAttribute("user", userDao.read(userTypesId, identificationTypesId, countryId));
         return "_layout";
     }
  
@@ -122,9 +128,9 @@ public class BillsController {
  	
  	model.addAttribute("backToShow", backToShow);
  	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
- 	model.addAttribute("user", billDao.read(id));
- 	model.addAttribute("userType", bookingDao.read(id));
- 	model.addAttribute("identification", userDao.read(id));
+ 	model.addAttribute("bill", billDao.read(id));
+ 	model.addAttribute("booking", bookingDao.read(id));
+ 	model.addAttribute("user", userDao.read(id));
      model.addAttribute("template", "bills/edit");
      return "_layout";
  

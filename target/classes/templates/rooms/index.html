@@ -34,13 +34,13 @@
        	<table>
 	        <thead>
 	            <tr>
-	                <th></th>
-	                <th>Id</th>
+	                <th>#</th>
 	                <th>Price</th>
 	                <th>Beds</th>
 	                <th>Room Number</th>
 	                <th>Is Smoking</th>
 	                <th>Room Types</th>
+	                <th>Actions</th>
 	            </tr>
 	        </thead>
 	
@@ -49,7 +49,7 @@
                 <tr th:each="room : ${rooms}" th:attr="data-room-id=${room.id}">
                     <td>
                         
-                        <!-- Show room -->
+                       <!--  Show room -->
                         <a 	
                         	th:href="@{/rooms/{id}(id=${room.id})}"
                         	class="btn btn-sm btn-light" 
@@ -63,7 +63,7 @@
                         </a>
                         
                         
-                        <!-- Edit subcategory -->
+                       <!--  Edit subcategory -->
                         <a
                         	th:href="@{/rooms/{id}/edit(id=${room.id})}"
                         	class="btn btn-sm btn-primary my-subcategory-to-edit" 
@@ -77,7 +77,7 @@
                         </a>
                            
                            
-                        <!-- Delete subcategory -->
+                       <!--  Delete subcategory -->
                         <button
                         	type="button"
                             class="btn btn-sm btn-danger my-subcategory-to-delete" 

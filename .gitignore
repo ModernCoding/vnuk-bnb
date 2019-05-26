@@ -1,0 +1,4 @@
+
+*.properties
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/maven/vn.edu.vnuk.bnb/vnuk-bnb/pom.properties
