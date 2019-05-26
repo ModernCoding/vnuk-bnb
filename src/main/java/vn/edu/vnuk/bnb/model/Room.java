@@ -3,7 +3,7 @@ package vn.edu.vnuk.bnb.model;
 import javax.validation.constraints.NotNull;
 
 public class Room {
-	private Long id;
+	private int id;
 	
 	@NotNull
 	private int beds;
@@ -14,15 +14,15 @@ public class Room {
 	@NotNull
 	private boolean isSmoking;
 	@NotNull
-	private Long roomTypesId;
+	private int roomTypeId;
 	
 	
-	private RoomType roomTypes;
+	private RoomType roomType;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public int getBeds() {
@@ -44,17 +44,17 @@ public class Room {
 		this.price = price;
 	}
 
-	public RoomType getRoomTypes() {
-		return roomTypes;
+	public RoomType getRoomType() {
+		return roomType;
 	}
-	public void setRoomTypes(RoomType roomTypes) {
-		this.roomTypes = roomTypes;
+	public void setRoomType(RoomType roomType) {
+		this.roomType = roomType;
 	}
-	public Long getRoomTypesId() {
-		return roomTypesId;
+	public int getRoomTypeId() {
+		return roomTypeId;
 	}
-	public void setRoomTypesId(Long roomTypesId) {
-		this.roomTypesId = roomTypesId;
+	public void setRoomTypeId(int roomTypeId) {
+		this.roomTypeId = roomTypeId;
 	}
 	public boolean isSmoking() {
 		return isSmoking;

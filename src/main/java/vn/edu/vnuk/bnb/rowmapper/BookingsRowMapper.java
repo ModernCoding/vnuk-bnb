@@ -38,16 +38,16 @@ public class BookingsRowMapper implements RowMapper<Booking> {
 		identificationtype.setId(rs.getLong("identification_type_id"));
 		identificationtype.setLabel(rs.getString("label"));
 		
-		roomtype.setId(rs.getLong("room_type_id"));
+		roomtype.setId(rs.getInt("room_type_id"));
 		roomtype.setLabel(rs.getString("label"));
 		
-		room.setId(rs.getLong("id"));
+		room.setId(rs.getInt("id"));
 		room.setPrice(rs.getDouble("price"));
 		room.setBeds(rs.getInt("beds"));
-		room.setRoomTypesId(rs.getLong("room_type_id"));
+		room.setRoomTypeId(rs.getInt("room_type_id"));
 		room.setRoomNumber(rs.getInt("room_number"));
 		room.setSmoking(rs.getBoolean("is_smoking"));
-		room.setRoomTypes(roomtype);
+		room.setRoomType(roomtype);
 		
 		user.setId(rs.getLong("id"));
 		user.setUserTypesId(rs.getLong("user_type_id"));
@@ -93,7 +93,7 @@ public class BookingsRowMapper implements RowMapper<Booking> {
     		IdentificationType identificationtype = new IdentificationType();
     		RoomType roomtype = new RoomType();
 			
-    		roomtype.setId((Long) row.get("room_type_id"));
+    		roomtype.setId((int) row.get("room_type_id"));
     		roomtype.setLabel((String) row.get("label"));
 			
     		usertype.setId((Long) row.get("user_type_id"));
@@ -105,13 +105,13 @@ public class BookingsRowMapper implements RowMapper<Booking> {
     		country.setId((Long) row.get("country_id"));
     		country.setLabel((String) row.get("label"));
 			
-			room.setId((Long) row.get("room_id"));
+			room.setId((int) row.get("room_id"));
 			room.setPrice((Double) row.get("price"));
 			room.setBeds((int) row.get("rbeds"));
-			room.setRoomTypesId((Long) row.get("room_type_id"));
+			room.setRoomTypeId((int) row.get("room_type_id"));
 			room.setRoomNumber((int) row.get("room_number"));
 			room.setSmoking((boolean) row.get("is_smoking"));
-			room.setRoomTypes(roomtype);
+			room.setRoomType(roomtype);
 			
 			user.setId((Long) row.get("user_id"));
 			user.setUserTypesId((Long) row.get("user_type_id"));

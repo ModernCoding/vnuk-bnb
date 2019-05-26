@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ADMIN
+Built-By: cormorant_programming
 Build-Jdk: 11.0.3
 Implementation-Title: vnuk-bnb
 Implementation-Version: 0.0.1.

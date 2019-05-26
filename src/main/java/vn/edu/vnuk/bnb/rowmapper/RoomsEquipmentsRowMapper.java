@@ -23,16 +23,16 @@ public class RoomsEquipmentsRowMapper implements RowMapper<RoomEquipment> {
 		RoomEquipment roomequipment= new RoomEquipment();
 		Equipment equipment = new Equipment();
 		
-		roomtypes.setId(rs.getLong("room_type_id"));
+		roomtypes.setId(rs.getInt("room_type_id"));
 		roomtypes.setLabel(rs.getString("label"));
 		
-		room.setId(rs.getLong("room_id"));
+		room.setId(rs.getInt("room_id"));
 		room.setPrice(rs.getDouble("price"));
 		room.setBeds(rs.getInt("beds"));
-		room.setRoomTypesId(rs.getLong("room_type_id"));
+		room.setRoomTypeId(rs.getInt("room_type_id"));
 		room.setRoomNumber(rs.getInt("room_number"));
 		room.setSmoking(rs.getBoolean("is_smoking"));
-		room.setRoomTypes(roomtypes);
+		room.setRoomType(roomtypes);
 		
 		equipment.setId(rs.getLong("equipment_id"));
 		equipment.setLabel(rs.getString("label"));
@@ -60,19 +60,19 @@ public class RoomsEquipmentsRowMapper implements RowMapper<RoomEquipment> {
     		RoomEquipment roomequipment= new RoomEquipment();
 			Room room = new Room();
 			
-			roomtypes.setId((Long) row.get("room_type_id"));
+			roomtypes.setId((int) row.get("room_type_id"));
 			roomtypes.setLabel((String) row.get("room_type_label"));
 			
 			equipment.setId((Long) row.get("equipment_id"));
 			equipment.setLabel((String) row.get("equipment_label"));
 			
-			room.setId((Long) row.get("room_id"));
+			room.setId((int) row.get("room_id"));
 			room.setPrice((Double) row.get("room_price"));
 			room.setBeds((int) row.get("room_beds"));
-			room.setRoomTypesId((Long) row.get("room_type_id"));
+			room.setRoomTypeId((int) row.get("room_type_id"));
 			room.setRoomNumber((int) row.get("room_number"));
 			room.setSmoking((boolean) row.get("is_smoking"));
-			room.setRoomTypes(roomtypes);
+			room.setRoomType(roomtypes);
 			
 			roomequipment.setId((Long) row.get("id"));
 			roomequipment.setRoomId((Long) row.get("room_id"));

@@ -36,7 +36,7 @@ public class RoomDao {
             						new Object[] {
             								task.getPrice(),
             								task.getBeds(),
-            								task.getRoomTypesId(),
+            								task.getRoomTypeId(),
             								task.getRoomNumber(),
             								task.isSmoking()
             									}
@@ -133,7 +133,7 @@ public class RoomDao {
 					new Object[] {
 						task.getPrice(),
 						task.getBeds(),
-						task.getRoomTypesId(),
+						task.getRoomTypeId(),
 						task.getRoomNumber(),
 						task.isSmoking(),
 						task.getId()

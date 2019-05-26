@@ -60,7 +60,7 @@
     		</div>
     		
         	<div class="my-margin-top-4">
-	    		<input type="checkbox" th:field="*{isSmoking}">
+	    		<input type="checkbox" th:field="*{smoking}">
         	</div>
         	
         	<div th:if="${labelFieldError}" class="my-error-field">
@@ -78,7 +78,7 @@
     		</div>
     		
         	<div class="my-margin-top-4">
-	        	<select th:field="*{roomTypesId}">
+	        	<select th:field="*{roomTypeId}">
 				    <option
 				    	th:each="roomType : ${roomTypes}"
 				    	th:value="${roomType.id}"
