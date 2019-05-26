@@ -1,0 +1,287 @@
+.header-linear {
+  background-color: #333333;
+  height:100px;
+  color: #fff;
+  font-style: italic;
+  font-size: 15px;
+  padding-top:30px;
+  padding-left: 100px;
+}
+#phone {
+  color: #fff;
+  font-style: italic;
+}
+
+
+.heading {
+  background-image: url("../images/dusk.jpg");
+  background-image: cover;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;
+  	text-shadow: 2px 1px 1px #4d4d4d;
+    margin: -20px -10px 0px -10px;
+  	min-height: 800px;
+  }
+.logo {
+  padding: 10px;
+  text-align: left;
+  font-size: 40px;
+  color: #ffffff;
+  margin: 20px 20px 20px 20px;
+  font-style:
+}
+.name {
+  text-align: center;
+  padding-top: 200px;
+  font-size: 100px  ;
+  color: #ffffff;
+  font-style:
+}
+.slogan {
+  text-align: center;
+  font-size: 25px  ;
+  color: #ffffff;
+}
+video {
+  width: 30%;
+  height: 30%;
+  margin-top: 3cm;
+  margin-left: 1cm;
+  margin-right: auto;
+   display: inline;
+}
+.destination{
+  font-size: 20px;
+  color:#505050;
+  min-height: 8 00px;
+}
+.destination-heading {
+  text-align: center;
+  font-size: 40px;
+  padding-top: 100px;
+}
+.destination-heading-1 {
+  text-align: center;
+  font-size: 20px;
+  color: #ffc107;
+  padding: 20px;
+}
+.destination-paragraph {
+  font-size: 20px;
+  padding-bottom: 100px;
+}
+.dinnerShow{
+  background-image: url("../images/cafehome.jpg");
+
+  background-image: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    text-shadow: 2px 1px 1px #4d4d4d;
+    margin: -20px -10px 0px -10px;
+    min-height: 800px;
+}
+.dinnerShow-heading {
+  text-align: center;
+
+  padding-top: 250px;
+  font-size: 80px  ;
+  color: #ffffff;
+}
+.dinnerShow-paragraph  {
+  text-align: center;
+  font-size: 25px ;
+  color: #ffffff;
+  padding-bottom: 50px;
+}
+.dinnerShow-button {
+  text-align: center;
+  font-size: 25px ;
+  color: #ffffff;
+}
+.elevate-your-experience{
+  height:700px;
+}
+.elevate-heading {
+  text-align: center;
+  color:#505050;
+  padding-top: 50px;
+}
+.elevate-text {
+  text-align: center;
+  font-size: 22px;
+  padding-top:40px;
+}
+.restaurant-food {
+background-image: url("../images/beef.jpg");
+  background-image: cover;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;
+    background-position: center;
+  	text-shadow: 2px 1px 1px #4d4d4d;
+    margin: -20px -10px 0px -10px;
+  	min-height: 800px;
+}
+.restaurant-food-heading {
+  text-align: center;
+  color:#ffffff;
+  font-size: 100px;
+  padding-top: 270px;
+}
+.restaurant-food-paragraph {
+  text-align: center;
+  font-size: 25px;
+  color:#ffffff;
+}
+.restaurant-menu {
+  text-align: center;
+  font-size: 25px;
+  color:#505050;
+  min-height: 400px;
+}
+.restaurant-menu-heading {
+  text-align: center;
+  font-size: 30px;
+  color:#505050;
+  padding-top: 50px;
+}
+.restaurant-menu-paragraph {
+  text-align: center;
+  font-size: 20px;
+  color:#505050;
+  padding-bottom:4  0px;
+}
+.restaurant-menu-wrapped-button {
+  text-align: center;
+  padding-bottom: 200px;
+}
+.restaurant-menu-button {
+  border-radius: 4px;
+  background-color: #ffc107;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 17px;
+  padding: 10px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.restaurant-menu-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.restaurant-menu-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -5px;
+  transition: 0.5s;
+}
+.restaurant-menu-button:hover span {
+  padding-right: 25px;
+}
+.restaurant-menu-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.restaurant-menu-button:active {
+}
+ul {
+  list-style-type: none;
+  margin: auto;
+  padding-right: 150px;
+  overflow: hidden;
+  background-color: #ffc107;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+li {
+  float: right;
+}
+li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  margin-left: auto;
+}
+li a:hover {
+  background-color: #fff;
+}
+.footer{
+  background-color:#333333;
+  height: 200px;
+  width: 100%;
+}
+.footer-linear-start{
+  background-color:#ffc107;
+  height: 5px;
+  width: 100%;
+}
+.footer-paragraph{
+  float: left;
+  width: 20%;
+  color: #fff;
+}
+
+.footer-section {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.footer-connact-info {
+  color:#ffc107;
+}
+.footer-connact-info {
+  padding-top: 60px;
+  padding-left: 50px;
+  float: left;
+  font-style: italic;
+}
+
+.footer-social-media {
+  padding-top:140px;
+  padding-right: 100px;
+  float: right;
+  color: #fff;
+
+}
+#facebook,#twitter,#youtube {
+  color: #ffc107;
+  padding: 5px;
+  font-size: 20px;
+}
+
+
+
+
+.footer-linear-end{
+  background-color:#ffc107;
+  height: 30px;
+  width: 100%;
+}
+
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
