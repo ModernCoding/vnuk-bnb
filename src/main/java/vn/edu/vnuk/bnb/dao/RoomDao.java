@@ -55,7 +55,7 @@ public class RoomDao {
     
     
     //  READ (List of Tasks)
-    public List<Room> read(String roomTypesId) throws SQLException {
+    public List<Room> read(String roomTypeId) throws SQLException {
 
     	String sqlQuery = "select t01.id"
     			+ "     , t01.price"
@@ -68,8 +68,8 @@ public class RoomDao {
 				+ " where t02.id = t01.room_type_id"
 		;
 
-    	if (roomTypesId != null) {
-    		sqlQuery += String.format("   and t02.id = %s", roomTypesId);
+    	if (roomTypeId != null) {
+    		sqlQuery += String.format("   and t02.id = %s", roomTypeId);
     		sqlQuery += " order by t01.id asc;";
     	}
 

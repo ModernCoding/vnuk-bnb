@@ -80,7 +80,7 @@
         	<div class="my-margin-top-4">
 	        	<select th:field="*{roomTypeId}">
 				    <option
-				    	th:each="roomType : ${roomTypes}"
+				    	th:each="roomType : ${roomType}"
 				    	th:value="${roomType.id}"
 				    	th:text="${roomType.label}"
 				    >

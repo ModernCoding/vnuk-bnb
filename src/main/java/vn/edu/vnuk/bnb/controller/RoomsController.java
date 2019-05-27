@@ -52,16 +52,14 @@ public class RoomsController {
 	@RequestMapping("/rooms")
     public String index(
 		
-		@RequestParam(value="roomTypesId", required = false) String roomTypesId,
+		@RequestParam(value="roomTypeId", required = false)String roomTypeId,
 		Model model,
 		ServletRequest request
-
 	) throws SQLException{
         
-		model.addAttribute("rooms", roomDao.read(roomTypesId));
-		
-		if (roomTypesId != null) {
-			model.addAttribute("roomType", roomTypeDao.read(Long.parseLong(roomTypesId)));
+		model.addAttribute("rooms", roomDao.read(roomTypeId));
+		if (roomTypeId != null) {
+			model.addAttribute("roomType", roomTypeDao.read(Long.parseLong(roomTypeId)));
 		}
 		
         model.addAttribute("template", "rooms/index");
@@ -69,10 +67,9 @@ public class RoomsController {
    
 	}
     
-    
     @RequestMapping("/rooms/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("room", roomTypeDao.read(id));
+        model.addAttribute("room", roomDao.read(id));
         model.addAttribute("template", "rooms/show");
         return "_layout";
     }
