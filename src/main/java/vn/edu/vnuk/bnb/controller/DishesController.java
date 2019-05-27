@@ -52,16 +52,16 @@ public class DishesController {
 	@RequestMapping("/dishes")
     public String index(
 		
-		@RequestParam(value="dishTypesId", required = false) String dishTypesId,
+		@RequestParam(value="dishTypeId", required = false) String dishTypeId,
 		Model model,
 		ServletRequest request
 
 	) throws SQLException{
         
-		model.addAttribute("dishes", dishDao.read(dishTypesId));
+		model.addAttribute("dishes", dishDao.read(dishTypeId));
 		
-		if (dishTypesId != null) {
-			model.addAttribute("dishType", dishTypeDao.read(Long.parseLong(dishTypesId)));
+		if (dishTypeId != null) {
+			model.addAttribute("dishType", dishTypeDao.read(Long.parseLong(dishTypeId)));
 		}
 		
         model.addAttribute("template", "dishes/index");

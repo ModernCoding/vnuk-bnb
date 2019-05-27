@@ -1,44 +1,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title" th:text="'Task #' + ${country.id}"></title>
+	<title th:fragment="title" th:text="'Subcategory #' + ${roomEquipment.id}"></title>
 	
 	
 	<section th:fragment="content">
 	
 		<h3 class="my-margin-bottom-28">
-			<em th:text="'Task #' + ${country.id}"></em>
+			<em th:text="'Subcategory #' + ${roomEquipment.id}"></em>
 		</h3>
 		
 		<table>
 			<tr>
-				<td>Label</td>
-				<td th:text="${country.label}" class="text-justify"></td>
+				<td>Rooms Price</td>
+				<td th:text="${price}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Beds</td>
+				<td th:text="${beds}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Number</td>
+				<td th:text="${roomNumber}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Is Smoking</td>
+				<td th:text="${smoking}" class="text-justify"></td>
 			</tr>
 			
+			<tr>
+				<td>Room Types</td>
+				<td th:text="${roomType.label}" class="text-justify"></td>
+			</tr>
+			
+			<tr>
+				<td>Equipment</td>
+				<td th:text="${equipment.label}" class="text-justify"></td>
+			</tr>
 		</table>
 		
 		
 		<div class="my-margin-top-19">
 	
-		    <a th:href="@{/countries}" th:class="'btn btn-sm btn-light'">
+		    <a th:href="@{/room-Equipments}" class="btn btn-sm btn-light my-margin-right-19">
 				<span class="my-margin-right-19">
 					<i class="far fa-arrow-alt-circle-left" aria-hidden="true"></i>
 				</span>
 				
-		    	<span>Back to the list of tasks</span>
+		    	<span>Back to the list of Room Equipments</span>
 		    </a>
 	
 	
 		    <a
-		    	th:unless="${country.label}"
-                th:href="@{/countries/{id}/edit(id=${country.id}, backToShow=true)}"
+                th:href="@{/room-Equipments/{id}/edit(id=${roomEquipment.id}, backToShow=true)}"
 		    	class="btn btn-sm btn-primary"
 		    >
 				<span class="my-margin-right-19">
 					<i class="far fa-edit" aria-hidden="true"></i>
 				</span>
 				
-		    	<span>Edit task #<span th:text="${country.id}"></span></span>
+		    	<span>Edit rooms #<span th:text="${roomEquipment.id}"></span></span>
 		    </a>
 		    
 		</div>

@@ -19,12 +19,12 @@ public class DishesRowMapper implements RowMapper<Dish> {
 		Dish dish = new Dish();
 		DishType dishtypes = new DishType();
 		
-		dishtypes.setId(rs.getLong("dish_type_id"));
+		dishtypes.setId(rs.getInt("dish_type_id"));
 		dishtypes.setLabel(rs.getString("label"));
 		
-		dish.setId(rs.getLong("id"));
+		dish.setId(rs.getInt("id"));
 		dish.setPrice(rs.getDouble("price"));
-		dish.setDishTypesId(rs.getLong("dish_type_id"));
+		dish.setDishTypeId(rs.getInt("dish_type_id"));
 		dish.setLabel(rs.getString("label"));
 		dish.setLabel(rs.getString("description"));
 		
@@ -44,12 +44,12 @@ public class DishesRowMapper implements RowMapper<Dish> {
     		DishType dishtypes = new DishType();
     		Dish dish = new Dish();
 			
-    		dishtypes.setId((Long) row.get("dish_type_id"));
+    		dishtypes.setId((int) row.get("dish_type_id"));
     		dishtypes.setLabel((String) row.get("label"));
 			
-			dish.setId((Long) row.get("id"));
+			dish.setId((int) row.get("id"));
 			dish.setPrice((Double) row.get("price"));
-			dish.setDishTypesId((Long) row.get("dish_type_id"));
+			dish.setDishTypeId((int) row.get("dish_type_id"));
 			dish.setLabel((String) row.get("label"));
 			dish.setLabel((String) row.get("description"));
 			dish.setDishType(dishtypes);;

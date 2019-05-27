@@ -4,17 +4,18 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class DishType {
-	private Long id;
+	private int id;
 	
 	@NotNull
     @Size(min = 1, message="Label is mandatory")
 	private String label;
 	
 	
-	public Long getId() {
+
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getLabel() {

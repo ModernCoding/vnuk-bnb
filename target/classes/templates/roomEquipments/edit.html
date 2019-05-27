@@ -2,16 +2,18 @@
 	
 	<title th:fragment="title" th:text="'Edit subcategory #' + ${roomEquipment.id}"></title>
 	
+	
 	<section th:fragment="content">
 	
 		<h3 class="my-margin-bottom-28">
 			<em th:text="'Edit subcategory #' + ${roomEquipment.id}"></em>
 		</h3>
 		
+		
 	    <form
 	    	th:replace="
 	    			~{
-	    				/roomEquipments/_form
+	    				/room-Equipments/_form
 	    				
 	    				::
 	    				

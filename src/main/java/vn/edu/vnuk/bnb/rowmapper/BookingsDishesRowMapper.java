@@ -36,7 +36,7 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 		country.setId(rs.getLong("country_id"));
 		country.setLabel(rs.getString("label"));
 		
-		dish.setId(rs.getLong("dish_id"));
+		dish.setId(rs.getInt("dish_id"));
 		dish.setLabel(rs.getString("label"));
 		
 		usertype.setId(rs.getLong("user_type_id"));
@@ -112,7 +112,7 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
     		roomtype.setId((int) row.get("room_type_id"));
     		roomtype.setLabel((String) row.get("label"));
 			
-    		dish.setId((Long) row.get("dish_id"));
+    		dish.setId((int) row.get("dish_id"));
     		dish.setLabel((String) row.get("label"));
     		
     		

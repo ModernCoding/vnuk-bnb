@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Dish {
-	private Long id;
+	private int id;
 	
 	@NotNull
 	@Size(min = 1, message="Label is mandatory")
@@ -15,17 +15,12 @@ public class Dish {
 	@Size(min = 1, message="Description is mandatory")
 	private String description;
 	@NotNull
-	private Long dishTypesId;
+	private int dishTypeId;
 	
 	
 	private DishType dishType;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getLabel() {
 		return label;
 	}
@@ -50,11 +45,18 @@ public class Dish {
 	public void setDishType(DishType dishType) {
 		this.dishType = dishType;
 	}
-	public Long getDishTypesId() {
-		return dishTypesId;
+	public int getId() {
+		return id;
 	}
-	public void setDishTypesId(Long dishTypesId) {
-		this.dishTypesId = dishTypesId;
+	public void setId(int id) {
+		this.id = id;
 	}
+	public int getDishTypeId() {
+		return dishTypeId;
+	}
+	public void setDishTypeId(int dishTypeId) {
+		this.dishTypeId = dishTypeId;
+	}
+
 	
 }

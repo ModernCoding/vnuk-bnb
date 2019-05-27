@@ -1,10 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${country}" th:method="${method}">
+    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${room}" th:method="${method}">
 
     	<div>
+    	
+    		LABEL
     		
     		<div>
+    			<label>Price</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{price}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+
+
+			<div>
     			<label>Label</label>
     		</div>
     		
@@ -18,6 +37,39 @@
 				</span>
 				
 		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	<div>
+    			<label>Description</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{description}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	CATEGORY
+    		
+    		<div class="my-margin-top-19">
+    			<label>Dish Type</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	        	<select th:field="*{dishTypeId}">
+				    <option
+				    	th:each="dishType : ${dishType}"
+				    	th:value="${dishType.id}"
+				    	th:text="${dishType.label}"
+				    >
+				    </option>
+				</select>
         	</div>
         	
         </div>

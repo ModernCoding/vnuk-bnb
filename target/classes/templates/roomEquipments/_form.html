@@ -13,12 +13,13 @@
         	<div class="my-margin-top-4">
 	        	<select th:field="*{roomId}">
 				    <option
-				    	th:each="room : ${rooms}"
+				    	th:each="room : ${room}"
 				    	th:value="${room.id}"
 				    	th:text="${room.price}"
 				    	th:text="${room.beds}"
 				    	th:text="${room.roomNumber}"
 				    	th:text="${room.smoking}"
+				    	th:text="${room.roomType.label}"
 				    >
 				    </option>
 				</select>
@@ -31,7 +32,7 @@
         	<div class="my-margin-top-4">
 	        	<select th:field="*{equipmentId}">
 				    <option
-				    	th:each="equipment : ${equipments}"
+				    	th:each="equipment : ${equipment}"
 				    	th:value="${equipment.id}"
 				    	th:text="${equipment.label}"
 				    	
