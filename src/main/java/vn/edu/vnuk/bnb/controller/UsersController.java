@@ -56,7 +56,7 @@ public class UsersController {
 	@RequestMapping("/users")
     public String index(
 		
-		@RequestParam(value="userTypesId", required = false) String userTypesId,
+		@RequestParam(value="userTypeId", required = false) String userTypeId,
 		@RequestParam(value="identificationTypeId", required = false) String identificationTypeId,
 		@RequestParam(value="countryId", required = false) String countryId,
 		Model model,
@@ -64,10 +64,10 @@ public class UsersController {
 
 	) throws SQLException{
         
-		model.addAttribute("users", userDao.read(userTypesId, identificationTypeId, countryId));
+		model.addAttribute("users", userDao.read(userTypeId, identificationTypeId, countryId));
 		
-		if (userTypesId != null && identificationTypeId!= null && countryId !=null ) {
-			model.addAttribute("userType", userTypeDao.read(Long.parseLong(userTypesId)));
+		if (userTypeId != null && identificationTypeId!= null && countryId !=null ) {
+			model.addAttribute("userType", userTypeDao.read(Long.parseLong(userTypeId)));
 			model.addAttribute("identificationType", identificationTypeDao.read(Long.parseLong(identificationTypeId)));
 			model.addAttribute("country", countryDao.read(Long.parseLong(countryId)));
 		}
@@ -79,9 +79,7 @@ public class UsersController {
 	
 	 @RequestMapping("/users/{id}")
 	    public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-	        model.addAttribute("userType", userTypeDao.read(id));
-	        model.addAttribute("identificationType", identificationTypeDao.read(id));
-	        model.addAttribute("country", countryDao.read(id));
+	        model.addAttribute("user", userDao.read(id));
 	        model.addAttribute("template", "users/show");
 	        return "_layout";
 	    }
@@ -104,7 +102,7 @@ public class UsersController {
 	    	
 	    	model.addAttribute("template", "users/new");
 	    	model.addAttribute("userType", userTypeDao.read());
-	    	model.addAttribute("user", identificationTypeDao.read());
+	    	model.addAttribute("identificationType", identificationTypeDao.read());
 	        model.addAttribute("country", countryDao.read());
 	        return "_layout";
 	    }
@@ -134,7 +132,7 @@ public class UsersController {
 	    	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
 	    	model.addAttribute("user", userDao.read(id));
 	    	model.addAttribute("userType", userTypeDao.read());
-	    	model.addAttribute("identification", identificationTypeDao.read());
+	    	model.addAttribute("identificationType", identificationTypeDao.read());
 	    	model.addAttribute("country", countryDao.read());
 	        model.addAttribute("template", "user/edit");
 	        return "_layout";

@@ -33,16 +33,16 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 		Dish dish = new Dish();
 		BookingDish bookingdish = new BookingDish();
 		
-		country.setId(rs.getLong("country_id"));
+		country.setId(rs.getInt("country_id"));
 		country.setLabel(rs.getString("label"));
 		
 		dish.setId(rs.getInt("dish_id"));
 		dish.setLabel(rs.getString("label"));
 		
-		usertype.setId(rs.getLong("user_type_id"));
+		usertype.setId(rs.getInt("user_type_id"));
 		usertype.setLabel(rs.getString("label"));
 		
-		identificationtype.setId(rs.getLong("identification_type_id"));
+		identificationtype.setId(rs.getInt("identification_type_id"));
 		identificationtype.setLabel(rs.getString("label"));
 		
 		roomtype.setId(rs.getInt("room_type_id"));
@@ -56,8 +56,8 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 		room.setSmoking(rs.getBoolean("is_smoking"));
 		room.setRoomType(roomtype);
 		
-		user.setId(rs.getLong("user_id"));
-		user.setUserTypesId(rs.getLong("user_type_id"));
+		user.setId(rs.getInt("user_id"));
+		user.setUserTypesId(rs.getInt("user_type_id"));
 		user.setFirstName(rs.getString("first_name"));
 		user.setMiddleName(rs.getString("middle_name"));
 		user.setLastName(rs.getString("last_name"));
@@ -71,9 +71,9 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 		user.setCountry(country);
 		user.setIdentificationTypes(identificationtype);
 		
-		booking.setId(rs.getLong("booking_id"));
-		booking.setRoomId(rs.getLong("room_id"));
-		booking.setUserId(rs.getLong("user_id"));
+		booking.setId(rs.getInt("booking_id"));
+		booking.setRoomId(rs.getInt("room_id"));
+		booking.setUserId(rs.getInt("user_id"));
 		booking.setCheckIn(rs.getDate("check_in"));
 		booking.setCheckOut(rs.getDate("check_out"));
 		booking.setQuanlity(rs.getInt("quanlity_of_people"));
@@ -81,9 +81,9 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 		booking.setRoom(room);
 		booking.setUser(user);
 		
-		bookingdish.setId(rs.getLong("id"));
-		bookingdish.setBookingId(rs.getLong("booking_id"));
-		bookingdish.setDishId(rs.getLong("dishe_id"));
+		bookingdish.setId(rs.getInt("id"));
+		bookingdish.setBookingId(rs.getInt("booking_id"));
+		bookingdish.setDishId(rs.getInt("dishe_id"));
 		bookingdish.setBookings(booking);
 		bookingdish.setDishes(dish);
 		
@@ -116,13 +116,13 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
     		dish.setLabel((String) row.get("label"));
     		
     		
-    		usertype.setId((Long) row.get("user_type_id"));
+    		usertype.setId((int) row.get("user_type_id"));
     		usertype.setLabel((String) row.get("label"));
 			
-    		identificationtype.setId((Long) row.get("identification_type_id"));
+    		identificationtype.setId((int) row.get("identification_type_id"));
     		identificationtype.setLabel((String) row.get("label"));
 			
-    		country.setId((Long) row.get("country_id"));
+    		country.setId((int) row.get("country_id"));
     		country.setLabel((String) row.get("label"));
 			
 			room.setId((int) row.get("room_id"));
@@ -133,8 +133,8 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 			room.setSmoking((boolean) row.get("is_smoking"));
 			room.setRoomType(roomtype);
 			
-			user.setId((Long) row.get("user_id"));
-			user.setUserTypesId((Long) row.get("user_type_id"));
+			user.setId((int) row.get("user_id"));
+			user.setUserTypesId((int) row.get("user_type_id"));
 			user.setFirstName((String) row.get("first_name"));
 			user.setMiddleName((String) row.get("middle_name"));
 			user.setLastName((String) row.get("last_name"));
@@ -147,9 +147,9 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 			user.setCountry(country);
 			user.setIdentificationTypes(identificationtype);
 			
-			booking.setId((Long) row.get("booking_id"));
-			booking.setRoomId((Long) row.get("room_id"));
-			booking.setUserId((Long) row.get("user_id"));
+			booking.setId((int) row.get("booking_id"));
+			booking.setRoomId((int) row.get("room_id"));
+			booking.setUserId((int) row.get("user_id"));
 			booking.setCheckIn((java.sql.Date) row.get("check_in"));
 			booking.setCheckOut((java.sql.Date) row.get("check_out"));
 			booking.setQuanlity((int) row.get("quanlity_of_people"));
@@ -157,9 +157,9 @@ public class BookingsDishesRowMapper implements RowMapper<BookingDish> {
 			booking.setRoom(room);
 			booking.setUser(user);
 			
-			bookingdish.setId((Long) row.get("id"));
-			bookingdish.setBookingId((Long) row.get("booking_id"));
-			bookingdish.setDishId((Long) row.get("dish_id"));
+			bookingdish.setId((int) row.get("id"));
+			bookingdish.setBookingId((int) row.get("booking_id"));
+			bookingdish.setDishId((int) row.get("dish_id"));
 			
 			
 			bookingdishes.add(bookingdish);

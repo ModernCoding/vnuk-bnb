@@ -3,21 +3,21 @@ package vn.edu.vnuk.bnb.model;
 import javax.validation.constraints.NotNull;
 
 public class BookingService {
-	private Long id;
+	private int id;
 	@NotNull
 	private double price;
 	@NotNull
-	private Long bookingId;
+	private int bookingId;
 	@NotNull
-	private Long serviceId;
+	private int serviceId;
 	
 	private Booking bookings;
 	private Service services;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public double getPrice() {
@@ -38,16 +38,16 @@ public class BookingService {
 	public void setServices(Service services) {
 		this.services = services;
 	}
-	public Long getBookingId() {
+	public int getBookingId() {
 		return bookingId;
 	}
-	public void setBookingId(Long bookingId) {
+	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
-	public Long getServiceId() {
+	public int getServiceId() {
 		return serviceId;
 	}
-	public void setServiceId(Long serviceId) {
+	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
 	}
 	
