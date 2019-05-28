@@ -33,131 +33,105 @@ import vn.edu.vnuk.bnb.model.Equipment;
  */
 @Controller
 public class EquipmentController {
-	
+
 	private EquipmentDao dao;
-	
+
 	@Autowired
 	public void setEquipmentDao(EquipmentDao dao) {
 		this.dao = dao;
 	}
-	
 
 	@RequestMapping("/equipments")
-    public String index(Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("equipments", dao.read());
-        model.addAttribute("template", "equipments/index");
-        return "_layout";
-    }
-    
-    
-    @RequestMapping("/equipments/{id}")
-    public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("equipment", dao.read(id));
-        model.addAttribute("template", "equipments/show");
-        return "_layout";
-    }
-    
-    
-    @RequestMapping("/equipments/new")
-    public String add(Equipment equipment, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
-    	
-    	for(FieldError fieldError : fieldErrors) {
-    		model.addAttribute(
-    				String.format("%sFieldError", fieldError.getField()),
-    				fieldError.getDefaultMessage()
-    			);
-    	}
-    	
-        model.addAttribute("template", "equipments/new");
-        return "_layout";
-    }
-    
-    
-    @RequestMapping("/equipments/{id}/edit")
-    public String edit(
-    		
-		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
-		@PathVariable("id") Long id,
-		Equipment equipment,
-		Model model,
-		ServletRequest request,
-		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
-		
-	) throws SQLException{
-    	
-    	
-    	for(FieldError fieldError : fieldErrors) {
-    		model.addAttribute(
-    				String.format("%sFieldError", fieldError.getField()),
-    				fieldError.getDefaultMessage()
-    			);
-    	}
-    	
-    	
-    	model.addAttribute("backToShow", backToShow);
-    	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-    	model.addAttribute("equipment", dao.read(id));
-        model.addAttribute("template", "equipments/edit");
+	public String index(Model model, ServletRequest request) throws SQLException {
+		model.addAttribute("equipments", dao.read());
+		model.addAttribute("template", "equipments/index");
+		return "_layout";
+	}
 
-        return "_layout";
-    
-        
-    }
-    
-    
-    @RequestMapping(value="/equipments", method=RequestMethod.POST)
-    public String create(
-		
-    	@Valid Equipment equipment,
-    	BindingResult bindingResult,
-    	ServletRequest request,
-    	RedirectAttributes redirectAttributes
-    
-    ) throws SQLException{
-        
-    	
-        if (bindingResult.hasErrors()) {
-        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return "redirect:/equipments/new";
-        }
-        
-        dao.create(equipment);
-        return "redirect:/equipments";
-        
-        
-    }
-    
-    
-    @RequestMapping(value="/equipments/{id}", method=RequestMethod.PATCH)
-    public String update(
-    		
-    		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
-    		@PathVariable("id") Long id,
-    		@Valid Equipment equipment,
-    		BindingResult bindingResult,
-    		ServletRequest request,
-    		RedirectAttributes redirectAttributes
-    		
-    	) throws SQLException{
-    	
-        
-    	if (bindingResult.hasErrors()) {
-        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-            return String.format("redirect:/equipments/%s/edit", id);
-        }
-        
-        dao.update(equipment);
-        return backToShow ? String.format("redirect:/equipments/%s", id) : "redirect:/equipments";
-        
-        
-    }
-    
-    
-    //  delete with ajax
-    @RequestMapping(value="/equipments/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
-    	dao.delete(id);
-        response.setStatus(200);
-    }
-    
+	@RequestMapping("/equipments/{id}")
+	public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException {
+		model.addAttribute("equipment", dao.read(id));
+		model.addAttribute("template", "equipments/show");
+		return "_layout";
+	}
+
+	@RequestMapping("/equipments/new")
+	public String add(Equipment equipment, Model model,
+			@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors) {
+
+		for (FieldError fieldError : fieldErrors) {
+			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
+		}
+
+		model.addAttribute("template", "equipments/new");
+		return "_layout";
+	}
+
+	@RequestMapping("/equipments/{id}/edit")
+	public String edit(
+
+			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
+			Equipment equipment, Model model, ServletRequest request,
+			@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
+
+	) throws SQLException {
+
+		for (FieldError fieldError : fieldErrors) {
+			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
+		}
+
+		model.addAttribute("backToShow", backToShow);
+		model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
+		model.addAttribute("equipment", dao.read(id));
+		model.addAttribute("template", "equipments/edit");
+
+		return "_layout";
+
+	}
+
+	@RequestMapping(value = "/equipments", method = RequestMethod.POST)
+	public String create(
+
+			@Valid Equipment equipment, BindingResult bindingResult, ServletRequest request,
+			RedirectAttributes redirectAttributes
+
+	) throws SQLException {
+
+		if (bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+			return "redirect:/equipments/new";
+		}
+
+		dao.create(equipment);
+		return "redirect:/equipments";
+
+	}
+
+	@RequestMapping(value = "/equipments/{id}", method = RequestMethod.PATCH)
+	public String update(
+
+			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
+			@Valid Equipment equipment, BindingResult bindingResult, ServletRequest request,
+			RedirectAttributes redirectAttributes
+
+	) throws SQLException {
+
+		if (bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+			return String.format("redirect:/equipments/%s/edit", id);
+		}
+
+		dao.update(equipment);
+		return backToShow ? String.format("redirect:/equipments/%s", id) : "redirect:/equipments";
+
+	}
+
+	// delete with ajax
+	@RequestMapping(value = "/equipments/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response)
+			throws SQLException {
+		dao.delete(id);
+		response.setStatus(200);
+	}
+
 }

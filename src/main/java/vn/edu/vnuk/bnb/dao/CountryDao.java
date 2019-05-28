@@ -12,142 +12,106 @@ import vn.edu.vnuk.bnb.model.Country;
 
 @Repository
 public class CountryDao {
-	
-    private final JdbcTemplate jdbcTemplate;
-    
-    @Autowired
-    public CountryDao(JdbcTemplate jdbcTemplate) {
-	  this.jdbcTemplate = jdbcTemplate;
-    }
 
+	private final JdbcTemplate jdbcTemplate;
 
-    //  CREATE
-    public void create(Country task) throws SQLException{
+	@Autowired
+	public CountryDao(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
-        String sqlQuery = "INSERT INTO countries (label) VALUES (?)";
+	// CREATE
+	public void create(Country task) throws SQLException {
 
-        try {
-            System.out.println(
-            		String.format(
-            				"%s new record in DB!",
-            				
-            				this.jdbcTemplate.update(
-            						sqlQuery,
-            						new Object[] {task.getLabel()}
-        						)
-        				)
-        		);
+		String sqlQuery = "INSERT INTO countries (label) VALUES (?)";
 
-            
-        } catch (Exception e) {
-        	
-            e.printStackTrace();
-        
-        }
+		try {
+			System.out.println(String.format("%s new record in DB!",
 
-    }
-    
-    
-    //  READ (List of Tasks)
-    public List<Country> read() throws SQLException {
+					this.jdbcTemplate.update(sqlQuery, new Object[] { task.getLabel() })));
 
-        try {
-        
-        	return this.jdbcTemplate.query(
-        			"SELECT * FROM countries",
-        			new BeanPropertyRowMapper<Country>(Country.class)
-    			);
+		} catch (Exception e) {
 
-        	
-        } catch (Exception e) {
-        	
-            e.printStackTrace();
-        
-        }
-        
-        
+			e.printStackTrace();
+
+		}
+
+	}
+
+	// READ (List of Tasks)
+	public List<Country> read() throws SQLException {
+
+		try {
+
+			return this.jdbcTemplate.query("SELECT * FROM countries",
+					new BeanPropertyRowMapper<Country>(Country.class));
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
 		return null;
 
+	}
 
-    }
+	// READ (Single Task)
+	public Country read(Long id) throws SQLException {
 
+		return this.jdbcTemplate.queryForObject("SELECT * FROM countries where id = ?", new Object[] { id },
+				new BeanPropertyRowMapper<Country>(Country.class));
 
-    //  READ (Single Task)
-    public Country read(Long id) throws SQLException{
-        
-    	return this.jdbcTemplate.queryForObject(
-    			"SELECT * FROM countries where id = ?",
-        		new Object[] {id},
-        		new BeanPropertyRowMapper<Country>(Country.class)
-        	);
-    	
-    
-    }  
+	}
 
-    
-    //  UPDATE
-    public void update(Country task) throws SQLException {
-        String sqlQuery = "update countries set label=? where id=?";
-        
-        try {
-        	this.jdbcTemplate.update(
-					sqlQuery,
-					
-					new Object[] {
-						task.getLabel(),
-						task.getId()
-					}
-				);
-            
-            
-            System.out.println("Countries successfully modified.");
-        } 
+	// UPDATE
+	public void update(Country task) throws SQLException {
+		String sqlQuery = "update countries set label=? where id=?";
 
-        catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-    }
-    
-    
-    //  DELETE
-    public void delete(Long id) throws SQLException {
-        String sqlQuery = "delete from countries where id=?";
+		try {
+			this.jdbcTemplate.update(sqlQuery,
 
-        try {
+					new Object[] { task.getLabel(), task.getId() });
 
-            System.out.println(
-            		String.format(
-            				"%s record successfully removed from DB!",
-            				
-            				this.jdbcTemplate.update(
-            						sqlQuery,
-            						new Object[] {id}
-        						)
-        				)
-        		);
+			System.out.println("Countries successfully modified.");
+		}
 
-        } 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-        catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+	}
 
-    }
-    
-    
-    //  OTHERS
-    
-    public void complete(Long id) throws SQLException{
-        
-    	Country task = this.read(id);
+	// DELETE
+	public void delete(Long id) throws SQLException {
+		String sqlQuery = "delete from countries where id=?";
+
+		try {
+
+			System.out.println(String.format("%s record successfully removed from DB!",
+
+					this.jdbcTemplate.update(sqlQuery, new Object[] { id })));
+
+		}
+
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// OTHERS
+
+	public void complete(Long id) throws SQLException {
+
+		Country task = this.read(id);
 //        task.setIsComplete(true);
 //        task.setDateOfCompletion(new Date(System.currentTimeMillis()));
-        
-        this.update(task);
-        
-    }
-    
+
+		this.update(task);
+
+	}
+
 }

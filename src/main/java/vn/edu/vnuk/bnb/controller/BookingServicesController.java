@@ -200,6 +200,6 @@ public class BookingServicesController {
     public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
     	bookingServiceDao.delete(id);
         response.setStatus(200);
-    }
-    
+	}
+
 }
