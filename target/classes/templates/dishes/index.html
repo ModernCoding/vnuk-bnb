@@ -1,109 +1,107 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	
+
 	<title th:fragment="title">List of all the Dishes</title>
-	
-	
+
+
 	<section th:fragment="content">
-	
+
 		<h3 class="my-margin-bottom-28">
-			<em th:if="${dishType == null}">List of all Dishes</em>
-			
+			<em th:if="${dishType == null}">List of all Rooms</em>
+
 			<em th:unless="${dishType == null}">
 				Dishes of <b th:text="${dishType.label}"></b>
 			</em>
 		</h3>
-	
-	    <a href="dishes/new" class="btn btn-sm btn-success my-margin-bottom-19">
+
+	    <a href="rooms/new" class="btn btn-sm btn-success my-margin-bottom-19">
 			<span class="my-margin-right-19">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</span>
-			
-	    	<span>Create a new Dishes</span>
+
+	    	<span>Create a new dishes</span>
 	    </a>
-	
-	
+
+
 	    <div id="my-notice" class="my-no-line-height">
 	        <span class="my-margin-right-19">
 				<i aria-hidden="true"></i>
 			</span>
-			
+
 	    	<span></span>
 		</div>
-		
-       
+
+
        	<table>
 	        <thead>
 	            <tr>
-	            	<th>Actions</th>
 	                <th>#</th>
 	                <th>Price</th>
+	                <th>Dish Type</th>
 	                <th>Label</th>
 	                <th>Description</th>
-	                <th>Dish Type</th>
-	                
+	                <th>Actions</th>
 	            </tr>
 	        </thead>
-	
+
 	        <tbody>
-	
-                <tr th:each="dish : ${dishes}" th:attr="data-room-id=${dish.id}">
+
+                <tr th:each="room : ${dishes}" th:attr="data-room-id=${dish.id}">
                     <td>
-                        
+
                        <!--  Show room -->
-                       
-                        <a 	
+                        <a
                         	th:href="@{/dishes/{id}(id=${dish.id})}"
-                        	class="btn btn-sm btn-light" 
+                        	class="btn btn-sm btn-light"
                            	data-toggle="tooltip"
                            	title="Show subcategory"
                            	data-placement="bottom"
                         >
-                        
+
                             <i class="far fa-eye" aria-hidden="true"></i>
-                            
+
                         </a>
-                        
-                        
+
+
                        <!--  Edit subcategory -->
                         <a
-                        	th:href="@{/dishes/{id}/edit(id=${dish.id})}"
-                        	class="btn btn-sm btn-primary my-subcategory-to-edit" 
+                        	th:href="@{/rooms/{id}/edit(id=${room.id})}"
+                        	class="btn btn-sm btn-primary my-subcategory-to-edit"
                            	data-toggle="tooltip"
                            	title="Edit subcategory"
                            	data-placement="bottom"
                         >
-                        
+
                             <i class="far fa-edit" aria-hidden="true"></i>
-                            
+
                         </a>
-                           
-                           
+
+
                        <!--  Delete subcategory -->
                         <button
                         	type="button"
-                            class="btn btn-sm btn-danger my-subcategory-to-delete" 
-                            th:value="${dish.id}"
-                            data-toggle="tooltip" 
-                            title="Delete subcategory" 
+                            class="btn btn-sm btn-danger my-subcategory-to-delete"
+                            th:value="${room.id}"
+                            data-toggle="tooltip"
+                            title="Delete subcategory"
                             data-placement="bottom"
                         >
-                            
+
                         	<i class="far fa-trash-alt" aria-hidden="true"></i>
-                        
+
                         </button>
 
                     </td>
-                    
+
                     <td th:text="${dish.id}"></td>
                     <td th:text="${dish.price}"></td>
+                    <td th:text="${dish.dishType.label}"></td>
                     <td th:text="${dish.label}"></td>
                     <td th:text="${dish.description}"></td>
-                    <td th:text="${dish.dishType.label}"></td>
                 </tr>
-	
+
 	        </tbody>
-	    </table>    
-    
+	    </table>
+
 	</section>
-	
+
 </html>

@@ -1,45 +1,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
+	
+    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${country}" th:method="${method}">
 
-<form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${bookingDish}" th:method="${method}">
+    	<div>
+    		
+    		<div>
+    			<label>Label</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{label}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        </div>
+        
+        
+        <div class="my-margin-top-19">
 
-	<div>
-
-		CATEGORY
-
-		<div class="my-margin-top-19">
-			<label>Booking</label>
-		</div>
-		<div class="my-margin-top-4">
-			<select th:field="*{bokkingId}">
-				<option th:each="booking : ${booking}" th:value="${booking.id}" th:text="${booking.label}">
-				</option>
-			</select>
-		</div>
-
-		<div>
-			<label>Dish</label>
-		</div>
-
-		<div class="my-margin-top-19">
-			<label>Dish</label>
-		</div>
-		<div class="my-margin-top-4">
-			<select th:field="*{dishId}">
-				<option th:each="dish : ${dish}" th:value="${dish.id}" th:text="${dish.label}">
-				</option>
-			</select>
-		</div>
-
-		<div>
-			<span>Cancel</span>
-			</a>
-			<button type="submit" class="btn btn-sm btn-success">
+		    <a th:href="${cancelLink}" class="btn btn-sm btn-light my-margin-right-19">
+				<span class="my-margin-right-19">
+					<i class="fas fa-times" aria-hidden="true"></i>
+				</span>
+				
+		    	<span>Cancel</span>
+		    </a>
+	
+	
+		    <button type="submit" class="btn btn-sm btn-success">
 				<span class="my-margin-right-19">
 					<i class="fas fa-check-circle" aria-hidden="true"></i>
 				</span>
-				<span>Save</span>
-			</button>
+				
+		    	<span>Save</span>
+		    </button>
+		    
 		</div>
-</form>
-
+		
+	</form>
+	
 </html>
