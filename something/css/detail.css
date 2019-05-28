@@ -1,0 +1,93 @@
+.rooms{
+  font-size: 20px;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top : 30px;
+  background-color: rgb(255,255,255);
+}
+.banner img{
+   width: 90%;
+   margin-left: 80px
+}
+.content{
+  margin-left: 50px;
+  width: 80%;
+  text-align: justify;
+  float:left;
+}
+
+.book-button{
+  width: 20%;
+  float: right;
+  display: flex;
+}
+
+.room-type{
+  height: 350px;
+  background-color: rgb(209, 224, 224);
+}
+
+h1{
+  color: #666600;
+}
+
+.button{
+    width: auto;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    background-color: #cda654;
+    border: 1px solid #cda654;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 100%;
+    text-decoration: none!important;
+    text-transform: uppercase;
+    padding: 7px 15px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.divider {
+    display: inline-block;
+    font-weight: 100;
+    font-size: 22px;
+    line-height: 1;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #93773a;
+    margin: .5em 0;
+}
+body{
+  margin-left: 60px;
+  margin-right: 60px;
+}
+.detail{
+  width: 28%;
+  height: 100%;
+  text-align: justify;
+  font-size: 13px;
+  float: left;
+  margin-right: 40px;
+}
+.why-book-room{
+  float: left;
+  width: 20%;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+h3{
+  color:  #93773a
+}
+.details-big{
+  margin-left: 65px;
+}
+
+.restaurant-detail{
+  margin-left: 60px;
+}

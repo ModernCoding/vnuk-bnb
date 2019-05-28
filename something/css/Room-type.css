@@ -5,7 +5,6 @@
   margin-top : 30px;
   background-color: rgb(255,255,255);
 }
-
  img{
   float: left;
   margin-left: 10px;
@@ -14,10 +13,11 @@
 }
 .content{
   margin-left: 500px;
+
 }
 
 .room-type{
-  height: 430px;
+  height: 350px;
   background-color: rgb(209, 224, 224);
 }
 
@@ -30,8 +30,8 @@ h2{
     vertical-align: middle;
     text-align: center;
     display: inline-block;
-    background-color: #ffc107;
-    border: 1px solid #ffc107;
+    background-color: #cda654;
+    border: 1px solid #cda654;
     color: #000;
     cursor: pointer;
     display: inline-block;
