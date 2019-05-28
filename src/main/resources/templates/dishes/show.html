@@ -1,48 +1,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	
-	<title th:fragment="title" th:text="'Task #' + ${country.id}"></title>
-	
-	
+
+	<title th:fragment="title" th:text="'Subcategory #' + ${dish.id}"></title>
+
+
 	<section th:fragment="content">
-	
+
 		<h3 class="my-margin-bottom-28">
-			<em th:text="'Task #' + ${country.id}"></em>
+			<em th:text="'Subcategory #' + ${dish.id}"></em>
 		</h3>
-		
+
 		<table>
 			<tr>
-				<td>Label</td>
-				<td th:text="${country.label}" class="text-justify"></td>
+				<td>Price</td>
+				<td th:text="${price}" class="text-justify"></td>
 			</tr>
-			
+			<tr>
+				<td>Dish Type</td>
+				<td th:text="${dishType}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Label</td>
+				<td th:text="${label}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td th:text="${description}" class="text-justify"></td>
+			</tr>
 		</table>
-		
-		
+
+
 		<div class="my-margin-top-19">
-	
-		    <a th:href="@{/countries}" th:class="'btn btn-sm btn-light'">
+
+		    <a th:href="@{/dishes}" class="btn btn-sm btn-light my-margin-right-19">
 				<span class="my-margin-right-19">
 					<i class="far fa-arrow-alt-circle-left" aria-hidden="true"></i>
 				</span>
-				
-		    	<span>Back to the list of tasks</span>
+
+		    	<span>Back to the list of Dishes</span>
 		    </a>
-	
-	
+
+
 		    <a
-		    	th:unless="${country.label}"
-                th:href="@{/countries/{id}/edit(id=${country.id}, backToShow=true)}"
+                th:href="@{/dishes/{id}/edit(id=${dish.id}, backToShow=true)}"
 		    	class="btn btn-sm btn-primary"
 		    >
 				<span class="my-margin-right-19">
 					<i class="far fa-edit" aria-hidden="true"></i>
 				</span>
-				
-		    	<span>Edit task #<span th:text="${country.id}"></span></span>
+
+		    	<span>Edit rooms #<span th:text="${dish.id}"></span></span>
 		    </a>
-		    
+
 		</div>
-	
+
 	</section>
-	
+
 </html>
