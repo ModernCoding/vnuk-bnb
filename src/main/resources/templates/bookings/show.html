@@ -10,20 +10,13 @@
 		</h3>
 		
 		<table>
+			
 			<tr>
-				<td>User ID</td>
-				<td th:text="${userId}" class="text-justify"></td>
-			</tr>
-			<tr>
-				<td>Room ID</td>
-				<td th:text="${roomId}" class="text-justify"></td>
-			</tr>
-			<tr>
-				<td>Check in</td>
+				<td>Check In</td>
 				<td th:text="${checkIn}" class="text-justify"></td>
 			</tr>
 			<tr>
-				<td>Check out</td>
+				<td>Check Out</td>
 				<td th:text="${checkOut}" class="text-justify"></td>
 			</tr>
 			
@@ -33,9 +26,75 @@
 			</tr>
 			
 			<tr>
-				<td>Room Types</td>
-				<td th:text="${label}" class="text-justify"></td>
+				<td>Room Price</td>
+				<td th:text="${room.price}" class="text-justify"></td>
 			</tr>
+			<tr>
+				<td>Room Beds</td>
+				<td th:text="${room.beds}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Number</td>
+				<td th:text="${room.roomNumber}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Smoking</td>
+				<td th:text="${room.smoking}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Type</td>
+				<td th:text="${room.roomType.label}" class="text-justify"></td>
+			</tr>
+			
+			<tr>
+				<td>First Name</td>
+				<td th:text="${user.firstName}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Middle Name</td>
+				<td th:text="${user.middleName}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td th:text="${user.lastName}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td th:text="${user.address}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td th:text="${user.email}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td th:text="${user.phone}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Create At</td>
+				<td th:text="${user.createAt}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Update At</td>
+				<td th:text="${user.updateAt}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Identification Number</td>
+				<td th:text="${user.identificationNumber}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>User Type</td>
+				<td th:text="${user.userType.label}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td th:text="${user.country.label}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Identification Type</td>
+				<td th:text="${user.identificationType.label}" class="text-justify"></td>
+			</tr>
+			
 		</table>
 		
 		

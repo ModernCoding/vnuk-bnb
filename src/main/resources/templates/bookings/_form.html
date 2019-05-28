@@ -3,44 +3,9 @@
     <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${bookings}" th:method="${method}">
 
     	<div>
-    	
-    		LABEL
-    		
-    		<div>
-    			<label>Room ID</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{roomId}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-
-
-			<div>
-    			<label>User ID</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{userId}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
+    
         	<div>
-    			<label>Checkin date</label>
+    			<label>Check In Date</label>
     		</div>
     		
         	<div class="my-margin-top-4">
@@ -56,7 +21,7 @@
         	</div>
         	
         	<div>
-    			<label>Checkout date</label>
+    			<label>Check Out date</label>
     		</div>
     		
         	<div class="my-margin-top-4">
@@ -72,7 +37,7 @@
         	</div>
         	
         	<div>
-    			<label>Number of people</label>
+    			<label>Number Of People</label>
     		</div>
     		
         	<div class="my-margin-top-4">
@@ -91,7 +56,7 @@
         	CATEGORY
     		
     		<div class="my-margin-top-19">
-    			<label>Booking Room ID</label>
+    			<label> Room </label>
     		</div>
     		
         	<div class="my-margin-top-4">
@@ -99,22 +64,36 @@
 				    <option
 				    	th:each="room : ${room}"
 				    	th:value="${room.id}"
-				    	th:text="${room.label}"
+				    	th:text="${room.beds}"
+				    	th:text="${room.roomNumber}"
+				    	th:text="${room.smoking}"
+				    	th:text="${room.roomType.label}"
 				    >
 				    </option>
 				</select>
         	</div>
         	
         	<div class="my-margin-top-19">
-    			<label>Booking User ID</label>
+    			<label>User </label>
     		</div>
     		
         	<div class="my-margin-top-4">
 	        	<select th:field="*{userId}">
 				    <option
-				    	th:each="room : ${user}"
+				    	th:each="user : ${user}"
 				    	th:value="${user.id}"
-				    	th:text="${user.label}"
+				    	th:text="${user.firstName}"
+				    	th:text="${user.middleName}"
+				    	th:text="${user.lastName}"
+				    	th:text="${user.address}"
+				    	th:text="${user.email}"
+				    	th:text="${user.phone}"
+				    	th:text="${user.createAt}"
+				    	th:text="${user.updateAt}"
+				    	th:text="${user.identificationNumber}"
+				    	th:text="${user.userType.label}"
+				    	th:text="${user.country.label}"
+				    	th:text="${user.identificationType.label}"
 				    >
 				    </option>
 				</select>

@@ -1,18 +1,98 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title" th:text="'Task #' + ${country.id}"></title>
+	<title th:fragment="title" th:text="'Subcategory #' + ${booking.id}"></title>
 	
 	
 	<section th:fragment="content">
 	
 		<h3 class="my-margin-bottom-28">
-			<em th:text="'Task #' + ${country.id}"></em>
+			<em th:text="'Subcategory #' + ${booking.id}"></em>
 		</h3>
 		
 		<table>
+			
 			<tr>
-				<td>Label</td>
-				<td th:text="${country.label}" class="text-justify"></td>
+				<td>Check In</td>
+				<td th:text="${checkIn}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Check Out</td>
+				<td th:text="${checkOut}" class="text-justify"></td>
+			</tr>
+			
+			<tr>
+				<td>Quanlity</td>
+				<td th:text="${quanlity}" class="text-justify"></td>
+			</tr>
+			
+			<tr>
+				<td>Room Price</td>
+				<td th:text="${room.price}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Beds</td>
+				<td th:text="${room.beds}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Number</td>
+				<td th:text="${room.roomNumber}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Smoking</td>
+				<td th:text="${room.smoking}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Room Type</td>
+				<td th:text="${room.roomType.label}" class="text-justify"></td>
+			</tr>
+			
+			<tr>
+				<td>First Name</td>
+				<td th:text="${user.firstName}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Middle Name</td>
+				<td th:text="${user.middleName}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td th:text="${user.lastName}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td th:text="${user.address}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td th:text="${user.email}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td th:text="${user.phone}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Create At</td>
+				<td th:text="${user.createAt}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Update At</td>
+				<td th:text="${user.updateAt}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Identification Number</td>
+				<td th:text="${user.identificationNumber}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>User Type</td>
+				<td th:text="${user.userType.label}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td th:text="${user.country.label}" class="text-justify"></td>
+			</tr>
+			<tr>
+				<td>Identification Type</td>
+				<td th:text="${user.identificationType.label}" class="text-justify"></td>
 			</tr>
 			
 		</table>
@@ -20,25 +100,24 @@
 		
 		<div class="my-margin-top-19">
 	
-		    <a th:href="@{/countries}" th:class="'btn btn-sm btn-light'">
+		    <a th:href="@{/bookings}" class="btn btn-sm btn-light my-margin-right-19">
 				<span class="my-margin-right-19">
 					<i class="far fa-arrow-alt-circle-left" aria-hidden="true"></i>
 				</span>
 				
-		    	<span>Back to the list of tasks</span>
+		    	<span>Back to the list of Bookings</span>
 		    </a>
 	
 	
 		    <a
-		    	th:unless="${country.label}"
-                th:href="@{/countries/{id}/edit(id=${country.id}, backToShow=true)}"
+                th:href="@{/bookings/{id}/edit(id=${booking.id}, backToShow=true)}"
 		    	class="btn btn-sm btn-primary"
 		    >
 				<span class="my-margin-right-19">
 					<i class="far fa-edit" aria-hidden="true"></i>
 				</span>
 				
-		    	<span>Edit task #<span th:text="${country.id}"></span></span>
+		    	<span>Edit rooms #<span th:text="${booking.id}"></span></span>
 		    </a>
 		    
 		</div>

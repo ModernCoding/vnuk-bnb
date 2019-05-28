@@ -75,8 +75,7 @@ public class BookingsController {
 	
 	@RequestMapping("/bookings/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("booking", userDao.read(id));
-        model.addAttribute("booking", roomDao.read(id));
+        model.addAttribute("booking", bookingDao.read(id));
         model.addAttribute("template", "bookings/show");
         return "_layout";
     }

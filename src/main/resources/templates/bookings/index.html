@@ -1,15 +1,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">List of all the Books</title>
-	
-	
+
 	<section th:fragment="content">
 	
 		<h3 class="my-margin-bottom-28">
 			<em th:if="${user == null}">List of all Users</em>
 			
 			<em th:unless="${user == null}">
-				Rooms of <b th:text="${user.label}"></b>
+				Rooms of <b th:text="${user.firstName}"></b>
+							<b th:text="${user.middleName}"></b>
+							<b th:text="${user.lastName}"></b>
+							<b th:text="${user.address}"></b>
+							<b th:text="${user.email}"></b>
+							<b th:text="${user.phone}"></b>
+							<b th:text="${user.createAt}"></b>
+							<b th:text="${user.updateAt}"></b>
+							<b th:text="${user.identificationNumber}"></b>
+							<b th:text="${user.userType.label}"></b>
+							<b th:text="${user.country.label}"></b>
+							<b th:text="${user.identificationType.label}"></b>
+							
 			</em>
 		</h3>
 		
@@ -17,12 +27,16 @@
 			<em th:if="${room == null}">List of all Rooms</em>
 			
 			<em th:unless="${room == null}">
-				Rooms of <b th:text="${room.label}"></b>
+				Rooms of <b th:text="${room.price}"></b>
+							<b th:text="${room.beds}"></b>
+							<b th:text="${room.roomNumber}"></b>
+							<b th:text="${room.smoking}"></b>
+							<b th:text="${room.roomType.label}"></b>
 			</em>
 		</h3>
 	
 	
-	    <a href="rooms/new" class="btn btn-sm btn-success my-margin-bottom-19">
+	    <a href="bookings/new" class="btn btn-sm btn-success my-margin-bottom-19">
 			<span class="my-margin-right-19">
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</span>
@@ -45,11 +59,11 @@
 	            <tr>
 	            	<th>Actions</th>
 	                <th>#</th>
-	                <th>Room_ID</th>
-	                <th>User_ID</th>
-	                <th>Check_in</th>
-	                <th>Check_out</th>
-	                <th>Quanlity_of_people</th>
+	                <th>Check In</th>
+	                <th>Check Out</th>
+	                <th>Number Of People</th>
+	                <th>Room</th>
+	                <th>User</th>
 	            </tr>
 	        </thead>
 	
@@ -103,13 +117,11 @@
                     </td>
                     
                     <td th:text="${booking.id}"></td>
-                    <td th:text="${booking.roomId}"></td>
-                    <td th:text="${booking.userId}"></td>
                     <td th:text="${booking.checkIn}"></td>
                     <td th:text="${booking.checkOut}"></td>
                     <td th:text="${booking.quanlity}"></td>
-                    <td th:text="${booking.rooms.id}"></td>
-                    <td th:text="${booking.users.id}"></td>
+                    <td th:text="${booking.room.id}"></td>
+                    <td th:text="${booking.user.id}"></td>
                 </tr>
 	
 	        </tbody>
