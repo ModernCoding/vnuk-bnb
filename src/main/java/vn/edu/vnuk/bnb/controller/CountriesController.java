@@ -33,104 +33,131 @@ import vn.edu.vnuk.bnb.model.Country;
  */
 @Controller
 public class CountriesController {
-
+	
 	private CountryDao dao;
-
+	
 	@Autowired
 	public void setCountriesDao(CountryDao dao) {
 		this.dao = dao;
 	}
+	
 
 	@RequestMapping("/countries")
-	public String index(Model model, ServletRequest request) throws SQLException {
-		model.addAttribute("countries", dao.read());
-		model.addAttribute("template", "countries/index");
-		return "_layout";
-	}
+    public String index(Model model, ServletRequest request) throws SQLException{
+        model.addAttribute("countries", dao.read());
+        model.addAttribute("template", "countries/index");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/countries/{id}")
+    public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
+        model.addAttribute("country", dao.read(id));
+        model.addAttribute("template", "countries/show");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/countries/new")
+    public String add(Country country, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    	
+    	for(FieldError fieldError : fieldErrors) {
+    		model.addAttribute(
+    				String.format("%sFieldError", fieldError.getField()),
+    				fieldError.getDefaultMessage()
+    			);
+    	}
+    	
+        model.addAttribute("template", "countries/new");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/countries/{id}/edit")
+    public String edit(
+    		
+		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
+		@PathVariable("id") Long id,
+		Country country,
+		Model model,
+		ServletRequest request,
+		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
+		
+	) throws SQLException{
+    	
+    	
+    	for(FieldError fieldError : fieldErrors) {
+    		model.addAttribute(
+    				String.format("%sFieldError", fieldError.getField()),
+    				fieldError.getDefaultMessage()
+    			);
+    	}
+    	
+    	
+    	model.addAttribute("backToShow", backToShow);
+    	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
+    	model.addAttribute("country", dao.read(id));
+        model.addAttribute("template", "countries/edit");
 
-	@RequestMapping("/countries/{id}")
-	public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException {
-		model.addAttribute("country", dao.read(id));
-		model.addAttribute("template", "countries/show");
-		return "_layout";
-	}
-
-	@RequestMapping("/countries/new")
-	public String add(Country country, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors) {
-
-		for (FieldError fieldError : fieldErrors) {
-			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
-		}
-
-		model.addAttribute("template", "countries/new");
-		return "_layout";
-	}
-
-	@RequestMapping("/countries/{id}/edit")
-	public String edit(
-
-			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
-			Country country, Model model, ServletRequest request,
-			@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
-
-	) throws SQLException {
-
-		for (FieldError fieldError : fieldErrors) {
-			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
-		}
-
-		model.addAttribute("backToShow", backToShow);
-		model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-		model.addAttribute("country", dao.read(id));
-		model.addAttribute("template", "countries/edit");
-
-		return "_layout";
-
-	}
-
-	@RequestMapping(value = "/countries", method = RequestMethod.POST)
-	public String create(
-
-			@Valid Country country, BindingResult bindingResult, ServletRequest request,
-			RedirectAttributes redirectAttributes
-
-	) throws SQLException {
-
-		if (bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-			return "redirect:/countries/new";
-		}
-
-		dao.create(country);
-		return "redirect:/countries";
-
-	}
-
-	@RequestMapping(value = "/countries/{id}", method = RequestMethod.PATCH)
-	public String update(
-
-			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
-			@Valid Country country, BindingResult bindingResult, ServletRequest request,
-			RedirectAttributes redirectAttributes
-
-	) throws SQLException {
-
-		if (bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-			return String.format("redirect:/countries/%s/edit", id);
-		}
-
-		dao.update(country);
-		return backToShow ? String.format("redirect:/countries/%s", id) : "redirect:/countries";
-
-	}
-
-	// delete with ajax
-	@RequestMapping(value = "/countries/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response)
-			throws SQLException {
-		dao.delete(id);
-		response.setStatus(200);
-	}
-
+        return "_layout";
+    
+        
+    }
+    
+    
+    @RequestMapping(value="/countries", method=RequestMethod.POST)
+    public String create(
+		
+    	@Valid Country country,
+    	BindingResult bindingResult,
+    	ServletRequest request,
+    	RedirectAttributes redirectAttributes
+    
+    ) throws SQLException{
+        
+    	
+        if (bindingResult.hasErrors()) {
+        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+            return "redirect:/countries/new";
+        }
+        
+        dao.create(country);
+        return "redirect:/countries";
+        
+        
+    }
+    
+    
+    @RequestMapping(value="/countries/{id}", method=RequestMethod.PATCH)
+    public String update(
+    		
+    		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
+    		@PathVariable("id") Long id,
+    		@Valid Country country,
+    		BindingResult bindingResult,
+    		ServletRequest request,
+    		RedirectAttributes redirectAttributes
+    		
+    	) throws SQLException{
+    	
+        
+    	if (bindingResult.hasErrors()) {
+        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+            return String.format("redirect:/countries/%s/edit", id);
+        }
+        
+        dao.update(country);
+        return backToShow ? String.format("redirect:/countries/%s", id) : "redirect:/countries";
+        
+        
+    }
+    
+    
+    //  delete with ajax
+    @RequestMapping(value="/countries/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
+    	dao.delete(id);
+        response.setStatus(200);
+    }
+    
 }

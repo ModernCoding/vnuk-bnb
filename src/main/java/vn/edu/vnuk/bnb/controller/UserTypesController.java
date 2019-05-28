@@ -33,105 +33,131 @@ import vn.edu.vnuk.bnb.model.UserType;
  */
 @Controller
 public class UserTypesController {
-
+	
 	private UserTypeDao dao;
-
+	
 	@Autowired
 	public void setUserTypesDao(UserTypeDao dao) {
 		this.dao = dao;
 	}
+	
 
 	@RequestMapping("/user-types")
-	public String index(Model model, ServletRequest request) throws SQLException {
-		model.addAttribute("userTypes", dao.read());
-		model.addAttribute("template", "userTypes/index");
-		return "_layout";
-	}
+    public String index(Model model, ServletRequest request) throws SQLException{
+        model.addAttribute("userTypes", dao.read());
+        model.addAttribute("template", "userTypes/index");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/user-types/{id}")
+    public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
+        model.addAttribute("userType", dao.read(id));
+        model.addAttribute("template", "userTypes/show");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/user-types/new")
+    public String add(UserType userType, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    	
+    	for(FieldError fieldError : fieldErrors) {
+    		model.addAttribute(
+    				String.format("%sFieldError", fieldError.getField()),
+    				fieldError.getDefaultMessage()
+    			);
+    	}
+    	
+        model.addAttribute("template", "userTypes/new");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/user-types/{id}/edit")
+    public String edit(
+    		
+		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
+		@PathVariable("id") Long id,
+		UserType userType,
+		Model model,
+		ServletRequest request,
+		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
+		
+	) throws SQLException{
+    	
+    	
+    	for(FieldError fieldError : fieldErrors) {
+    		model.addAttribute(
+    				String.format("%sFieldError", fieldError.getField()),
+    				fieldError.getDefaultMessage()
+    			);
+    	}
+    	
+    	
+    	model.addAttribute("backToShow", backToShow);
+    	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
+    	model.addAttribute("userType", dao.read(id));
+        model.addAttribute("template", "userTypes/edit");
 
-	@RequestMapping("/user-types/{id}")
-	public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException {
-		model.addAttribute("userType", dao.read(id));
-		model.addAttribute("template", "userTypes/show");
-		return "_layout";
-	}
-
-	@RequestMapping("/user-types/new")
-	public String add(UserType userType, Model model,
-			@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors) {
-
-		for (FieldError fieldError : fieldErrors) {
-			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
-		}
-
-		model.addAttribute("template", "userTypes/new");
-		return "_layout";
-	}
-
-	@RequestMapping("/user-types/{id}/edit")
-	public String edit(
-
-			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
-			UserType userType, Model model, ServletRequest request,
-			@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
-
-	) throws SQLException {
-
-		for (FieldError fieldError : fieldErrors) {
-			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
-		}
-
-		model.addAttribute("backToShow", backToShow);
-		model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-		model.addAttribute("userType", dao.read(id));
-		model.addAttribute("template", "userTypes/edit");
-
-		return "_layout";
-
-	}
-
-	@RequestMapping(value = "/user-types", method = RequestMethod.POST)
-	public String create(
-
-			@Valid UserType userType, BindingResult bindingResult, ServletRequest request,
-			RedirectAttributes redirectAttributes
-
-	) throws SQLException {
-
-		if (bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-			return "redirect:/user-types/new";
-		}
-
-		dao.create(userType);
-		return "redirect:/user-types";
-
-	}
-
-	@RequestMapping(value = "/user-types/{id}", method = RequestMethod.PATCH)
-	public String update(
-
-			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
-			@Valid UserType userType, BindingResult bindingResult, ServletRequest request,
-			RedirectAttributes redirectAttributes
-
-	) throws SQLException {
-
-		if (bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-			return String.format("redirect:/user-types/%s/edit", id);
-		}
-
-		dao.update(userType);
-		return backToShow ? String.format("redirect:/user-types/%s", id) : "redirect:/user-types";
-
-	}
-
-	// delete with ajax
-	@RequestMapping(value = "/user-types/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response)
-			throws SQLException {
-		dao.delete(id);
-		response.setStatus(200);
-	}
-
+        return "_layout";
+    
+        
+    }
+    
+    
+    @RequestMapping(value="/user-types", method=RequestMethod.POST)
+    public String create(
+		
+    	@Valid UserType userType,
+    	BindingResult bindingResult,
+    	ServletRequest request,
+    	RedirectAttributes redirectAttributes
+    
+    ) throws SQLException{
+        
+    	
+        if (bindingResult.hasErrors()) {
+        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+            return "redirect:/user-types/new";
+        }
+        
+        dao.create(userType);
+        return "redirect:/user-types";
+        
+        
+    }
+    
+    
+    @RequestMapping(value="/user-types/{id}", method=RequestMethod.PATCH)
+    public String update(
+    		
+    		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
+    		@PathVariable("id") Long id,
+    		@Valid UserType userType,
+    		BindingResult bindingResult,
+    		ServletRequest request,
+    		RedirectAttributes redirectAttributes
+    		
+    	) throws SQLException{
+    	
+        
+    	if (bindingResult.hasErrors()) {
+        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+            return String.format("redirect:/user-types/%s/edit", id);
+        }
+        
+        dao.update(userType);
+        return backToShow ? String.format("redirect:/user-types/%s", id) : "redirect:/user-types";
+        
+        
+    }
+    
+    
+    //  delete with ajax
+    @RequestMapping(value="/user-types/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
+    	dao.delete(id);
+        response.setStatus(200);
+    }
+    
 }

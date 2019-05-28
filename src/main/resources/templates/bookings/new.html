@@ -1,15 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">Create a new task</title>
+	<title th:fragment="title">Create a new Booking</title>
 	
 	
 	<section th:fragment="content">
 	
 		<h3 class="my-margin-bottom-28">
-			<em>Create a new task</em>
+			<em>Create a new Booking</em>
 		</h3>
 		
-		<form th:replace="~{/countries/_form :: form(@{/countries}, 'post', @{/countries})}"></form>
+		<form th:replace="~{/bookings/_form :: form(@{/bookings}, 'post', @{/bookings})}"></form>
 
 	</section>
 	

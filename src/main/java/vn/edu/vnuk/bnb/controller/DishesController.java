@@ -72,7 +72,7 @@ public class DishesController {
     
     @RequestMapping("/dishes/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("dish", dishTypeDao.read(id));
+        model.addAttribute("dish", dishDao.read(id));
         model.addAttribute("template", "dishes/show");
         return "_layout";
     }

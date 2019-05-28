@@ -1,95 +1,101 @@
 <html xmlns:th="http://www.thymeleaf.org">
+	
+    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${dish}" th:method="${method}">
 
-<form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${dish}" th:method="${method}">
+    	<div>
+    	
+    		LABEL
+    		
+    		<div>
+    			<label>Price</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{price}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
 
-	<div>
 
-		LABEL
+			<div>
+    			<label>Label</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{label}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	<div>
+    			<label>Description</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{description}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	CATEGORY
+    		
+    		<div class="my-margin-top-19">
+    			<label>Dish Type</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	        	<select th:field="*{dishTypeId}">
+				    <option
+				    	th:each="dishType : ${dishType}"
+				    	th:value="${dishType.id}"
+				    	th:text="${dishType.label}"
+				    >
+				    </option>
+				</select>
+        	</div>
+        	
+        </div>
+        
+        
+        <div class="my-margin-top-19">
 
-		<div>
-			<label>Price</label>
+		    <a th:href="${cancelLink}" class="btn btn-sm btn-light my-margin-right-19">
+				<span class="my-margin-right-19">
+					<i class="fas fa-times" aria-hidden="true"></i>
+				</span>
+				
+		    	<span>Cancel</span>
+		    </a>
+	
+	
+		    <button type="submit" class="btn btn-sm btn-success">
+				<span class="my-margin-right-19">
+					<i class="fas fa-check-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span>Save</span>
+		    </button>
+		    
 		</div>
-
-		<div class="my-margin-top-4">
-			<input type="text" th:field="*{price}">
-		</div>
-
-		<div th:if="${labelFieldError}" class="my-error-field">
-			<span class="my-margin-right-19">
-				<i class="fas fa-minus-circle" aria-hidden="true"></i>
-			</span>
-
-			<span th:text="${labelFieldError}"></span>
-		</div>
-
-		<div class="my-margin-top-19">
-			<label>Dish Types</label>
-		</div>
-
-		<div class="my-margin-top-4">
-			<select th:field="*{dishTypeId}">
-				<option th:each="dishType : ${roomTypes}" th:value="${dishType.id}" th:text="${dishType.label}">
-				</option>
-			</select>
-		</div>
-
-		<div>
-			<label>Label</label>
-		</div>
-
-		<div class="my-margin-top-4">
-			<input type="checkbox" th:field="*{smoking}">
-		</div>
-
-		<div th:if="${labelFieldError}" class="my-error-field">
-			<span class="my-margin-right-19">
-				<i class="fas fa-minus-circle" aria-hidden="true"></i>
-			</span>
-
-			<span th:text="${labelFieldError}"></span>
-		</div>
-
-		Description
-
-		<div>
-			<label>Label</label>
-		</div>
-
-		<div class="my-margin-top-4">
-			<input type="checkbox" th:field="*{smoking}">
-		</div>
-
-		<div th:if="${labelFieldError}" class="my-error-field">
-			<span class="my-margin-right-19">
-				<i class="fas fa-minus-circle" aria-hidden="true"></i>
-			</span>
-
-			<span th:text="${labelFieldError}"></span>
-		</div>
-
-	</div>
-
-
-	<div class="my-margin-top-19">
-
-		<a th:href="${cancelLink}" class="btn btn-sm btn-light my-margin-right-19">
-			<span class="my-margin-right-19">
-				<i class="fas fa-times" aria-hidden="true"></i>
-			</span>
-
-			<span>Cancel</span>
-		</a>
-
-		<button type="submit" class="btn btn-sm btn-success">
-			<span class="my-margin-right-19">
-				<i class="fas fa-check-circle" aria-hidden="true"></i>
-			</span>
-
-			<span>Save</span>
-		</button>
-
-	</div>
-
-</form>
-
+		
+	</form>
+	
 </html>

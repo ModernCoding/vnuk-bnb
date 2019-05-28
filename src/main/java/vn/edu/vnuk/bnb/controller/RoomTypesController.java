@@ -33,105 +33,131 @@ import vn.edu.vnuk.bnb.model.RoomType;
  */
 @Controller
 public class RoomTypesController {
-
+	
 	private RoomTypeDao dao;
-
+	
 	@Autowired
 	public void setRoomTypesDao(RoomTypeDao dao) {
 		this.dao = dao;
 	}
+	
 
 	@RequestMapping("/room-types")
-	public String index(Model model, ServletRequest request) throws SQLException {
-		model.addAttribute("roomTypes", dao.read());
-		model.addAttribute("template", "roomTypes/index");
-		return "_layout";
-	}
+    public String index(Model model, ServletRequest request) throws SQLException{
+        model.addAttribute("roomTypes", dao.read());
+        model.addAttribute("template", "roomTypes/index");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/room-types/{id}")
+    public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
+        model.addAttribute("roomType", dao.read(id));
+        model.addAttribute("template", "roomTypes/show");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/room-types/new")
+    public String add(RoomType roomType, Model model, @ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors){
+    	
+    	for(FieldError fieldError : fieldErrors) {
+    		model.addAttribute(
+    				String.format("%sFieldError", fieldError.getField()),
+    				fieldError.getDefaultMessage()
+    			);
+    	}
+    	
+        model.addAttribute("template", "roomTypes/new");
+        return "_layout";
+    }
+    
+    
+    @RequestMapping("/room-types/{id}/edit")
+    public String edit(
+    		
+		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
+		@PathVariable("id") Long id,
+		RoomType roomType,
+		Model model,
+		ServletRequest request,
+		@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
+		
+	) throws SQLException{
+    	
+    	
+    	for(FieldError fieldError : fieldErrors) {
+    		model.addAttribute(
+    				String.format("%sFieldError", fieldError.getField()),
+    				fieldError.getDefaultMessage()
+    			);
+    	}
+    	
+    	
+    	model.addAttribute("backToShow", backToShow);
+    	model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
+    	model.addAttribute("roomtype", dao.read(id));
+        model.addAttribute("template", "roomTypes/edit");
 
-	@RequestMapping("/room-types/{id}")
-	public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException {
-		model.addAttribute("roomType", dao.read(id));
-		model.addAttribute("template", "roomTypes/show");
-		return "_layout";
-	}
-
-	@RequestMapping("/room-types/new")
-	public String add(RoomType roomType, Model model,
-			@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors) {
-
-		for (FieldError fieldError : fieldErrors) {
-			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
-		}
-
-		model.addAttribute("template", "roomTypes/new");
-		return "_layout";
-	}
-
-	@RequestMapping("/room-types/{id}/edit")
-	public String edit(
-
-			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
-			RoomType roomType, Model model, ServletRequest request,
-			@ModelAttribute("fieldErrors") ArrayList<FieldError> fieldErrors
-
-	) throws SQLException {
-
-		for (FieldError fieldError : fieldErrors) {
-			model.addAttribute(String.format("%sFieldError", fieldError.getField()), fieldError.getDefaultMessage());
-		}
-
-		model.addAttribute("backToShow", backToShow);
-		model.addAttribute("urlCompletion", backToShow ? String.format("/%s", id) : "");
-		model.addAttribute("roomtype", dao.read(id));
-		model.addAttribute("template", "roomTypes/edit");
-
-		return "_layout";
-
-	}
-
-	@RequestMapping(value = "/room-types", method = RequestMethod.POST)
-	public String create(
-
-			@Valid RoomType roomType, BindingResult bindingResult, ServletRequest request,
-			RedirectAttributes redirectAttributes
-
-	) throws SQLException {
-
-		if (bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-			return "redirect:/room-types/new";
-		}
-
-		dao.create(roomType);
-		return "redirect:/room-types";
-
-	}
-
-	@RequestMapping(value = "/room-types/{id}", method = RequestMethod.PATCH)
-	public String update(
-
-			@RequestParam(value = "backToShow", defaultValue = "false") Boolean backToShow, @PathVariable("id") Long id,
-			@Valid RoomType roomType, BindingResult bindingResult, ServletRequest request,
-			RedirectAttributes redirectAttributes
-
-	) throws SQLException {
-
-		if (bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
-			return String.format("redirect:/room-types/%s/edit", id);
-		}
-
-		dao.update(roomType);
-		return backToShow ? String.format("redirect:/room-types/%s", id) : "redirect:/room-types";
-
-	}
-
-	// delete with ajax
-	@RequestMapping(value = "/room-types/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response)
-			throws SQLException {
-		dao.delete(id);
-		response.setStatus(200);
-	}
-
+        return "_layout";
+    
+        
+    }
+    
+    
+    @RequestMapping(value="/room-types", method=RequestMethod.POST)
+    public String create(
+		
+    	@Valid RoomType roomType,
+    	BindingResult bindingResult,
+    	ServletRequest request,
+    	RedirectAttributes redirectAttributes
+    
+    ) throws SQLException{
+        
+    	
+        if (bindingResult.hasErrors()) {
+        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+            return "redirect:/room-types/new";
+        }
+        
+        dao.create(roomType);
+        return "redirect:/room-types";
+        
+        
+    }
+    
+    
+    @RequestMapping(value="/room-types/{id}", method=RequestMethod.PATCH)
+    public String update(
+    		
+    		@RequestParam(value="backToShow", defaultValue="false") Boolean backToShow,
+    		@PathVariable("id") Long id,
+    		@Valid RoomType roomType,
+    		BindingResult bindingResult,
+    		ServletRequest request,
+    		RedirectAttributes redirectAttributes
+    		
+    	) throws SQLException{
+    	
+        
+    	if (bindingResult.hasErrors()) {
+        	redirectAttributes.addFlashAttribute("fieldErrors", bindingResult.getAllErrors());
+            return String.format("redirect:/room-types/%s/edit", id);
+        }
+        
+        dao.update(roomType);
+        return backToShow ? String.format("redirect:/room-types/%s", id) : "redirect:/room-types";
+        
+        
+    }
+    
+    
+    //  delete with ajax
+    @RequestMapping(value="/room-types/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") Long id, ServletRequest request, HttpServletResponse response) throws SQLException {
+    	dao.delete(id);
+        response.setStatus(200);
+    }
+    
 }
