@@ -1,226 +1,195 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	
-    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${user}" th:method="${method}">
 
-    	<div>
-    		
-    		<div>
-    			<label>First Name</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{firstName}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
+<form th:fragment="form(action, method, cancelLink)"
+	th:action="${action}" th:object="${user}" th:method="${method}">
 
+	<div>
 
-			<div>
-    			<label>Middle Name</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{middleName}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	<div>
-    			<label>Last Name</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{lastName}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	<div>
-    			<label>Address</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{address}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	<div>
-    			<label>Email</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{email}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	<div>
-    			<label>Phone</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{phone}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	
-        	<div>
-    			<label>Create At</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{createAt}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	<div>
-    			<label>Update At</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{updateAt}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	<div>
-    			<label>Identification Number</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{identificationNumber}">
-        	</div>
-        	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
-        	</div>
-        	
-        	CATEGORY
-    		
-    		<div class="my-margin-top-19">
-    			<label>User Types</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	        	<select th:field="*{userTypeId}">
-				    <option
-				    	th:each="userType : ${userType}"
-				    	th:value="${userType.id}"
-				    	th:text="${userType.label}"
-				    >
-				    </option>
-				</select>
-        	</div>
-        	
-        	<div class="my-margin-top-19">
-    			<label>Countries</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	        	<select th:field="*{countryId}">
-				    <option
-				    	th:each="country : ${country}"
-				    	th:value="${country.id}"
-				    	th:text="${country.label}"
-				    >
-				    </option>
-				</select>
-        	</div>
-        	
-        	<div class="my-margin-top-19">
-    			<label>Identification Types</label>
-    		</div>
-    		
-        	<div class="my-margin-top-4">
-	        	<select th:field="*{identificationTypeId}">
-				    <option
-				    	th:each="identificationType : ${identificationType}"
-				    	th:value="${identificationType.id}"
-				    	th:text="${identificationType.label}"
-				    >
-				    </option>
-				</select>
-        	</div>
-        	
-        </div>
-        
-        
-        <div class="my-margin-top-19">
-
-		    <a th:href="${cancelLink}" class="btn btn-sm btn-light my-margin-right-19">
-				<span class="my-margin-right-19">
-					<i class="fas fa-times" aria-hidden="true"></i>
-				</span>
-				
-		    	<span>Cancel</span>
-		    </a>
-	
-	
-		    <button type="submit" class="btn btn-sm btn-success">
-				<span class="my-margin-right-19">
-					<i class="fas fa-check-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span>Save</span>
-		    </button>
-		    
+		<div>
+			<label>First Name</label>
 		</div>
-		
-	</form>
-	
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{firstName}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+
+		<div>
+			<label>Middle Name</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{middleName}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+		<div>
+			<label>Last Name</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{lastName}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+		<div>
+			<label>Address</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{address}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+		<div>
+			<label>Email</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{email}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+		<div>
+			<label>Phone</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{phone}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+
+		<div>
+			<label>Create At</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{createAt}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+		<div>
+			<label>Update At</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{updateAt}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+		<div>
+			<label>Identification Number</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<input type="text" th:field="*{identificationNumber}">
+		</div>
+
+		<div th:if="${labelFieldError}" class="my-error-field">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-minus-circle" aria-hidden="true"></i>
+			</span> <span th:text="${labelFieldError}"></span>
+		</div>
+
+		CATEGORY
+
+		<div class="my-margin-top-19">
+			<label>User Types</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<select th:field="*{userTypeId}">
+				<option th:each="userType : ${userType}" th:value="${userType.id}"
+					th:text="${userType.label}"></option>
+			</select>
+		</div>
+
+		<div class="my-margin-top-19">
+			<label>Countries</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<select th:field="*{countryId}">
+				<option th:each="country : ${country}" th:value="${country.id}"
+					th:text="${country.label}"></option>
+			</select>
+		</div>
+
+		<div class="my-margin-top-19">
+			<label>Identification Types</label>
+		</div>
+
+		<div class="my-margin-top-4">
+			<select th:field="*{identificationTypeId}">
+				<option th:each="identificationType : ${identificationType}"
+					th:value="${identificationType.id}"
+					th:text="${identificationType.label}"></option>
+			</select>
+		</div>
+
+	</div>
+
+
+	<div class="my-margin-top-19">
+
+		<a th:href="${cancelLink}"
+			class="btn btn-sm btn-light my-margin-right-19"> <span
+			class="my-margin-right-19"> <i class="fas fa-times"
+				aria-hidden="true"></i>
+		</span> <span>Cancel</span>
+		</a>
+
+
+		<button type="submit" class="btn btn-sm btn-success">
+			<span class="my-margin-right-19"> <i
+				class="fas fa-check-circle" aria-hidden="true"></i>
+			</span> <span>Save</span>
+		</button>
+
+	</div>
+
+</form>
+
 </html>
