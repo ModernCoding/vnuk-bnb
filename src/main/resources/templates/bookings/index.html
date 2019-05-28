@@ -1,92 +1,120 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<title th:fragment="title">List of all Countries</title>
+	<title th:fragment="title">List of all the Books</title>
 	
 	
 	<section th:fragment="content">
-		<div class="container">
-			<h3 class="my-margin-bottom-28">
-				<em>List of all Countries</em>
-			</h3>
-
-			<a th:href="@{/countries/new}" class="btn btn-sm btn-success my-margin-bottom-19">
-				<span class="my-margin-right-19">
-					<i class="fa fa-plus" aria-hidden="true"></i>
-				</span>
-				<span>Create a new Countries</span>
-			</a>
-
-
-			<div id="my-notice" class="my-no-line-height">
-				<span class="my-margin-right-19">
-					<i aria-hidden="true"></i>
-				</span>
-				<span></span>
-			</div>
-
-
-			<table class="table table-bordered">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Label</th>
-						<th scope="col">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="country : ${countries}" th:attr="data-country-id=${country.id}">
-						<td scope="row" th:text="${country.id}"></td>
-						<td>
-							<div th:text="${country.label}" class="my-margin-bottom-4 d-inline-block" ></div>
-							<div class="d-inline-block">
-								<a th:href="@{/rooms?roomTypeId={id}(id=${country.id})}" class="btn btn-sm btn-info">
-									<i class="fas fa-angle-double-right" aria-hidden="true"></i>
-									<span class="my-margin-left-19">
-										<i>Subcategories</i>
-									</span>
-								</a>
-							</div>
-						</td>
-						<td>
-							<!-- Show category -->
-							<a
-									th:href="@{/countries/{id}(id=${country.id})}"
-									class="btn btn-sm btn-light"
-									data-toggle="tooltip"
-									title="Show category"
-									data-placement="bottom"
-							>
-								<i class="far fa-eye" aria-hidden="true"></i>
-							</a>
-
-
-							<!-- Edit category -->
-							<a
-									th:href="@{/countries/{id}/edit(id=${country.id})}"
-									class="btn btn-sm btn-primary my-category-to-edit"
-									data-toggle="tooltip"
-									title="Edit category"
-									data-placement="bottom"
-							>
-								<i class="far fa-edit" aria-hidden="true"></i>
-							</a>
-
-							<!-- Delete category -->
-							<button
-									type="button"
-									class="btn btn-sm btn-danger my-category-to-delete"
-									th:value="${country.id}"
-									data-toggle="tooltip"
-									title="Delete category"
-									data-placement="bottom"
-							>
-								<i class="far fa-trash-alt" aria-hidden="true"></i>
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	
+		<h3 class="my-margin-bottom-28">
+			<em th:if="${user == null}">List of all Users</em>
+			
+			<em th:unless="${user == null}">
+				Rooms of <b th:text="${user.label}"></b>
+			</em>
+		</h3>
+		
+		<h3 class="my-margin-bottom-28">
+			<em th:if="${room == null}">List of all Rooms</em>
+			
+			<em th:unless="${room == null}">
+				Rooms of <b th:text="${room.label}"></b>
+			</em>
+		</h3>
+	
+	
+	    <a href="rooms/new" class="btn btn-sm btn-success my-margin-bottom-19">
+			<span class="my-margin-right-19">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+			</span>
+			
+	    	<span>Create a new booking</span>
+	    </a>
+	
+	
+	    <div id="my-notice" class="my-no-line-height">
+	        <span class="my-margin-right-19">
+				<i aria-hidden="true"></i>
+			</span>
+			
+	    	<span></span>
 		</div>
+		
+       
+       	<table>
+	        <thead>
+	            <tr>
+	            	<th>Actions</th>
+	                <th>#</th>
+	                <th>Room_ID</th>
+	                <th>User_ID</th>
+	                <th>Check_in</th>
+	                <th>Check_out</th>
+	                <th>Quanlity_of_people</th>
+	            </tr>
+	        </thead>
+	
+	        <tbody>
+	
+                <tr th:each="booking : ${bookings}" th:attr="booking-id=${booking.id}">
+                    <td>
+                        
+                       <!--  Show room -->
+                        <a 	
+                        	th:href="@{/bookings/{id}(id=${booking.id})}"
+                        	class="btn btn-sm btn-light" 
+                           	data-toggle="tooltip"
+                           	title="Show subcategory"
+                           	data-placement="bottom"
+                        >
+                        
+                            <i class="far fa-eye" aria-hidden="true"></i>
+                            
+                        </a>
+                        
+                        
+                       <!--  Edit subcategory -->
+                        <a
+                        	th:href="@{/bookings/{id}/edit(id=${booking.id})}"
+                        	class="btn btn-sm btn-primary my-subcategory-to-edit" 
+                           	data-toggle="tooltip"
+                           	title="Edit subcategory"
+                           	data-placement="bottom"
+                        >
+                        
+                            <i class="far fa-edit" aria-hidden="true"></i>
+                            
+                        </a>
+                           
+                           
+                       <!--  Delete subcategory -->
+                        <button
+                        	type="button"
+                            class="btn btn-sm btn-danger my-subcategory-to-delete" 
+                            th:value="${booking.id}"
+                            data-toggle="tooltip" 
+                            title="Delete subcategory" 
+                            data-placement="bottom"
+                        >
+                            
+                        	<i class="far fa-trash-alt" aria-hidden="true"></i>
+                        
+                        </button>
+
+                    </td>
+                    
+                    <td th:text="${booking.id}"></td>
+                    <td th:text="${booking.roomId}"></td>
+                    <td th:text="${booking.userId}"></td>
+                    <td th:text="${booking.checkIn}"></td>
+                    <td th:text="${booking.checkOut}"></td>
+                    <td th:text="${booking.quanlity}"></td>
+                    <td th:text="${booking.rooms.id}"></td>
+                    <td th:text="${booking.users.id}"></td>
+                </tr>
+	
+	        </tbody>
+	    </table>    
+    
 	</section>
 	
 </html>

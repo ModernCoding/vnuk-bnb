@@ -1,15 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${country}" th:method="${method}">
+    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${bookings}" th:method="${method}">
 
     	<div>
+    	
+    		LABEL
     		
     		<div>
-    			<label>Label</label>
+    			<label>Room ID</label>
     		</div>
     		
         	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{label}">
+	    		<input type="text" th:field="*{roomId}">
         	</div>
         	
         	<div th:if="${labelFieldError}" class="my-error-field">
@@ -18,6 +20,104 @@
 				</span>
 				
 		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+
+
+			<div>
+    			<label>User ID</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{userId}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	<div>
+    			<label>Checkin date</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="text" th:field="*{checkIn}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	<div>
+    			<label>Checkout date</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="checkbox" th:field="*{checkOut}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	<div>
+    			<label>Number of people</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	    		<input type="checkbox" th:field="*{quanlity}">
+        	</div>
+        	
+        	<div th:if="${labelFieldError}" class="my-error-field">
+        		<span class="my-margin-right-19">
+					<i class="fas fa-minus-circle" aria-hidden="true"></i>
+				</span>
+				
+		    	<span th:text="${labelFieldError}"></span>
+        	</div>
+        	
+        	
+        	CATEGORY
+    		
+    		<div class="my-margin-top-19">
+    			<label>Booking Room ID</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	        	<select th:field="*{roomId}">
+				    <option
+				    	th:each="room : ${room}"
+				    	th:value="${room.id}"
+				    	th:text="${room.label}"
+				    >
+				    </option>
+				</select>
+        	</div>
+        	
+        	<div class="my-margin-top-19">
+    			<label>Booking User ID</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	        	<select th:field="*{userId}">
+				    <option
+				    	th:each="room : ${user}"
+				    	th:value="${user.id}"
+				    	th:text="${user.label}"
+				    >
+				    </option>
+				</select>
         	</div>
         	
         </div>
