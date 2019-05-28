@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Booking {
-	private Long id;
+	private int id;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date checkIn;
@@ -17,17 +17,17 @@ public class Booking {
 	private int quanlity;
 	
 	@NotNull
-	private Long userId;
+	private int userId;
 	@NotNull
-	private Long roomId;
+	private int roomId;
 	
 	private User user;
 	private Room room;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -62,16 +62,16 @@ public class Booking {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
-	public Long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public Long getRoomId() {
+	public int getRoomId() {
 		return roomId;
 	}
-	public void setRoomId(Long roomId) {
+	public void setRoomId(int roomId) {
 		this.roomId = roomId;
 	}
 	

@@ -63,7 +63,7 @@ public class UserDao {
     
     
     //  READ (List of Tasks)
-    public List<User> read(String userTypesId,String identificationTypesId, String countryId) throws SQLException {
+    public List<User> read(String userTypeId,String identificationTypeId, String countryId) throws SQLException {
 
     	String sqlQuery = "select t01.id"
     			+ "     , t02.id as user_type_id"
@@ -87,8 +87,8 @@ public class UserDao {
 				+ " and t03.id = t01.identification_type_id"
 				+ " and t04.id = t01.country_id"
 				;
-    	if (userTypesId != null && identificationTypesId != null && countryId != null ) {
-    		sqlQuery += String.format("   and t02.id = %s", userTypesId,"   and t03.id = %s",identificationTypesId ,"   and t04.id = %s",countryId );
+    	if (userTypeId != null && identificationTypeId != null && countryId != null ) {
+    		sqlQuery += String.format("   and t02.id = %s", userTypeId,"   and t03.id = %s",identificationTypeId ,"   and t04.id = %s",countryId );
     		sqlQuery += " order by t01.id asc;";
     	}
 

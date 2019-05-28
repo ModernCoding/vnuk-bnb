@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
-	private Long id;
+	private int id;
 	@NotNull
 	@Size(min = 1, message="FirstName is mandatory")
 	private String firstName;
@@ -35,24 +35,24 @@ public class User {
 	private Date updateAt;
 	
 	@NotNull
-	private Long userTypesId;
+	private int userTypeId;
 	@NotNull
-	private Long countryId;
+	private int countryId;
 	@NotNull
-	private Long identificationTypesId;
+	private int identificationTypeId;
 	@NotNull
 	private int identificationNumber;
 	
 	
-	private UserType userTypes;
-	private IdentificationType identificationTypes;
+	private UserType userType;
+	private IdentificationType identificationType;
 	private Country country;
 	
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getFirstName() {
@@ -112,16 +112,16 @@ public class User {
 		this.identificationNumber = identificationNumber;
 	}
 	public UserType getUserTypes() {
-		return userTypes;
+		return userType;
 	}
-	public void setUserTypes(UserType userTypes) {
-		this.userTypes = userTypes;
+	public void setUserTypes(UserType userType) {
+		this.userType = userType;
 	}
 	public IdentificationType getIdentificationTypes() {
-		return identificationTypes;
+		return identificationType;
 	}
-	public void setIdentificationTypes(IdentificationType identificationTypes) {
-		this.identificationTypes = identificationTypes;
+	public void setIdentificationTypes(IdentificationType identificationType) {
+		this.identificationType = identificationType;
 	}
 	public Country getCountry() {
 		return country;
@@ -129,23 +129,23 @@ public class User {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-	public Long getUserTypesId() {
-		return userTypesId;
+	public int getUserTypesId() {
+		return userTypeId;
 	}
-	public void setUserTypesId(Long userTypesId) {
-		this.userTypesId = userTypesId;
+	public void setUserTypesId(int userTypeId) {
+		this.userTypeId = userTypeId;
 	}
-	public Long getCountryId() {
+	public int getCountryId() {
 		return countryId;
 	}
-	public void setCountryId(Long countryId) {
+	public void setCountryId(int countryId) {
 		this.countryId = countryId;
 	}
-	public Long getIdentificationTypesId() {
-		return identificationTypesId;
+	public int getIdentificationTypesId() {
+		return identificationTypeId;
 	}
-	public void setIdentificationTypesId(Long identificationTypesId) {
-		this.identificationTypesId = identificationTypesId;
+	public void setIdentificationTypesId(int identificationTypeId) {
+		this.identificationTypeId = identificationTypeId;
 	}
 	
 }

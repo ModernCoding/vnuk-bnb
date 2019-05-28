@@ -68,10 +68,9 @@ public class RoomEquipmentsController {
    
 	}
 	
-	@RequestMapping("/roomEquipments/{id}")
+	@RequestMapping("/room-Equipments/{id}")
     public String show(@PathVariable("id") Long id, Model model, ServletRequest request) throws SQLException{
-        model.addAttribute("roomEquipment", roomDao.read(id));
-        model.addAttribute("roomEquipment", equipmentDao.read(id));
+        model.addAttribute("roomEquipment", roomEquipmentDao.read(id));
         model.addAttribute("template", "roomEquipments/show");
         return "_layout";
         

@@ -23,17 +23,17 @@ public class UsersRowMapper implements RowMapper<User> {
 		IdentificationType identificationtype = new IdentificationType();
 		Country country = new Country();
 		
-		country.setId(rs.getLong("country_id"));
+		country.setId(rs.getInt("country_id"));
 		country.setLabel(rs.getString("label"));
 		
-		usertype.setId(rs.getLong("user_type_id"));
+		usertype.setId(rs.getInt("user_type_id"));
 		usertype.setLabel(rs.getString("label"));
 		
-		identificationtype.setId(rs.getLong("identification_type_id"));
+		identificationtype.setId(rs.getInt("identification_type_id"));
 		identificationtype.setLabel(rs.getString("label"));
 		
-		user.setId(rs.getLong("id"));
-		user.setUserTypesId(rs.getLong("user_type_id"));
+		user.setId(rs.getInt("id"));
+		user.setUserTypesId(rs.getInt("user_type_id"));
 		user.setFirstName(rs.getString("first_name"));
 		user.setMiddleName(rs.getString("middle_name"));
 		user.setLastName(rs.getString("last_name"));
@@ -63,17 +63,17 @@ public class UsersRowMapper implements RowMapper<User> {
     		IdentificationType identificationtype = new IdentificationType();
     		Country country = new Country();
 			
-    		usertype.setId((Long) row.get("user_type_id"));
+    		usertype.setId((int) row.get("user_type_id"));
     		usertype.setLabel((String) row.get("label"));
 			
-    		country.setId((Long) row.get("country_id"));
+    		country.setId((int) row.get("country_id"));
     		country.setLabel((String) row.get("label"));
     		
-    		identificationtype.setId((Long) row.get("identification_type_id"));
+    		identificationtype.setId((int) row.get("identification_type_id"));
     		identificationtype.setLabel((String) row.get("label"));
     		
-    		user.setId((Long) row.get("id"));
-    		user.setUserTypesId((Long) row.get("user_type_id"));
+    		user.setId((int) row.get("id"));
+    		user.setUserTypesId((int) row.get("user_type_id"));
     		user.setFirstName((String) row.get("first_name"));
     		user.setMiddleName((String) row.get("middle_name"));
     		user.setLastName((String) row.get("last_name"));

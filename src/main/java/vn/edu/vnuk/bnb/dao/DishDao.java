@@ -37,7 +37,7 @@ public class DishDao {
             						sqlQuery,
             						new Object[] {
             								task.getPrice(),
-            								task.getDishTypesId(),
+            								task.getDishTypeId(),
             								task.getLabel(),
             								task.getDescription()
             									}
@@ -56,11 +56,10 @@ public class DishDao {
     
     
     //  READ (List of Tasks)
-    public List<Dish> read(String dishTypesId) throws SQLException {
+    public List<Dish> read(String dishTypeId) throws SQLException {
 
     	String sqlQuery = "select t01.id"
     			+ "     , t01.price"
-    			+ "     , t01.beds"
     			+ "     , t02.id as dish_type_id"
     			+ "     , t01.label"
     			+ "     , t01.description"
@@ -69,8 +68,8 @@ public class DishDao {
 				+ " where t02.id = t01.dish_type_id"
 		;
 
-    	if (dishTypesId != null) {
-    		sqlQuery += String.format("   and t02.id = %s", dishTypesId);
+    	if (dishTypeId != null) {
+    		sqlQuery += String.format("   and t02.id = %s", dishTypeId);
     		sqlQuery += " order by t01.id asc;";
     	}
 
@@ -102,7 +101,6 @@ public class DishDao {
         
     	String sqlQuery = "select t01.id"
     			+ "     , t01.price"
-    			+ "     , t01.beds"
     			+ "     , t02.id as dish_type_id"
     			+ "     , t01.label"
     			+ "     , t01.description"
@@ -133,7 +131,7 @@ public class DishDao {
 					
 					new Object[] {
 						task.getPrice(),
-						task.getDishTypesId(),
+						task.getDishTypeId(),
 						task.getLabel(),
 						task.getDescription(),
 						task.getId()

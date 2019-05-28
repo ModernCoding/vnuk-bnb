@@ -34,12 +34,12 @@ public class RoomsEquipmentsRowMapper implements RowMapper<RoomEquipment> {
 		room.setSmoking(rs.getBoolean("is_smoking"));
 		room.setRoomType(roomtypes);
 		
-		equipment.setId(rs.getLong("equipment_id"));
+		equipment.setId(rs.getInt("equipment_id"));
 		equipment.setLabel(rs.getString("label"));
 		
-		roomequipment.setId(rs.getLong("id"));
-		roomequipment.setRoomId(rs.getLong("room_id"));
-		roomequipment.setEquipmentId(rs.getLong("equipment_id"));
+		roomequipment.setId(rs.getInt("id"));
+		roomequipment.setRoomId(rs.getInt("room_id"));
+		roomequipment.setEquipmentId(rs.getInt("equipment_id"));
 		roomequipment.setRoom(room);
 		roomequipment.setEquipment(equipment);
 		
@@ -63,7 +63,7 @@ public class RoomsEquipmentsRowMapper implements RowMapper<RoomEquipment> {
 			roomtypes.setId((int) row.get("room_type_id"));
 			roomtypes.setLabel((String) row.get("room_type_label"));
 			
-			equipment.setId((Long) row.get("equipment_id"));
+			equipment.setId((int) row.get("equipment_id"));
 			equipment.setLabel((String) row.get("equipment_label"));
 			
 			room.setId((int) row.get("room_id"));
@@ -74,10 +74,10 @@ public class RoomsEquipmentsRowMapper implements RowMapper<RoomEquipment> {
 			room.setSmoking((boolean) row.get("is_smoking"));
 			room.setRoomType(roomtypes);
 			
-			roomequipment.setId((Long) row.get("id"));
-			roomequipment.setRoomId((Long) row.get("room_id"));
+			roomequipment.setId((int) row.get("id"));
+			roomequipment.setRoomId((int) row.get("room_id"));
 			roomequipment.setRoom(room);
-			roomequipment.setEquipmentId((Long) row.get("equipment_id"));
+			roomequipment.setEquipmentId((int) row.get("equipment_id"));
 			roomequipment.setEquipment(equipment);
 			
 			roomsequipment.add(roomequipment);

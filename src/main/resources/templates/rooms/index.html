@@ -34,13 +34,14 @@
        	<table>
 	        <thead>
 	            <tr>
+	            	<th>Actions</th>
 	                <th>#</th>
 	                <th>Price</th>
 	                <th>Beds</th>
 	                <th>Room Number</th>
 	                <th>Is Smoking</th>
 	                <th>Room Types</th>
-	                <th>Actions</th>
+	                
 	            </tr>
 	        </thead>
 	
@@ -50,6 +51,7 @@
                     <td>
                         
                        <!--  Show room -->
+                       
                         <a 	
                         	th:href="@{/rooms/{id}(id=${room.id})}"
                         	class="btn btn-sm btn-light" 

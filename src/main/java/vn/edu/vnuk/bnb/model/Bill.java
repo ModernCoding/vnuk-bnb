@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Bill {
-	private Long id;
+	private int id;
 	
 	@NotNull
 	private double totalPrice;
@@ -18,17 +18,17 @@ public class Bill {
 	private Date updated;
 	
 	@NotNull
-	private Long bookingId;
+	private int bookingId;
 	@NotNull
-	private Long userId;
+	private int userId;
 	
 	private Booking booking;
 	private User user;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public double getTotalPrice() {
@@ -63,16 +63,16 @@ public class Bill {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Long getBookingId() {
+	public int getBookingId() {
 		return bookingId;
 	}
-	public void setBookingId(Long bookingId) {
+	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
-	public Long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	

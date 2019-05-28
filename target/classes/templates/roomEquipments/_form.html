@@ -1,23 +1,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${country}" th:method="${method}">
+    <form th:fragment="form(action, method, cancelLink)" th:action="${action}" th:object="${roomEquipment}" th:method="${method}">
 
     	<div>
+        	
+        	CATEGORY
     		
-    		<div>
-    			<label>Label</label>
+    		<div class="my-margin-top-19">
+    			<label>Room</label>
     		</div>
     		
         	<div class="my-margin-top-4">
-	    		<input type="text" th:field="*{label}">
+	        	<select th:field="*{roomId}">
+				    <option
+				    	th:each="room : ${room}"
+				    	th:value="${room.id}"
+				    	th:text="${room.price}"
+				    	th:text="${room.beds}"
+				    	th:text="${room.roomNumber}"
+				    	th:text="${room.smoking}"
+				    	th:text="${room.roomType.label}"
+				    >
+				    </option>
+				</select>
         	</div>
         	
-        	<div th:if="${labelFieldError}" class="my-error-field">
-        		<span class="my-margin-right-19">
-					<i class="fas fa-minus-circle" aria-hidden="true"></i>
-				</span>
-				
-		    	<span th:text="${labelFieldError}"></span>
+        	<div class="my-margin-top-19">
+    			<label>Equipment</label>
+    		</div>
+    		
+        	<div class="my-margin-top-4">
+	        	<select th:field="*{equipmentId}">
+				    <option
+				    	th:each="equipment : ${equipment}"
+				    	th:value="${equipment.id}"
+				    	th:text="${equipment.label}"
+				    	
+				    >
+				    </option>
+				</select>
         	</div>
         	
         </div>
